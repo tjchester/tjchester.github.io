@@ -189,9 +189,15 @@ tags: [Chester, Thomas, programming, IT, blog, Connecticut]
 	                    </div>
 	                </header>
 	                <div class="post-body bordered-bottom">
-	                {% assign excerptsize = post.excerpt | number_of_words %}
-	                {% if excerptsize <= 100 and excerptsize >= 50 %}<p class = "lead">{{ post.excerpt | strip_html }}</p>&hellip;{% else %}
-	                    <p>{{ post.content | strip_html | truncatewords:100 }}&hellip;</p>{% endif %}
+		                {% assign excerpt = post.content | split:"<!-- more -->" | first | strip_html | truncate:300 %}
+		                {% assign excerptsize = excerpt | number_of_words %}
+
+		                {% if excerptsize >= 1 and excerptsize <= 300 %}
+		                  <p class = "lead">{{ excerpt }}</p>&hellip;
+		                {% else %}
+		                    <p>{{ post.content | strip_html | truncatewords:20 }}&hellip;</p>
+		                {% endif %}
+
 	                    {% if post.description %}
 		                <a href="{{ site.url }}{{ post.url }}" data-toggle="tooltip" title="{{ post.description }}" class="more-link">
 		                    <i class="icon-link"></i> read more...
