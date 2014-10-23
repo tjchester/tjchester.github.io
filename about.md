@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /thomas-chester/index.html
+permalink: /about/
 title: Thomas Chester
 tags: [Thomas, Chester, tjchester]
 image:

@@ -28,7 +28,7 @@ owner:
   twitter:        
   facebook:       
   github:         tjchester
-  stackexchange:  https://stackexchange.com/users/41778/tchester
+  stackexchange:  https://stackexchange.com/users/41778/tchester/
   linkedin:       
   instagram:      
   flickr:         
@@ -51,11 +51,11 @@ links:
     external: false
     icon: home
   - title: Categories
-    url: /categories
+    url: /categories/
   - title: Tags
-    url: /tags
-  - title: Thomas who?
-    url: /thomas-chester
+    url: /tags/
+#  - title: Thomas who?
+#    url: /thomas-chester/
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/New_York
@@ -66,7 +66,7 @@ paginate:    6
 paginate_path: "page:num"
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink:   /:categories/:title
+permalink:   /:categories/:title/
 
 kramdown:
   input: GFM
