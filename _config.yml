@@ -13,8 +13,9 @@ animated_fins:	  true
 # Specify the fin color in RGB value
 fin_color:        "255,255,255"
 # Change url to your domain. Leave localhost server or blank when working locally.
-url:              http://tjchester.github.io
+#url:              http://tjchester.github.io
 #url:               http://localhost:4000
+url:              http://www.dragonflyreflections.com
 
 # Owner/author information
 owner:
@@ -41,7 +42,10 @@ owner:
 google_analytics:   
 google_verify:      
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:         
+bing_verify:
+# Piwik analytics
+piwik_analytics: piwik.dragonflyreflections.com
+piwik_analytics_siteid: 1
 
 # Links to include in footer navigation
 # For external links add external: true
