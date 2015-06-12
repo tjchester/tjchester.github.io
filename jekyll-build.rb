@@ -60,7 +60,7 @@ namespace :jekyll do
   task :filedeploy, [:path, :publish_path, :publish_owner, :publish_group] do |t, args|
 
     puts "File deploying"
-    FileUtils.copy_entry File.join(args.path, "_site"), args.publish_path
+    FileUtils.copy_entry File.join(args.path, "_site"), args.publish_path, :remove_destination => true
     
     if args.publish_owner? && args.publish_group?
       FileUtils.chown_R args.publish_owner, args.publish_group, args.publish_path, :verbose => true
