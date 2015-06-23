@@ -126,7 +126,7 @@ Part.#  Size         Partition Type           Partition Name
 Do get from the original to the desired configuration I am going to use the **cgdisk** program making the following changes:
 
 ```
-$ cgdisk /dev/sda1
+$ cgdisk /dev/sda
 ```
 
 - Delete partition 1 (Windows RE) which will create the 1024.0 MiB free space at the beginning of the disk
@@ -198,7 +198,13 @@ $ mkfs.xfs /dev/vg-arch/lv-home
 
 The next step is that I need to mount each of the partitions under a single mount point on the live system.
 
-First I need to create subfolders under the **/mnt** folder for the different partitions a want in my system.
+First I need to mount the new root partition under the **/mnt** folder of the live installation system.
+
+```
+$ mount /dev/vg-arch/lv-root /mnt
+```
+
+Next I need to create subfolders under the **/mnt** folder for the different partitions in my system.
 
 ```
 $ mkdir /mnt/boot
@@ -206,10 +212,9 @@ $ mkdir /mnt/var
 $ mkdir /mnt/home
 ```
 
-Now I need to mount each of my LVM partitions, including the UEFI partition under that same mount point.
+Finally I need to mount each of the remaining LVM partitions, including the UEFI partition.
 
 ```
-$ mount /dev/vg-arch/lv-root /mnt
 $ mount /dev/sda2 /mnt/boot
 $ mount /dev/vg-arch/lv-var /mnt/var
 $ mount /dev/vg-arch/lv-home /mnt/home
@@ -304,7 +309,7 @@ $ vi /etc/hosts
 
 #<ip-address>   <hostname.domain.org>   <hostname>
 127.0.0.1       localhost.localdomain   localhost gandalf
-::1             localhost.localdomain   localhost
+::1             localhost.localdomain   localhost gandalf
 
 # End of file
 ...
@@ -369,8 +374,19 @@ The last step I need to complete before booting into the new system is to instal
 
 ```
 $ pacman -S dosfstools grub efibootmgr
-$ grub-install --target=x86_64 --efi-directory=/boot --bootloader-id=arch_grub --recheck
+$ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck
+Installing for x86_64-efi platform.
+Installation finished. No error reported.
 $ grub-mkconfig -o /boot/grub/grub.cfg
+Generating grub configuration file ...
+  /run/lvm/lvmetad.socket: connect failed: No such file or directory
+  WARNING: Failed to connect to lvmetad. Falling back to internal scanning.
+  ...
+Found linux image: /boot/vmlinuz-linux
+Found initrd image: /boot/initramfs-linux.img
+Found fallback initramfs image: /boot/initramfs-linux-fallback.img
+  ...
+done
 ```
 
 #### HP Envy Workaround
