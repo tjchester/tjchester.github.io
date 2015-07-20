@@ -44,10 +44,10 @@ Within the *sqlcmd* tool the following commands will set the 'sa' user's passwor
 
 If in addition, you wanted to add a Windows server login and grant that user administrative authority for the SQL instance then use the additional commands below.
 
-1> CREATE LOGIN [MYDOMAIN\MYUSER] FROM WINDOWS WITH DEFAULT_DATABASE=[master];
-2> GO
-1> EXEC sp_addsrvrolemember @loginame='MYDOMAIN\MYUSER', @rolename='sysadmin';
-2> GO
+	1> CREATE LOGIN [MYDOMAIN\MYUSER] FROM WINDOWS WITH DEFAULT_DATABASE=[master];
+	2> GO
+	1> EXEC sp_addsrvrolemember @loginame='MYDOMAIN\MYUSER', @rolename='sysadmin';
+	2> GO
 
 Once you have completed that steps that you wanted to perform you can exit the *sqlcmd* tool and close the connection to SQL Server.
 
