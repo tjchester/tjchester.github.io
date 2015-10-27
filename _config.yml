@@ -1,7 +1,7 @@
 title:            Thomas Chester
 description:      "The Truth is Out There"
 logo:             omikron.png
-disqus_shortname: 
+disqus_shortname:
 # Assign a default image for your site's header and footer
 default_bg:       default_bg.jpg
 search:           true
@@ -14,7 +14,7 @@ animated_fins:	  true
 fin_color:        "255,255,255"
 # Change url to your domain. Leave localhost server or blank when working locally.
 #url:               http://dragonflyreflections.com
-url:                http://localhost:4000
+url:               http://localhost:4000
 
 # Owner/author information
 owner:
@@ -25,21 +25,21 @@ owner:
   description:    Thomas Chester is a IT Technology Professional residing in Connecticut, USA. His interests are anything that&#39;s related to programming, video games, or Ancient Aliens. He believes that much of the original fun of writing programs has been driven into hiding and is on a quest to rediscover that magic.
   # Social networking links used in footer. Update and remove as you like.
   # To register at HMFAYSAL SOCIAL, visit http://social.hmfaysal.tk
-  twitter:        
-  facebook:       
+  twitter:
+  facebook:
   github:         tjchester
   stackexchange:  https://stackexchange.com/users/41778/tchester/
-  linkedin:       
-  instagram:      
-  flickr:         
-  tumblr:         
-  hmfaysalsocial: 
+  linkedin:
+  instagram:
+  flickr:
+  tumblr:
+  hmfaysalsocial:
   # For Google Authorship https://plus.google.com/authorship
-  google_plus:    
+  google_plus:
 
 # Analytics and webmaster tools stuff goes here
-google_analytics:   
-google_verify:      
+google_analytics:
+google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
 bing_verify:
 # Piwik analytics
@@ -80,7 +80,7 @@ kramdown:
   use_coderay: true
 
   coderay:
-    coderay_line_numbers: 
+    coderay_line_numbers:
     coderay_line_numbers_start: 1
     coderay_tab_width: 4
     coderay_bold_every: 10
