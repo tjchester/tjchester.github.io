@@ -29,7 +29,7 @@ owner:
   facebook:
   github:         tjchester
   stackexchange:  https://stackexchange.com/users/41778/tchester/
-  linkedin:
+  linkedin:       https://www.linkedin.com/in/thomas-chester-9b255b110
   instagram:
   flickr:
   tumblr:
@@ -43,7 +43,7 @@ google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
 bing_verify:
 # Piwik analytics
-piwik_analytics: piwik.dragonflyreflections.com
+piwik_analytics: 
 piwik_analytics_siteid: 1
 
 # Links to include in footer navigation
@@ -77,7 +77,7 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: true
+  enable_coderay: true
 
   coderay:
     coderay_line_numbers:
@@ -88,3 +88,5 @@ kramdown:
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Gemfile", "Capfile", "Gemfile.lock", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+
+gems: [jekyll-paginate]
