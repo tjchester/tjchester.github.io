@@ -13,7 +13,6 @@ animated_fins:	  true
 # Specify the fin color in RGB value
 fin_color:        "255,255,255"
 # Change url to your domain. Leave localhost server or blank when working locally.
-#url:               http://dragonflyreflections.com
 url:               http://tjchester.github.io
 
 # Owner/author information
@@ -63,8 +62,8 @@ links:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/New_York
 future:      true
-highlighter: pygments
 markdown:    kramdown
+highligher:  rouge
 paginate:    6
 paginate_path: "page:num"
 
@@ -77,14 +76,16 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  enable_coderay: true
+  syntax_highlighter: rouge
 
-  coderay:
-    coderay_line_numbers:
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
+  syntax_highlighter_opts:
+    line_numbers: true
+    line_numbers_start: 1
+    tab_width: 2
+    bold_every: 10
+    wrap: true
+    css: class
+    css_class: 'highlight'
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Gemfile", "Capfile", "Gemfile.lock", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]

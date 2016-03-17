@@ -48,7 +48,12 @@
                     <i class="icon-github"></i>
                 </a>
             </li>{% endif %}
-        </ul>
+            {% if site.owner.linkedin %}<li>
+                <a href="{{ site.owner.linkedin }}" data-toggle="tooltip" title="{{ site.owner.name}} on LinkedIn" target="_blank">
+                    <i class="icon-linkedin"></i>
+                </a>
+            </li>{% endif %}
+            </ul>
             <p class="copy-text">
                 <a href="{{ site.url }}/about/">{{ site.owner.name }}</a> &copy; {{ site.time | date: '%Y' }} &bull; All rights reserved.
             </p>
