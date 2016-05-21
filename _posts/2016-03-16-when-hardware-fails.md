@@ -9,8 +9,6 @@ image:
 comments: false
 ---
 
-## Overview
-
 A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.
 
 <!-- more -->
