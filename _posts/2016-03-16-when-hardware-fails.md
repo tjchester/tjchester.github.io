@@ -11,7 +11,7 @@ comments: false
 
 ## Overview
 
-The past few years I have been involved in infrastructure related tasks more so than projects per se. The failures that I am most familiar with are hardware failures. While this is a little bit of a slant on what you are asking, they both have much in common. A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.
+A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.
 
 <!-- more -->
 
