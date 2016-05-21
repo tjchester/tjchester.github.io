@@ -24,7 +24,7 @@ owner:
   description:    Thomas Chester is a IT Technology Professional residing in Connecticut, USA. His interests are anything that&#39;s related to programming, video games, or Ancient Aliens. He believes that much of the original fun of writing programs has been driven into hiding and is on a quest to rediscover that magic.
   # Social networking links used in footer. Update and remove as you like.
   # To register at HMFAYSAL SOCIAL, visit http://social.hmfaysal.tk
-  twitter:
+  twitter:        metaldog13
   facebook:
   github:         tjchester
   stackexchange:  https://stackexchange.com/users/41778/tchester/
@@ -42,7 +42,7 @@ google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
 bing_verify:
 # Piwik analytics
-piwik_analytics: 
+piwik_analytics:
 piwik_analytics_siteid: 1
 
 # Links to include in footer navigation
