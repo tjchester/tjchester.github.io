@@ -3771,3 +3771,7 @@ ol.CodeRay li {
 .CodeRay .head .head {
     color: #f4f;
 }
+
+table {
+  width: 100%;
+}
