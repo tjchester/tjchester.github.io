@@ -3,7 +3,7 @@ layout: post
 title: "Installing ownCloud on ArchLinux"
 description: "Describes how to setup a new ownCloud server on an ArchLinux system and start syncing with it from Mac OS X."
 category: HowTo
-tags: [Linux, ArchLinux, ownCloud, Apple]
+tags: [Linux, ArchLinux, ownCloud, macOS]
 image: 
   feature: layout-posts.jpg
 comments: false
