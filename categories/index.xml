@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/categories/</link>
+    <description>Recent content in Categories on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://tjchester.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Howto</title>
+      <link>http://tjchester.github.io/categories/howto/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/categories/howto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plug</title>
+      <link>http://tjchester.github.io/categories/plug/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/categories/plug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Post</title>
+      <link>http://tjchester.github.io/categories/post/</link>
+      <pubDate>Tue, 05 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/categories/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Technote</title>
+      <link>http://tjchester.github.io/categories/technote/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/categories/technote/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Backup/Restore on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/backup/restore/</link>
+    <description>Recent content in Backup/Restore on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Aug 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/backup/restore/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL Backups with AutoMySQLBackup</title>
+      <link>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</link>
+      <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</guid>
+      <description>&lt;p&gt;This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2012 Restore Error</title>
+      <link>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</link>
+      <pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</guid>
+      <description>&lt;p&gt;This post describes an error that may occur when you are transferring database backup files from a SQL 2008 server to a SQL 2012 server and you are using SQL Server Management Studio (SSMS) to perform the restores.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

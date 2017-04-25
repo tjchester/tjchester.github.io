@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ssis on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/ssis/</link>
+    <description>Recent content in Ssis on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Jun 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/ssis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SSIS Multi-Environment Configration</title>
+      <link>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</guid>
+      <description>&lt;p&gt;This post describes a method of managing multiple SQL Server Integration Services (SSIS) package configurations across environments using a single SQL Server table.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Unable to Connect to Remote SQL Server Integration Services</title>
+      <link>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</link>
+      <pubDate>Fri, 17 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &lt;em&gt;&amp;ldquo;Access Is Denied&amp;rdquo;&lt;/em&gt; error when trying to connect to a remote instance SQL Server Integration Services.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

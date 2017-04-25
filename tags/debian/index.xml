@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debian on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/debian/</link>
+    <description>Recent content in Debian on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/debian/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create a Debian Bootable Install Disk</title>
+      <link>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</guid>
+      <description>&lt;p&gt;In this post I discuss how to create a bootable USB disk on Mac OS X for the Debian &amp;ldquo;Testing&amp;rdquo; network installer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

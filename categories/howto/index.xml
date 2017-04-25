@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Howto on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/categories/howto/</link>
+    <description>Recent content in Howto on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Sep 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/categories/howto/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using the bpod Gem</title>
+      <link>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</guid>
+      <description>&lt;p&gt;This post will discuss installing the &lt;strong&gt;bpod&lt;/strong&gt; gem on a macOS desktop and then scheduling it to change your desktop picture each day to the Bing home page image.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Palindromic Prime Calculation</title>
+      <link>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</link>
+      <pubDate>Tue, 30 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</guid>
+      <description>&lt;p&gt;This post will dicuss palindromic prime numbers using ruby code. It will also discuss several refinements made to the original attempt to speed up the performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL Backups with AutoMySQLBackup</title>
+      <link>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</link>
+      <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</guid>
+      <description>&lt;p&gt;This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing ownCloud on ArchLinux</title>
+      <link>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</link>
+      <pubDate>Sun, 05 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</guid>
+      <description>&lt;p&gt;Do you like the idea of DropBox but want to host the files on a server that you control. This how-to will walkthrough installing ownCloud on an ArchLinux installation and then configuring a Mac client to sync with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Setup an ArchLinux System</title>
+      <link>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</guid>
+      <description>&lt;p&gt;This walk-through will focus on a fresh installation of ArchLinux on a HP Envy TouchSmart SE all-in-one computer. The all-in-one has an existing installation of Windows 8.1 that will be replaced.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing an IPFire Based Firewall</title>
+      <link>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</link>
+      <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</guid>
+      <description>&lt;p&gt;In this post I will discuss setting up an IPFire based firewall appliance via a console serial cable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Add Drivers to a Windows Deployment Image</title>
+      <link>http://tjchester.github.io/post/2014-06-18-how-to-add-drivers-to-a-windows-deployment-image-troubleshooting/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-06-18-how-to-add-drivers-to-a-windows-deployment-image-troubleshooting/</guid>
+      <description>&lt;p&gt;This post describes the procedure for opening a Windows image and incorporating vendor specific drivers in it for the purposes of deploying that image on new equipment.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSIS Multi-Environment Configration</title>
+      <link>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</guid>
+      <description>&lt;p&gt;This post describes a method of managing multiple SQL Server Integration Services (SSIS) package configurations across environments using a single SQL Server table.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Upgrade Windows Server 2008 from Standard Edition to Datacenter Edition</title>
+      <link>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</link>
+      <pubDate>Fri, 07 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</guid>
+      <description>&lt;p&gt;This post describes a process for upgrading a Microsoft Windows Server 2008 R2 Standard edition to the Datacenter edition using generic Key Management Server (KMS) keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Source Control Your SQL Server Databases</title>
+      <link>http://tjchester.github.io/post/2012-03-30-sql-server-source-control/</link>
+      <pubDate>Fri, 30 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-03-30-sql-server-source-control/</guid>
+      <description>&lt;p&gt;This document discusses the feasibility of using source control with database development for SQL Server (2005 and newer) databases.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

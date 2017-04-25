@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technote on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/categories/technote/</link>
+    <description>Recent content in Technote on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/categories/technote/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lost Disk Space to Fuslogvw</title>
+      <link>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</guid>
+      <description>&lt;p&gt;This post will discuss a recent problem I encountered when installing Visual Studio 2015 &lt;em&gt;(although the actual software being installed does not matter)&lt;/em&gt;. During the installation process, the 250GB drive in my computer ran out of space.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Disable Google Chrome Updates [Updated]</title>
+      <link>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</guid>
+      <description>&lt;p&gt;In this article we look at using the Administative Template in ADMX format for Windows 7 and later. The original article, &lt;strong&gt;Disable Google Chrome Updates&lt;/strong&gt;, used the Administrative Template in ADM format for versions of Windows prior to Windows 7.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fixing Windows Update Error 0x80072F8F</title>
+      <link>http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/</link>
+      <pubDate>Sun, 15 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/</guid>
+      <description>&lt;p&gt;The posts discusses a method of addressing Windows Update error 0x80072F8F in the context of SCCM and non-domain joined machines.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Regain Access to SQL Server When Locked Out</title>
+      <link>http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/</link>
+      <pubDate>Wed, 08 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/</guid>
+      <description>&lt;p&gt;This post describes how to regain access to a SQL server when you are denied access and the sa password has been lost.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2012 Restore Error</title>
+      <link>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</link>
+      <pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</guid>
+      <description>&lt;p&gt;This post describes an error that may occur when you are transferring database backup files from a SQL 2008 server to a SQL 2012 server and you are using SQL Server Management Studio (SSMS) to perform the restores.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dell PowerEdge OpenManage Firmware Notice</title>
+      <link>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</link>
+      <pubDate>Thu, 18 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</guid>
+      <description>&lt;p&gt;This brief note talks about how to turn off the Dell OpenManage disk firmware and driver checks.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dell PowerEdge Degraded Backplane Error</title>
+      <link>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</link>
+      <pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</guid>
+      <description>&lt;p&gt;This brief note talks about an issue I encountered with the Dell OpenManage agents after replacing a failed disk.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Disable Google Chrome Updates</title>
+      <link>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</guid>
+      <description>&lt;p&gt;Google publishes information on how to disable the automatic updating of Chrome on Windows machines via group policy. That information is not easily to locate on Google&amp;rsquo;s site, so this article will distill that information into an easily referenced procedure.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monitoring RabbitMQ Hosted on Microsoft Windows</title>
+      <link>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</guid>
+      <description>&lt;p&gt;This post will discuss how to monitor a Windows hosted RabbitMQ installation from a Linux based Zenoss monitor using the RabbitMQ plugin.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PowerShell Tips - Remote Maintenance Helpers</title>
+      <link>http://tjchester.github.io/post/2014-10-10-powershell-tips-for-remote-maintenance/</link>
+      <pubDate>Fri, 10 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-10-powershell-tips-for-remote-maintenance/</guid>
+      <description>&lt;p&gt;This article contains some PowerShell tips that I have found to be useful for performing maintenance on computers in remote offices.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fedora Fails to Boot After Install</title>
+      <link>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</link>
+      <pubDate>Wed, 03 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</guid>
+      <description>&lt;p&gt;In this post I discuss a fatal bug that I ran into while installing Fedora 20.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create a Debian Bootable Install Disk</title>
+      <link>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</guid>
+      <description>&lt;p&gt;In this post I discuss how to create a bootable USB disk on Mac OS X for the Debian &amp;ldquo;Testing&amp;rdquo; network installer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Error Running SQL 2012 Best Practice Analyzer</title>
+      <link>http://tjchester.github.io/post/2014-06-15-error-running-sql-2012-bpa/</link>
+      <pubDate>Sun, 15 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-06-15-error-running-sql-2012-bpa/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a permissions problem when attempting to run the SQL Server 2012 Best Practice Analyzer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Class Not Registered Error Using Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</link>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a “Class Not Registered Error” when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Designer Stops Working in BIDS</title>
+      <link>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</guid>
+      <description>&lt;p&gt;This post describes how to fix the Business Intelligence Development Studio 2008 error that occurs when trying to view the design surface of a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Transaction Response Timeout from Service Manager</title>
+      <link>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a timeout error that occurs during a service startup.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Alias Registry Settings</title>
+      <link>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</guid>
+      <description>&lt;p&gt;In this post we will discuss where SQL Server Aliases, defined through the SQL Server Configuration Manager, are stored in the Windows registry.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Database Mirroring Troubleshooting Notes</title>
+      <link>http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/</link>
+      <pubDate>Tue, 11 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/</guid>
+      <description>&lt;p&gt;In this post we will highlight a collection of troubleshooting notes related to SQL Server database mirroring.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Database Mirroring Failover Notes</title>
+      <link>http://tjchester.github.io/post/2013-06-10-sql-server-database-mirroring-failover-notes/</link>
+      <pubDate>Mon, 10 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-10-sql-server-database-mirroring-failover-notes/</guid>
+      <description>&lt;p&gt;In this post we will highlight some techniques on executing a failover when using SQL Server database mirroring.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Communicate with Debug Host Process in BIDS</title>
+      <link>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to fix the &lt;em&gt;“cannot communicate with the debug host process”&lt;/em&gt; error when trying to debug SQL Server Integration Services projects using the Business Intelligence Development Studio (BIDS).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ConvertStringSidToSid Error from the Volume Shadow Copy Service</title>
+      <link>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</guid>
+      <description>&lt;p&gt;In this post we discuss how to fix the ConvertStringSidToSid error from the Volume Shadow Copy Service.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Entity Framework Error When Calling SaveChanges Method</title>
+      <link>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a potential transaction error when calling the SaveChanges method on an Entity Framework context variable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Unable to Connect to Remote SQL Server Integration Services</title>
+      <link>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</link>
+      <pubDate>Fri, 17 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &lt;em&gt;&amp;ldquo;Access Is Denied&amp;rdquo;&lt;/em&gt; error when trying to connect to a remote instance SQL Server Integration Services.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Change SQL Agent Job Ownership</title>
+      <link>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a typical error when trying to reassign SQL Agent job ownership.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Acquire Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</link>
+      <pubDate>Wed, 13 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &amp;ldquo;OLE DB error … failed to acquire connection&amp;rdquo; when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

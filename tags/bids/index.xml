@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bids on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/bids/</link>
+    <description>Recent content in Bids on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Apr 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/bids/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Class Not Registered Error Using Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</link>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a “Class Not Registered Error” when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Designer Stops Working in BIDS</title>
+      <link>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</guid>
+      <description>&lt;p&gt;This post describes how to fix the Business Intelligence Development Studio 2008 error that occurs when trying to view the design surface of a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Communicate with Debug Host Process in BIDS</title>
+      <link>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to fix the &lt;em&gt;“cannot communicate with the debug host process”&lt;/em&gt; error when trying to debug SQL Server Integration Services projects using the Business Intelligence Development Studio (BIDS).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Acquire Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</link>
+      <pubDate>Wed, 13 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &amp;ldquo;OLE DB error … failed to acquire connection&amp;rdquo; when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

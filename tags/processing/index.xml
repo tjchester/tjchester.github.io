@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Processing on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/processing/</link>
+    <description>Recent content in Processing on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Oct 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/processing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pixel Art with Processing</title>
+      <link>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</guid>
+      <description>&lt;p&gt;This brief post talks about my first attempt at creating art using the Processing visual arts programming environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

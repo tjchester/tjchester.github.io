@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/categories/post/</link>
+    <description>Recent content in Post on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/categories/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Removing Old Windows Folder After Upgrade</title>
+      <link>http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/</link>
+      <pubDate>Tue, 05 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/</guid>
+      <description>&lt;p&gt;When you do an inplace upgrade of Windows Server 2008 R2 to Windows Server 2012 R2, the old Windows system files are relocated to a folder named C:\Windows.old. This is to support a rollback to the prior version if necessary.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Generating Test Data for Rails Projects</title>
+      <link>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</link>
+      <pubDate>Thu, 17 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</guid>
+      <description>&lt;p&gt;How often have you created a database for a new Rails application and then sat staring at the empty tables? Often times when building a new application you need sample data to help flesh out the user interface or to show off the application to your customer. Rails provides a convenient method of loading this data via the &lt;em&gt;seeds.rb&lt;/em&gt; file, but you still have to create the content for this file. This article will discuss a mostly automated way of generating content for your database.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>When Hardware Fails?</title>
+      <link>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</guid>
+      <description>&lt;p&gt;A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>What Is A Database?</title>
+      <link>http://tjchester.github.io/post/2016-03-03-what-is-a-database/</link>
+      <pubDate>Thu, 03 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-03-what-is-a-database/</guid>
+      <description>&lt;p&gt;If I were to say the word &lt;em&gt;database&lt;/em&gt; to you, what might be the first thing that would come to mind. It would probably depend on your current situation and background. Corporate developers might immediately think of Oracle Database or Microsoft SQL Server. Open-source developers would probably think of MySQL/MariaDB, PostgreSQL, or MongoDB. Desktop users might think of Microsoft Access, Paradox, or even dBase. In general, what you are actually thinking of is the DBMS (Database Management System) or the software that allows you to interact with the database.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pixel Art with Processing</title>
+      <link>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</guid>
+      <description>&lt;p&gt;This brief post talks about my first attempt at creating art using the Processing visual arts programming environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

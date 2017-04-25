@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="theme-color" content="#263238">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+<link rel="apple-touch-icon" href="http://tjchester.github.io/images/logo.png">
+
+
+<link rel="canonical" href="http://tjchester.github.io/post/2012-03-30-sql-server-source-control/">
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster%7cLato:400,700" rel="stylesheet">
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>How To Source Control Your SQL Server Databases - Thomas Chester&#39;s Blog</title>
+    
+
+<meta name="description" content="Describes how to apply source control practices to your database management system.">
+
+<meta property="og:title" content="How To Source Control Your SQL Server Databases - Thomas Chester&#39;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tjchester.github.io/post/2012-03-30-sql-server-source-control/">
+<meta property="og:image" content="http://tjchester.github.io/images/theme/thumbnail-04.jpg">
+<meta property="og:site_name" content="Thomas Chester&#39;s Blog">
+<meta property="og:description" content="Describes how to apply source control practices to your database management system.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Thomas Chester&#39;s Blog">
+<meta name="twitter:url" content="http://tjchester.github.io/post/2012-03-30-sql-server-source-control/">
+<meta name="twitter:title" content="How To Source Control Your SQL Server Databases - Thomas Chester&#39;s Blog">
+<meta name="twitter:description" content="Describes how to apply source control practices to your database management system.">
+<meta name="twitter:image" content="http://tjchester.github.io/images/theme/thumbnail-04.jpg">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http://tjchester.github.io/"
+    },
+    "headline": "How To Source Control Your SQL Server Databases - Thomas Chester&#39;s Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http://tjchester.github.io/images/theme/thumbnail-04.jpg",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2012-03-30T00:00:00JST",
+    "dateModified": "2012-03-30T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Chester&#39;s Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Thomas Chester&#39;s Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http://tjchester.github.io/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "Describes how to apply source control practices to your database management system."
+  }
+</script>
+
+
+    <style>
+      html { font-size: 18px; background-color: rgba(236,239,241,.5);}@media (max-width: 768px) { html { font-size: 15px; }}body { color: #333; font-family: 'Roboto Slab','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-feature-settings : "palt"; font-size: inherit; line-height: 1rem; margin: 0; padding: 0;}h1, h2, h3, h4, h5 ,h6 { font-size: 1rem; font-weight: 700; line-height: 1rem; margin: 0;}hr { border: 0; border-top: 1px dashed #cfd8dc; margin: 1rem 0;}p { margin: 0; line-height: 1rem;}a { color: #2196f3; text-decoration: none; transition-duration: .3s;}ul, ol { margin: 0; padding: 0;}table { border-collapse: collapse;}th, td { font-size: .8rem; padding: .5rem;}tr { border-bottom: 1px dashed #ddd;}/* Layouts */main,aside { display: block;}main { padding: 1rem 0 3rem 0; }aside.h { padding: 3rem 0; }main.f,aside.f { background-color: #333; border-top: 2px dashed #fff; border-bottom: 2px dashed #fff;}.l-container { position: relative; max-width: 68rem; margin: 0 auto; padding: 0 1rem;}.l-container.thin { max-width: 44rem;}.l-header { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); padding: 1rem 0; text-align: center;}.l-footer { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); font-size: .6rem; font-weight: 700; padding: 1rem 0;}@media (max-width: 768px) { .l-sidebar { margin-top: 4rem; }}.mrow { margin: 0 -1rem; overflow: hidden;}.mcol { box-sizing: border-box; float: left; padding: 0 1rem;}.c6 { width: 50%; }.c4 { width: 33.26323833%; }.c8 { width: 66.66666%; }@media (max-width: 768px) { .mcol { width: 100%; float: none; }}.logo a { font-size: 1.4rem; line-height: 1.5rem; font-weight: 700; color: #333;}.articles { margin: -1rem 0; margin-bottom: 1rem;}.articles.sm { margin: -.5rem 0; margin-bottom: 0;}article { border-radius: 4px; overflow: hidden;}article.li { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); height: 20rem; overflow: hidden; margin: 1rem 0;}article.li > a { display: block; color: #333;}article.li .inner { padding: 1rem;}article.li .thumb { height: 8rem;}article.li .title { color: #333; font-size: 1.2rem; line-height: 1.5rem; margin-bottom: .5rem;}article.li .summary { font-size: .8rem; height: 6rem; overflow: hidden; margin-top: 1rem;}article.lism { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin: .5rem 0;}article.lism::after { content: ''; display: block; clear: both;}article.lism > a { display: block; color: #333;}article.lism .inner { display: table-cell; vertical-align: middle; height: 5rem; padding-left: .5rem;}article.lism .thumb { width: 5rem; height: 5rem; float: left;}article.lism .title { font-weight: 700; line-height: 1.25rem; margin-bottom: .25rem;}article.sn { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin-bottom: 1rem;}article.sn .thumb { height: 20rem;}@media (max-width: 768px) { article.sn .thumb { height: 10rem; }}article.sn > .article-header,article.sn > .article-body,article.sn .article-footer { padding: 2rem;}article.sn > .article-body { padding: 0 2rem;}@media (max-width: 768px) { article.sn > .article-header, article.sn > .article-body, article.sn .article-footer { padding: 1rem; } article.sn > .article-body { padding: 0 1rem; }}article.sn > .article-header .title { font-size: 1.8rem; line-height: 2rem; margin-bottom: .5rem;}@media (max-width: 768px) { article.sn > .article-header .title { font-size: 1.4rem; line-height: 1.5rem; }}article.sn > .article-header .facts { margin-bottom: 1rem;}article.sn > .article-body { margin-bottom: 1.5rem; word-break: break-all;}article.sn > .article-body h2 { border-bottom: .25rem solid #333; font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; padding: .5rem 0;}article.sn > .article-body h3 { border-left: .5rem solid #333; line-height: 1.5rem; margin: 1.5rem 0; padding: .125rem .5rem;}article.sn > .article-body ul,article.sn > .article-body ol { margin: 1.5rem 0; padding-left: 1.5rem;}article.sn > .article-body li { padding-bottom: .5rem; line-height: 1.5rem;}article.sn > .article-body li:last-child { padding-bottom: 0;}article.sn > .article-body p { margin: 1rem 0; line-height: 1.5rem;}article.sn > .article-body strong,article.sn > .article-body em { font-style: normal; font-weight: 700;}article.sn > .article-body strong { box-shadow: 0 -.5rem 0 0 #ffc107 inset;}article.sn > .article-body em { color: #8bc34a;}article.sn > .article-body code,article.sn > .article-body pre { font-family: Menlo, Consolas, monospace; font-size: .7rem;}article.sn > .article-body pre { background-color: #333; color: #fff; line-height: 1rem; margin: 1.5rem -2rem; overflow: auto;}@media (max-width: 768px) { article.sn > .article-body pre { margin: 1.5rem -1rem; }}article.sn > .article-body pre > code { display: block; padding: 1rem 2rem;}@media (max-width: 768px) { article.sn > .article-body pre > code { padding: 1rem; }}article.sn > .article-body p code { background-color: #eceff1; color: #333; border-radius: 4px; margin: 0 .25rem; padding: .375rem; white-space: nowrap;}article.sn > .article-body blockquote { position: relative; border-left: .25rem solid #333; font-size: .8rem; padding: .125rem 1rem; margin: 1.5rem 0;}@media (max-width: 768px) { article.sn > .article-body blockquote { font-size: 1rem; }}article.sn > .article-body blockquote p { margin: .5rem 0; line-height: 1rem;}article.sn > .article-body figure { margin: 1.5rem 0;}article.sn > .article-body figure img,article.sn > .article-body figure amp-img { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); max-width: 100%;}article.sn > .article-body figcaption { color: #cfd8dc; font-size: .8rem; font-weight: 700; margin-top: .5rem;}.facts li { display: inline; font-size: .8rem; margin-right: 1rem;}.facts i { color: #cfd8dc; margin-right: .5em;}.facts.sm li { font-size: .7rem;}.sections.sidebar { margin: -1rem 0;}.sections.footer { margin: -1rem 0;}section.sidebar { margin: 2rem 0;}section.sidebar > header { font-size: .8rem; font-weight: 700; letter-spacing: 4px; text-align: center; margin: 1.5rem 0;}section.footer { margin: 1rem 0;}section.footer > header { font-size: .8rem; margin: .5rem 0;}section.footer > header::before { content: "- ";}section.footer > header a { font-weight: 700; color: #333; text-decoration: underline;}.terms { margin: -.25rem;}.terms li { display: inline-block;}.terms a { display: block; float: left; background-color: #333; border-radius: 4px; color: #fff; font-size: .7rem; margin: .25rem; padding: 0 .75rem; line-height: 1.75rem;}.paging { text-align: center; padding: 1rem 0;}.paging a { display: inline-block; background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); border-radius: 4px; color: #333; padding: 0 1rem; line-height: 3rem;}.page-title { text-align: center; margin: 1rem 0;}.page-title::after { content: ''; display: block; border-bottom: .25rem solid #333; width: 3rem; margin: 1.5rem auto;}.page-title > .title { font-size: 1.2rem; line-height: 1.5rem;}/* Parts:breadcrumb */.crumb ol { text-overflow: ellipsis; color: #cfd8dc; white-space: nowrap; overflow: hidden;}.crumb li { display: inline; font-size: .8rem;}.crumb li::after { content: '›'; margin: 0 .25rem 0 .5rem;}.crumb li:last-child::after { content: '';}.crumb a { color: #cfd8dc;}.crumb i { margin-right: .5em;}.share { padding: 0;}.share a { display: inline-block; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); min-width: 1rem; height: 2rem; border-radius: 4px; color: #333; font-size: .8rem; font-weight: 700; line-height: 2rem; text-align: center; padding: 0 .5rem;}.adj article.lism { margin-bottom: 1rem;}.adj header { font-weight: 700; font-size: .8rem;}.toc { padding: 0 2rem;}@media (max-width: 768px) { .toc { padding: 0 1rem; }}.toc { margin: 1rem 0;}.toc nav>ul { background-color: #eceff1; border-radius: 4px; display: inline-block; font-size: .8rem; padding: .5rem 1rem; word-break: break-all; list-style: none;}.toc ul { padding: 0;}.toc ul ul { padding-left: 1rem;}.toc ul ul ul { padding-left: 1rem;}.toc li { color: #90a4ae;}.toc ul ul>li { font-weight: 700; margin: .5rem 0; list-style-type: decimal;}.toc ul ul ul>li { list-style-type: disc; font-weight: 500;}.thumb { background-image: url(http://tjchester.github.io/images/default.jpg); background-size: cover;}.thumb-161ea488772a611c68ae338f28c6ff01 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-e701422d5d79d3a6784393e8f5f859f7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-9c06832134ac3b1bf5ac505f44f972e7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-e2fc3f612fd039b967f1bec3ce76b2e6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-0b0cda628be80f0d61e5448c8fc42fd0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-32f88f5a104c180ca0e2c5598b72ee39 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-ea1d53287313d452e54fbfcd6f08a7cf { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-a104fb8a18bd0de47f233c01bf2e7479 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-938a1f711bc39c21459842955cb4a3fc { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-89b38bad6ca604794ee7fbad564408a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-3c4116e0c0758d85af1236a2a437f985 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-ea20ca6e433a2829b5be53dc2eafe393 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-aed55365eccf97e5c290a3e12317108e { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-abd38d5b85b8b17ee3913acdb5cea5c5 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-f625bb597fe06739be42d9478a39e309 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-6efc84aba56ee6c729401c3b786fddac { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-1ca01e36e8ea1c36087086fc322b82ad { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1891628ad0db83c0a00b880b6c17974c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-9756858709cfd2e412619c2a284493b3 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-1cf3d78b95eb200c427a3e487128426c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-bb175006c256441fed31e035fcd454a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-508618ae10dd76aa38789fccbb50fb76 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-80814d5c7659bffa0b562563d29bc98c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-fda34b02421a4f884291523c4ad49d32 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-963b9700f2a58d526bfd16e0004911d8 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-a86fb5985e759d8a858551602a42be71 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-633b5e63fc7775442ffc225297502a1a { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-f6d0788325ae45084d3ebe6e7baf6c52 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-33cc6a32e49ca50523d31820a54cfcbb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-6fbec6ca8cc6335a412d8b2210ec2c23 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-e06b60ef112096b1249f29bcaa30cf46 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-052660c3e6eabd122d8f3931ab383dd6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-6bbfa922acab3dec818390ad7aee5e91 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-2aa42f120abcb5a6d78ae24187f4ea74 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-62b31a793be89a89cd160b9dc5be26bb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-8ac4e8461a27760ccbddd69d69e40911 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-5aff53c7421c80d2bd68aa4977270977 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-27abff142ce9069dcbc65786087f931d { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-bb7a4b292816e52cc39ec3a59baf5053 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1770d4fe2262c48ffa32f35c66384410 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-d1d552cdb71d70c0ee72fdb4deb0ab90 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}
+       body { font-family: Lato,YuGothic,'Hiragino Kaku Gothic Pro',Meiryo,sans-serif; } 
+       .h-logo { font-family: Lobster, cursive; } 
+    </style>
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <div class="l-container">
+        <div class="logo">
+          <a href="http://tjchester.github.io/">Thomas Chester&#39;s Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="l-container">
+        
+<div class="mrow">
+  <div class="mcol c8">
+
+    <article class="sn">
+
+  <div class="thumb thumb-27abff142ce9069dcbc65786087f931d"></div>
+
+  <header class="article-header">
+    <h1 class="title">How To Source Control Your SQL Server Databases</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2012-03-30T00:00:00JST">March 30, 2012</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://tjchester.github.io/post/">POST</a></li>
+      
+    </ul>
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&title=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&text=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&t=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&title=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+  </header>
+
+  
+
+  <div class="article-body"><p>This document discusses the feasibility of using source control with database development for SQL Server (2005 and newer) databases.</p>
+
+<p></p>
+
+<p>While it has long been a practice to manage application source code through version control systems, up until recently it has not been practical to perform the same activities with databases. The advent of tools that connect database development tools to the same version control systems used by the application teams opens up a new window of opportunity for controlled and repeatable processes to be built around an organization’s database development. It is this paper’s posture that Microsoft SQL Server database source control is feasible and practical provided there is an investment in tools and the development of processes around the use of those tools. In addition, there are some limitations to the list of recommended tools that will require some custom in-house development to resolve.</p>
+
+<h2 id="purpose">Purpose</h2>
+
+<p>This document discusses the feasibility of using source control with database development for SQL Server (2005 and newer) databases. First some background around the problem is discussed; which includes the differences between shared and dedicated databases. Next, the Red Gate toolset is introduced, followed by some examples demonstrating the use of their SQL Source Control plug-in. Those examples are then followed by a discussion of some limitations of the current version of that plug-in. The last section talks about how to extend basic version control with issue tracking, code reviews, continuous integration, and the support of version control for other SQL Server technologies such as Integration Services.</p>
+
+<h2 id="background">Background</h2>
+
+<p>Source control systems give you the ability to track and retain the history of changes to the files that make up an application or system. These shared repositories provide a central authoritative source for a system and allow the controlled collaboration between the people involved in the development and maintenance of that system. Traditionally these benefits have not extended to database development because databases do not consist of strict source files, but are comprised of schema and data – usually held within some form of binary container. Corporate databases are storage areas for the majority of a business’s vital information and changes to the objects and logic contained in them should be visible and auditable. In addition, to having databases under source control a method of controlled and repeatable migrations between environments is needed. Up until recently, there were not any available tools that could assist with this process.</p>
+
+<p>One potential method of managing databases under source control is to create a directory containing sequentially number SQL scripts that are applied to the database in order by an external tool. This tool further creates a table within the database for tracking which scripts have been applied. These scripts can be source controlled and applied in a controlled manner. The limitation lies in the fact that changes to the database are isolated in batches and you lose the ability to see the history to individual objects in any easily accessible manner.</p>
+
+<p>One of the difficulties around database objects is that one set of syntax is used to create the object and a different set of syntax is used to change the object. Application source files on the other hand have no such limitation. In order for a source control system to handle the history around database objects, it must store the initial CREATE syntax and then apply each successive ALTER as a transformation on the CREATE rather than a CREATE file followed by successive ALTER files.</p>
+
+<p>This is best illustrated using an example. Suppose we have the following syntax used to create a table to store state information:</p>
+
+<pre><code class="language-sql">CREATE TABLE MyStateTable
+(
+  StateAbbrev CHAR(2) NOT NULL PRIMARY KEY,
+  StateName   VARCHAR(50) NOT NULL
+)
+</code></pre>
+
+<p>Our version control system sees the following:</p>
+
+<p><img src="/images/posts/sql-server-source-control-01.png" alt="" /></p>
+
+<p>Now let us suppose that we forgot to add a field for the state capital. Normally through SQL we would create the following file:</p>
+
+<pre><code class="language-sql">ALTER TABLE MyStateTable
+  ADD StateCapital VARCHAR(100) NULL
+</code></pre>
+
+<p>Behind the scenes, our tool stores the following which preserves the history of the object but takes into account the actual change:</p>
+
+<p><img src="/images/posts/sql-server-source-control-02.png" alt="" /></p>
+
+<pre><code>It should be pointed out that since the tool is storing objects with only CREATE syntax, it must support the ability to compare a version in source control to the current version and generate the sequence of ALTER statements that will be needed to transform the old object into the new object.
+</code></pre>
+
+<h2 id="development-models">Development Models</h2>
+
+<p>There are two common database development models: shared and dedicated. In the shared model, developers work on a common database typically located on a development server. In the dedicated model, developers work on a local copy of the database on their machines.</p>
+
+<h3 id="shared-model">Shared Model</h3>
+
+<p>In this model, the development database is typically created using a restored backup from the production database. All developers work on their own objects within the database and at some point changes will be migrated to a test or production environment.</p>
+
+<p>While this model does simplify some change management activities it has some limitations and risks. For one it typically requires that developers have elevated privileges on the server and database as well as remote access to the server’s desktop. Additionally, it is difficult for developers to experiment or make changes without impacting the other developers. Finally, it is difficult to stabilize test data as each developer may be creating or modifying data to test their particular changes.</p>
+
+<h3 id="dedicated-model">Dedicated Model</h3>
+
+<p>In this model, each developer works with their own copy of the database which could be either located on a server or on their local machine.</p>
+
+<p>Working in this model requires some form of source control to manage the publication of the developer’s local changes as well as being able to synchronize the changes from other developers. Each developer gains isolation for the development and testing of their changes. The choice of a server or local location for the development database typically depends on the power of the developer machines and the sensitivity of the data in the database. As a general rule, the data contained within the database should neither be direct production data nor should it be production volumes.</p>
+
+<p>Compared to the shared model, the dedicated model facilitates better project tracking. When developers use a shared model there is no real need to commit changes since everybody is working on a common database and repository. When developers work on their own dedicated database, then they need to perform commits and pushes to the master repository in order for their changes to be visible to the other developers. If a project manager fails to see commits to the master repository from a developer then that can be a tickler to follow-up and see what issues may be holding that person up.</p>
+
+<p>One of the pre-requisites of this model is that developers are supplied with machines that are suitable for this kind of development; which is not typically the same machines that are deployed for regular desktop use. In particular, faster processors, more RAM, multiple monitors, and fast large and local disks are required.</p>
+
+<h2 id="red-gate-tools">Red Gate Tools</h2>
+
+<p><a href="http://www.red-gate.com/">Red Gate</a> produces a variety of tools related to database development and administration.</p>
+
+<p>The Red Gate SQL Server Development Tools are listed in the table below with the costs for a single developer buying the tools separately.</p>
+
+<table>
+<thead>
+<tr>
+<th>Tool Name(1)</th>
+<th>Description</th>
+<th>Cost(2)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>SQL Source Control</td>
+<td>Database source control within SSMS</td>
+<td>$395</td>
+</tr>
+
+<tr>
+<td>SQL Compare Professional</td>
+<td>Compares and synchronizes database schemas</td>
+<td>$595</td>
+</tr>
+
+<tr>
+<td>SQL Data Compare Professional</td>
+<td>Compares and synchronizes database contents</td>
+<td>$595</td>
+</tr>
+
+<tr>
+<td>SQL Data Generator</td>
+<td>Test data generator for SQL Server databases</td>
+<td>$295</td>
+</tr>
+
+<tr>
+<td>SQL Packager</td>
+<td>Packages a database for deployment or update</td>
+<td>$295</td>
+</tr>
+
+<tr>
+<td>SQL Doc</td>
+<td>Document SQL Server databases</td>
+<td>$295</td>
+</tr>
+
+<tr>
+<td>SQL Dependency Tracker</td>
+<td>Visualizes SQL Server object dependencies</td>
+<td>$295</td>
+</tr>
+
+<tr>
+<td>SQL Prompt</td>
+<td>Write, edit, and explore SQL effortlessly</td>
+<td>$295</td>
+</tr>
+
+<tr>
+<td>SQL Multi Script Unlimited</td>
+<td>Deploy multiple scripts to multiple servers with one click</td>
+<td>$195</td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td>$3255.00</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>(1) It appears from Section 5.3 of the Red Gate License Agreement, the tools listed here are classified as “Per User Licensed Software” which allows a single specified user to use those tools on more than one OSE (Operating System Environment). This would seem to imply that we could not purchase only the SQL Source Control plug-in for each developer and then install the bundle on a server for shared access without first purchasing a bundle license for each user.
+(2) The prices listed do not reflect any discounts, such as for volume purchases.
+</code></pre>
+
+<p>The table below lists the bundle price for a single developer.</p>
+
+<table>
+<thead>
+<tr>
+<th>Bundle</th>
+<th>Cost</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>SQL Developer Bundle</td>
+<td>$1495</td>
+</tr>
+
+<tr>
+<td>- SQL Source Control</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Compare Professional</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Data Compare Professional</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Data Generator</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Packager</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Doc</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Dependency Tracker</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Prompt Professional</td>
+<td></td>
+</tr>
+
+<tr>
+<td>- SQL Multi-Script Unlimited</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>The SQL Source Control tool is required at a bare minimum in order to support version control for SQL Server objects. The additional tools add value in the areas of environment migration, test data generation, and impact analysis but are not strictly required just to support version control.
+</code></pre>
+
+<h2 id="sql-source-control">SQL Source Control</h2>
+
+<p>SQL Source Control is an add-in for Microsoft SQL Server Management Studio that acts as a connector between a database and an external source control system such as Subversion, Team Foundation Server or Mercurial. This add-in can track changes for both database objects and static table data.</p>
+
+<pre><code>Best practices state that any data created through the use of the system such as transaction data should not be managed through source control.
+</code></pre>
+
+<h3 id="example-1-adding-a-database-to-source-control">Example 1: Adding a Database to Source Control</h3>
+
+<p>This example demonstrates how an existing production database might be added to source control. This example assumes an empty Mercurial repository has been created prior to the linking step. The act of creating a new repository in Kiln and then cloning that repository is sufficient to complete the setup.</p>
+
+<p>In this example we are going to add the <em>Adventure Works</em> sample database to source control. First select the database and then select <strong>SQL Source Control</strong> from the <strong>Tools</strong> menu. When the <em>Link a database to source control</em> tab is displayed, click the <strong>Link database to source control…</strong> link.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-01-01.png" alt="" /></p>
+
+<p>We will need to complete the dialog shown below. Item 1 specifies the working folder where the empty repository resides. For Item 2 we need to select <em>Mercurial</em> from the list. Per database development best practices, we should select <strong>Dedicated database</strong> from <em>Development Model</em>. Finally, click the <strong>Link</strong> button to complete.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-01-02.png" alt="" /></p>
+
+<p>The following dialog will be displayed to indicate the link is complete. At this stage, the database has been linked to the repository, but no objects have actually been committed to source control. That will be done in the next step. Click <strong>OK</strong> to close this dialog.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-01-03.png" alt="" /></p>
+
+<p>Select the <em>Commit Changes</em> tab to see a list of objects that are ready to be committed to source control. Enter a commit message and click <strong>Commit</strong>. You can uncheck the box next to an individual object to exclude if from the current commit operation. In addition, you can specify filter rules (not shown in this example) that will remove certain objects from appearing in the <em>Commit</em>, <em>Get Latest</em>, or <em>Undo</em> lists.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-01-04.png" alt="" /></p>
+
+<p>At the completion of this commit operation, the dialog, shown below, will be displayed. At this stage, your database objects are in the local repository but not yet available for other developers to access. Click the <strong>OK</strong> button to close out this dialog.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-01-05.png" alt="" /></p>
+
+<p>As the final step, use either <a href="http://tortoisehg.bitbucket.org/"><em>TortoiseHg</em></a> or the <em>Mercurial</em> command line to push your local repository back to the central repository (in this example that would be Kiln) in order for other developers to access your changes.</p>
+
+<h3 id="example-2-developer-database-setup">Example 2: Developer Database Setup</h3>
+
+<p>This example demonstrates how a developer gets a copy of the production database now under source control and recreates it on a development machine. This example also assumes that an existing Mercurial repository has been created prior to the linking step. The act of cloning the master repository from Kiln is sufficient to complete the setup. In addition, an empty database must also be created, although the name does not have to match the name of the production database.</p>
+
+<p>In this example, assume we have already created a database named <em>AdventureWorks-Developer1</em> on our development machine. We select that database in the SQL Server Management Studio and then select <strong>SQL Source Control</strong> from the <strong>Tools</strong> menu. When the <em>Link a database to source control</em> tab is displayed, click the <strong>Link database to source control…</strong> link.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-02-01.png" alt="" /></p>
+
+<p>We will need to complete the dialog shown below. Item 1 specifies the working folder where the empty repository resides. For Item 2 we need to select <em>Mercurial</em> from the list. Per database development best practices, we should select <strong>Dedicated database</strong> from <em>Development Model</em>. Finally, click the <strong>Link</strong> button to complete.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-02-02.png" alt="" /></p>
+
+<p>The following dialog will be displayed to indicate the link is complete. At this stage, the database has been linked to the repository, but no objects have actually been retrieved from source control into our local database. That will be done in the next step. Click <strong>OK</strong> to close this dialog.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-02-03.png" alt="" /></p>
+
+<p>Select the <em>Get Latest</em> tab to see a list of objects that are ready to be retrieved from source control. You can uncheck the box next to an individual object to exclude if from the current operation. In addition, you can specify filter rules (not shown in this example) that will remove certain objects from appearing in the <em>Commit</em>, <em>Get Latest</em>, or <em>Undo</em> lists. Click the <strong>Get Latest</strong> button.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-02-04.png" alt="" /></p>
+
+<p>At the completion of this operation the following dialog will be displayed. At this stage, your database objects are synchronized with the master copy and your database is ready for development. Click the <strong>OK</strong> button to close out this dialog.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-02-05.png" alt="" /></p>
+
+<h3 id="example-3-adding-static-data-to-source-control">Example 3: Adding Static Data to Source Control</h3>
+
+<p>This example demonstrates how static data can be placed under source control.</p>
+
+<p>We first select out database in SQL Server Management Studio, then right-click and select <strong>Link/Unlink Static Data</strong> from the <strong>Other SQL Source Control Tasks</strong> menu.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-03-01.png" alt="" /></p>
+
+<p>On the <em>Link/Unlink Static Data</em> tab select the tables that you want to include and then click the <strong>Save and close</strong> button. This dialog shows all tables that have been selected for linking, either currently, or in the past, so we may see some tables that are already selected in the list.</p>
+
+<pre><code>As noted in the Tool Limitations section, the tool will not detect foreign key dependencies between tables when you are selecting tables to link.
+</code></pre>
+
+<p><img src="/images/posts/sql-server-source-control-example-03-02.png" alt="" /></p>
+
+<p>Select the <em>Commit Changes</em> tab to see a list of objects that are ready to be committed to source control. You can uncheck the box next to an individual object to exclude if from the current commit operation. In addition, you can specify filter rules (not shown in this example) that will remove certain objects from appearing in the <em>Commit</em>, <em>Get Latest</em>, or <em>Undo</em> lists. Enter a commit message and click the <strong>Commit</strong> button.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-03-03.png" alt="" /></p>
+
+<p>After the changes are successfully committed, you will see the following dialog. Click <strong>OK</strong> to close it.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-03-04.png" alt="" /></p>
+
+<p>As the final step, use either <a href="http://tortoisehg.bitbucket.org/"><em>TortoiseHg</em></a> or the <em>Mercurial</em> command line to push your local repository back to the central repository (in this example that would be Kiln) in order for other developers to access your changes.</p>
+
+<h2 id="tool-limitations">Tool Limitations</h2>
+
+<h3 id="sql-source-control-1">SQL Source Control</h3>
+
+<h4 id="link-unlink-data">Link/Unlink Data</h4>
+
+<p>This function does not detect foreign key relationships when selecting tables to link data for. For instance in the <em>AdventureWorks</em> database, we could select just the <em>Person.StateProvince</em> table for linking and the tool would not alert us to the fact that it depends on data in the <em>Person.CountryRegion</em> and <em>Sales.SalesTerritory</em> tables.</p>
+
+<p>This function is not subject to the “Undo Change” functionality of the Source Control plugin. If we unlink a table and then decide that we still needed it; we must manually go in and re-add it because there is no undo.</p>
+
+<pre><code>It appears that the unlinking of static data is a non-destructive operation. The Source Control Plugin Commit screen shows the following in the change area:
+ “This change is a data unlink. Data unlink. This is a configuration change. When you commit a data unlink the table’s data is removed from source control and data changes for the table are no longer detected. The data in your database does not change.”
+</code></pre>
+
+<h4 id="miscellaneous">Miscellaneous</h4>
+
+<p>The order of some of the <em>sp_addextendedproperty N’MS_Description’</em> entries changed between the source database and when the script was applied to the target database. This resulted in a “commit” required back to the original database. In general, this would not have caused any problems but it was unexpected behavior.</p>
+
+<h4 id="migration-scripts">Migration Scripts</h4>
+
+<p>Migration scripts are not currently supported when using Mercurial as your source control system. This means that certain destructive operations, such as table renames, cannot be handled through the source control plugin without assistance. The Red Gate documentation identifies the four most common operations which require a migration script:</p>
+
+<ol>
+<li>Adding a NOT NULL constraint to a column that has data in it already but doesn’t have a default value specified.</li>
+<li>Renaming a table causes a DROP then CREATE table which results in a loss of data</li>
+<li>Table and column splits and merges results in the DROP of the old column and the CREATE of the new columns resulting a loss of data</li>
+<li>Changing the data type (or size) of a column could result in truncation or existing data or the change to fail if existing data cannot be converted to the new data type</li>
+</ol>
+
+<p>In theory, a possible solution is to create database deployment scripts in version control along with the object changes. A database deployment tool, such as <a href="https://github.com/psake/psake"><em>psake</em></a>, will execute those scripts before the object changes are applied to the database.</p>
+
+<pre><code>The Source Control Plugin seemed to identify changes that could cause problems such as shortening the column length on the Commit side, but on the Get Latest side did not indicate that would happen until you actually ran the operation, then a dialog appeared asking you to confirm.
+</code></pre>
+
+<h3 id="multiple-tools">Multiple Tools</h3>
+
+<h4 id="version-selection-and-history-viewing">Version Selection and History Viewing</h4>
+
+<p>In their current versions, the Red Gate tools support a tighter integration with other source control systems such as Team Foundation Server and Subversion. Because the integration with Mercurial is not as tight, you are not able to specify the version of the schema to migrate using the Data Compare tool nor are you able to view object history from within the SQL Source Control tool.</p>
+
+<h2 id="looking-to-the-future">Looking to the Future</h2>
+
+<p>Having databases under source control opens the possibility of integrating more agile development techniques into the database development process. A couple of these techniques are applying version control to other SQL Server technologies, issue tracking with code reviews, continuous integration and unit testing.</p>
+
+<h3 id="integration-services-and-reporting-services">Integration Services and Reporting Services</h3>
+
+<p>SQL Server Integration Services (SSIS) packages and SQL Server Reporting Services (SSRS) reports are created and maintained through the SQL Server Business Intelligence Development Studio (BIDS), which is based on the editor used in the Visual Studio product. This editor supports source control through a plug-in interface. Out of the box it supports Microsoft SourceSafe but through the use of the free <a href="http://visualhg.codeplex.com/">VisualHG plug-in</a> it can be made to support Mercurial. This plug-in does not currently work with SQL Server Management Studio (SSMS).</p>
+
+<h3 id="issue-tracking-code-reviews">Issue Tracking / Code Reviews</h3>
+
+<p><a href="http://www.fogcreek.com">Fog Creek Software</a> produces an integrated set of tools known as FogBugz and Kiln. FogBugz is an issue tracker and Kiln is a source control product based on Mercurial. The integration between the two products allows changes to be tied to issues, time to be estimated and tracked against those issues, and the option of online code reviews of changes.</p>
+
+<p>The Fog Creek tools are listed in the table below with the costs for a single developer buying the tools separately.</p>
+
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Cost</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Self-Hosted FogBugz – 1 license</td>
+<td>$299</td>
+</tr>
+
+<tr>
+<td>Self-Hosted Kiln – 1 license</td>
+<td>$299</td>
+</tr>
+
+<tr>
+<td></td>
+<td>$598.00</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>The prices listed do not reflect any discounts, such as for volume purchases.
+</code></pre>
+
+<p>The table below lists the bundle price for a single developer.</p>
+
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Cost</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Self-Hosted FogBugz with Kiln Integration – 1 License</td>
+<td>$449</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="example-1-linking-a-bug-to-a-change">Example 1: Linking a Bug to a Change</h4>
+
+<p>In this example, we create an issue in order to track activity related to a change request.</p>
+
+<p>In FogBugz, we have created issue 74415 to track the request to store state abbreviations in an existing table.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-04-01.png" alt="" /></p>
+
+<p>As the assigned developer, we are making the change within SQL Server Management Studio. We could just have easily scripted the change using an ALTER script, and the change would still have been detected by the SQL Control Plugin.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-04-02.png" alt="" /></p>
+
+<p>After testing our change, we are ready to commit it into our local repository. Activating the <em>Source Control</em> tab and going to the <em>Commit Changes</em> tab, we enter our commit message. As long as we preface our change with the word <em>Bug</em> (<em>Case</em> or <em>Review</em>) and the number (i.e. Bug 74415 or Case 74415) our changes will automatically be linked between FogBugz and Kiln.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-04-03.png" alt="" /></p>
+
+<p>After committing to our local repository, we still need to push the changes to the remote Kiln repository that contains the master copy of the database objects. Once that push has been made, then going back into our open issue shows a new <em>Changeset</em> comment added to the work log.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-04-04.png" alt="" /></p>
+
+<h4 id="example-2-using-a-code-review-for-a-change">Example 2: Using a Code Review for a Change</h4>
+
+<p>In this example, we view the change activity within Kiln and request a code review of the change.</p>
+
+<p>In Kiln, we can see our change in the list of recent activities.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-05-01.png" alt="" /></p>
+
+<p>Clicking on the commit message takes us to the details of that change set which in this example is only a single file related to the table definition of the <em>MyNewTable</em> object. The red and green highlighted lines indicate the actual change.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-05-02.png" alt="" /></p>
+
+<p>Within the change view, shown above, you can click the <em>Reviews</em> link to view existing reviews or to create a new review. As an alternative, you can also create a review from the recent activity view as shown in the image below. In either case, we then select a number of people to be involved in the review and click <strong>Request Review</strong>.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-05-03.png" alt="" /></p>
+
+<p>Once inside the review, shown below, the reviewer can sign-off on the change by clicking the <strong>Approved</strong> button on the <em>Approve/Reject</em> tab.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-05-04.png" alt="" /></p>
+
+<p>The approval or rejection of the code review is reflected in the issue that is tracking this change.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-05-05.png" alt="" /></p>
+
+<h2 id="continuous-integration">Continuous Integration</h2>
+
+<p>Continues integration means that development occurs in small batches and is combined together on a frequent basis including running additional tests. The purpose of this process is to ensure that problems are found and fixed earlier in the development process. In database development terms, this would be a development build server that continually gets the latest source, updates the database, and then optionally runs automated tests.</p>
+
+<blockquote>
+<p>Continuous Integration is a software development practice where members of a team integrate their work frequently, usually each person integrates at least daily — leading to multiple integrations per day. Many teams find that this approach leads to significantly reduced integration problems and allows a team to develop cohesive software more rapidly. – Martin Fowler</p>
+</blockquote>
+
+<p>Using a combination of <a href="http://www.jetbrains.com/teamcity/">JetBrains TeamCity</a> and Red Gate Data Compare with Red Gate SQL Data Compare tools, a build server can be built.</p>
+
+<pre><code>The professional versions of the Data Compare and SQL Data Compare tools are needed in order to: (1) deploy from source control and (2) to have command line access to the tools.
+</code></pre>
+
+<pre><code>The Professional (free) version of Team City supports 20 build configurations and 5 build agents. Some investigation would still need to be done to see if it is possible to programmatically or manually change a set of build configurations in order to use them for more than 20 databases. If this is not possible then and Enterprise License would be needed for TeamCity.
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Cost</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>JetBrains TeamCity Enterprise License</td>
+<td>$1999</td>
+</tr>
+
+<tr>
+<td>Red Gate Data SQL Compare Professional</td>
+<td>$595</td>
+</tr>
+
+<tr>
+<td>Red Gate SQL Compare Professional</td>
+<td>$595</td>
+</tr>
+
+<tr>
+<td>Total Per Development Server</td>
+<td>$3189.00</td>
+</tr>
+</tbody>
+</table>
+
+<p>Best Practices state that the production database environment should not be automatically updated through a continuous build process but through the use of scripts created generated by the Data Compare and SQL Data Compare tools.</p>
+
+<pre><code>An automated build server depends on a resolution to the Migration Script issues as discussed in the Tool Limitations section above.
+</code></pre>
+
+<h4 id="example-1-automated-database-documentation">Example 1: Automated Database Documentation</h4>
+
+<p>Database documentation aids in the impact analysis of new changes as well as research into bugs related to recent changes. Red Gate has a tool called <em>SQL Doc 2</em> that can generate database documentation through a user interface as well as through the command line (after a project file has been created through the GUI). This tool can output documentation in one of four formats: HTML, HTML with frames, Microsoft Word, and Microsoft Help File (i.e. CHM).</p>
+
+<p>The image below shows a sample from the CHM file format.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-06-01.png" alt="" /></p>
+
+<h3 id="unit-testing">Unit Testing</h3>
+
+<p>Red Gate is currently previewing <em>SQL Test</em>, a unit test add-in for SQL Server Management Studio. This tool is actually a graphical interface over the open-source <a href="http://tsqlt.org/sql-test/"><em>tSQLt</em></a> tool. Out of the box the tool comes with <em>SQL Cop</em> rules which perform static analysis tests against your SQL.</p>
+
+<p>Installing the tSQLt framework requires several changes to your server and database that require elevated privileges. In addition, each test you create will be its own stored procedure and the framework will create objects within your database that manage the execution of the tests. Your database migration plans may have to be updated if you want to prevent the migration of the test specific objects.</p>
+
+<h4 id="example-1-running-unit-tests-using-sql-server-management-studio">Example 1: Running Unit Tests Using SQL Server Management Studio</h4>
+
+<p>This example walks through the simple use case of running the tests manually using SQL Server Management Studio.</p>
+
+<p>After selecting <strong>SQL Test</strong> from the Tools menu, you are presented with the following dialog:</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-07-01.png" alt="" /></p>
+
+<p>Click the <strong>Add Database to SQL Test</strong> link, select the <em>tSQLt_Example</em> database from the list, and click the <strong>Add Database</strong> button. NOTE: If you do not have the tSQLt_Example database in the list you can click the Install Sample Database link at the bottom of the dialog to install it.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-07-02.png" alt="" /></p>
+
+<p>After selecting the database that you want to test, you are presented with a dialog which displays the available tests within that database. By highlighting either the database name or the test grouping names you can control the number of tests that are run. In this example, the database name is highlighted indicating that we want to run all available tests.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-07-03.png" alt="" /></p>
+
+<p>The results of the test are shown below indicating that two test failures have occurred.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-07-04.png" alt="" /></p>
+
+<p>Double-clicking the name of test, in this case <em>test Decimal Size Problem</em>, opens up the test script (i.e. stored procedure) in the query editor window.</p>
+
+<h4 id="example-2-running-unit-tests-using-teamcity">Example 2: Running Unit Tests Using TeamCity</h4>
+
+<p>This example walks through the setup and execution of units tests through a TeamCity project. It is assumed that the tSQLt setup has already been completed in the example database.</p>
+
+<p>First connect to TeamCity and create a new project.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-01.png" alt="" /></p>
+
+<p>Next we will add a build configuration.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-02.png" alt="" /></p>
+
+<p>Next we will add a build step to execute all of the unit tests.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-03.png" alt="" /></p>
+
+<p>Next we will add an additional build step to retrieve the test results as an XML file.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-04.png" alt="" /></p>
+
+<p>Next we will add a build feature to parse the XML results file.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-05.png" alt="" /></p>
+
+<p>Next we will manually run the build configuration.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-06.png" alt="" /></p>
+
+<p>The build configuration has failed and we can view the results.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-07.png" alt="" /></p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-08.png" alt="" /></p>
+
+<p>Clicking the Tests tab shows all of the tests that were run.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-09.png" alt="" /></p>
+
+<p>If the additional build step and build feature to export the results as XML was not included; you could still find the tests that failed, but it would require a manual inspection of the build log as shown below.</p>
+
+<p><img src="/images/posts/sql-server-source-control-example-08-10.png" alt="" /></p>
+
+<h2 id="citations-and-additional-reading">Citations and Additional Reading</h2>
+
+<p>The following articles and websites were used in the production of this document and contain additional information related to the products and processes discussed. They appear in no particular order.</p>
+
+<ol>
+<li><a href="http://www.sqlservercentral.com/articles/Red+Gate+Software/71062/Printable">SQL Source Control – Q &amp; A, 08/26/2012, SQL Server Central</a></li>
+<li><a href="http://www.red-gate.com">The business benefits of database source control – Improving productivity, change management, scalability, and code quality with SQL Source Control, Red Gate</a></li>
+<li><a href="http://www.red-gate.com">Database development models – SQL Source Control version 3.0 Help Documentation, Red Gate</a></li>
+<li><a href="http://www.troyhunt.com/2011/05/10-commandments-of-good-source-control.html">The 10 commandments of good source control management, Troy Hunt, 05/10/2011</a></li>
+<li><a href="http://martinfowler.com/articles/evodb.html">Evolutionary Database Design, Martin Fowler and Pramod Sadalage, 01/2003</a></li>
+<li><a href="http://www.troyhunt.com/2011/02/unnecessary-evil-of-shared-development.html">The unnecessary evil of the shared development database, Troy Hunt, 02/2011</a></li>
+<li><a href="http://www.troyhunt.com/2010/07/rocking-your-sql-source-control-world.html">Rocking your SQL Source Control world with Red Gate, Troy Hunt, 07/2010</a></li>
+<li><a href="http://www.troyhunt.com/2011/02/automated-database-releases-with.html">Automated database releases with TeamCity and Red Gate, Troy Hunt, 02/2011</a></li>
+<li><a href="http://www.simple-talk.com/content/print.aspx?article=1436">Using SQL Test Database Unit Testing with TeamCity Continuous Integration, Dave Green, 02/02/2012</a></li>
+</ol></div>
+
+  <footer class="article-footer">
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&title=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&text=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&t=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f&title=How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?How%20To%20Source%20Control%20Your%20SQL%20Server%20Databases http%3a%2f%2ftjchester.github.io%2fpost%2f2012-03-30-sql-server-source-control%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+
+    <section class="footer">
+      <div>
+        <nav class="crumb">
+          <ol>
+            <li><a href="http://tjchester.github.io/"><i class="fa fa-home" aria-hidden="true"></i>TOP</a></li>
+            
+            <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://tjchester.github.io/post/" itemprop="url"><span itemprop="title">POST</span></a></li>
+            
+            <li class="active">How To Source Control Your SQL Server Databases</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/categories/">CATEGORIES</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/categories/howto/">HowTo</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/tags/">TAGS</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/tags/source-control/">Source Control</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/sql-server/">SQL Server</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    <div class="adj">
+      <div class="mrow">
+        
+        <div class="mcol c6">
+          <header>Previous Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/">
+    <div class="thumb thumb-bb7a4b292816e52cc39ec3a59baf5053"></div>
+
+    <div class="inner">
+      <div class="title">Unable to Connect to Remote SQL Server Integration Services</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2010-12-17T00:00:00JST">December 17, 2010</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+        
+        <div class="mcol c6">
+          <header>Next Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/">
+    <div class="thumb thumb-5aff53c7421c80d2bd68aa4977270977"></div>
+
+    <div class="inner">
+      <div class="title">Entity Framework Error When Calling SaveChanges Method</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2012-06-28T00:00:00JST">June 28, 2012</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="mcol c4">
+    <aside class="l-sidebar">
+
+  <div class="sections sidebar">
+    <section class="sidebar">
+      <header>LATESTS</header>
+      <div>
+        <div class="articles sm">
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/">
+    <div class="thumb thumb-161ea488772a611c68ae338f28c6ff01"></div>
+
+    <div class="inner">
+      <div class="title">Lost Disk Space to Fuslogvw</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-12-07T00:00:00JST">December 7, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/">
+    <div class="thumb thumb-e701422d5d79d3a6784393e8f5f859f7"></div>
+
+    <div class="inner">
+      <div class="title">Using the bpod Gem</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-09-03T00:00:00JST">September 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/">
+    <div class="thumb thumb-9c06832134ac3b1bf5ac505f44f972e7"></div>
+
+    <div class="inner">
+      <div class="title">Palindromic Prime Calculation</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-08-30T00:00:00JST">August 30, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/">
+    <div class="thumb thumb-e2fc3f612fd039b967f1bec3ce76b2e6"></div>
+
+    <div class="inner">
+      <div class="title">Disable Google Chrome Updates [Updated]</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-07-20T00:00:00JST">July 20, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+    <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+    <div class="inner">
+      <div class="title">Generating Test Data for Rails Projects</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+    <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+    <div class="inner">
+      <div class="title">Fixing Windows Update Error 0x80072F8F</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="sidebar">
+      <header>CATEGORIES</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/categories/technote">technote</a></li><li><a href="http://tjchester.github.io/categories/howto">howto</a></li><li><a href="http://tjchester.github.io/categories/post">post</a></li><li><a href="http://tjchester.github.io/categories/plug">plug</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="sidebar">
+      <header>TAGS</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/tags/sql-server">sql-server</a></li><li><a href="http://tjchester.github.io/tags/linux">linux</a></li><li><a href="http://tjchester.github.io/tags/windows-server">windows-server</a></li><li><a href="http://tjchester.github.io/tags/bids">bids</a></li><li><a href="http://tjchester.github.io/tags/macos">macos</a></li><li><a href="http://tjchester.github.io/tags/registry">registry</a></li><li><a href="http://tjchester.github.io/tags/ruby">ruby</a></li><li><a href="http://tjchester.github.io/tags/.net">.net</a></li><li><a href="http://tjchester.github.io/tags/archlinux">archlinux</a></li><li><a href="http://tjchester.github.io/tags/backup/restore">backup/restore</a></li>
+        </ul>
+      </div>
+    </section>
+    
+  </div>
+
+</aside>
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <p><span class="h-logo">&copy; Thomas Chester&#39;s Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

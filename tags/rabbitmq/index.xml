@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rabbitmq on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/rabbitmq/</link>
+    <description>Recent content in Rabbitmq on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Oct 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/rabbitmq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monitoring RabbitMQ Hosted on Microsoft Windows</title>
+      <link>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</guid>
+      <description>&lt;p&gt;This post will discuss how to monitor a Windows hosted RabbitMQ installation from a Linux based Zenoss monitor using the RabbitMQ plugin.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

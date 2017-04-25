@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sql Server Agent on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/sql-server-agent/</link>
+    <description>Recent content in Sql Server Agent on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Nov 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/sql-server-agent/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Failed to Change SQL Agent Job Ownership</title>
+      <link>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a typical error when trying to reassign SQL Agent job ownership.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

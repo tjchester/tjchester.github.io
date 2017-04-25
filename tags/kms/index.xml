@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kms on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/kms/</link>
+    <description>Recent content in Kms on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Jun 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/kms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How To Upgrade Windows Server 2008 from Standard Edition to Datacenter Edition</title>
+      <link>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</link>
+      <pubDate>Fri, 07 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</guid>
+      <description>&lt;p&gt;This post describes a process for upgrading a Microsoft Windows Server 2008 R2 Standard edition to the Datacenter edition using generic Key Management Server (KMS) keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

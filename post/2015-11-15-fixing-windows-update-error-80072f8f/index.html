@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="theme-color" content="#263238">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+<link rel="apple-touch-icon" href="http://tjchester.github.io/images/logo.png">
+
+
+<link rel="canonical" href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster%7cLato:400,700" rel="stylesheet">
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>Fixing Windows Update Error 0x80072F8F - Thomas Chester&#39;s Blog</title>
+    
+
+<meta name="description" content="The posts discusses a method of addressing Windows Update error 0x80072F8F stemming from SSL certificate problems in the context non-domain joined machines.">
+
+<meta property="og:title" content="Fixing Windows Update Error 0x80072F8F - Thomas Chester&#39;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+<meta property="og:image" content="http://tjchester.github.io/images/theme/thumbnail-11.jpg">
+<meta property="og:site_name" content="Thomas Chester&#39;s Blog">
+<meta property="og:description" content="The posts discusses a method of addressing Windows Update error 0x80072F8F stemming from SSL certificate problems in the context non-domain joined machines.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Thomas Chester&#39;s Blog">
+<meta name="twitter:url" content="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+<meta name="twitter:title" content="Fixing Windows Update Error 0x80072F8F - Thomas Chester&#39;s Blog">
+<meta name="twitter:description" content="The posts discusses a method of addressing Windows Update error 0x80072F8F stemming from SSL certificate problems in the context non-domain joined machines.">
+<meta name="twitter:image" content="http://tjchester.github.io/images/theme/thumbnail-11.jpg">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http://tjchester.github.io/"
+    },
+    "headline": "Fixing Windows Update Error 0x80072F8F - Thomas Chester&#39;s Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http://tjchester.github.io/images/theme/thumbnail-11.jpg",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2015-11-15T00:00:00JST",
+    "dateModified": "2015-11-15T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Chester&#39;s Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Thomas Chester&#39;s Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http://tjchester.github.io/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "The posts discusses a method of addressing Windows Update error 0x80072F8F stemming from SSL certificate problems in the context non-domain joined machines."
+  }
+</script>
+
+
+    <style>
+      html { font-size: 18px; background-color: rgba(236,239,241,.5);}@media (max-width: 768px) { html { font-size: 15px; }}body { color: #333; font-family: 'Roboto Slab','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-feature-settings : "palt"; font-size: inherit; line-height: 1rem; margin: 0; padding: 0;}h1, h2, h3, h4, h5 ,h6 { font-size: 1rem; font-weight: 700; line-height: 1rem; margin: 0;}hr { border: 0; border-top: 1px dashed #cfd8dc; margin: 1rem 0;}p { margin: 0; line-height: 1rem;}a { color: #2196f3; text-decoration: none; transition-duration: .3s;}ul, ol { margin: 0; padding: 0;}table { border-collapse: collapse;}th, td { font-size: .8rem; padding: .5rem;}tr { border-bottom: 1px dashed #ddd;}/* Layouts */main,aside { display: block;}main { padding: 1rem 0 3rem 0; }aside.h { padding: 3rem 0; }main.f,aside.f { background-color: #333; border-top: 2px dashed #fff; border-bottom: 2px dashed #fff;}.l-container { position: relative; max-width: 68rem; margin: 0 auto; padding: 0 1rem;}.l-container.thin { max-width: 44rem;}.l-header { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); padding: 1rem 0; text-align: center;}.l-footer { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); font-size: .6rem; font-weight: 700; padding: 1rem 0;}@media (max-width: 768px) { .l-sidebar { margin-top: 4rem; }}.mrow { margin: 0 -1rem; overflow: hidden;}.mcol { box-sizing: border-box; float: left; padding: 0 1rem;}.c6 { width: 50%; }.c4 { width: 33.26323833%; }.c8 { width: 66.66666%; }@media (max-width: 768px) { .mcol { width: 100%; float: none; }}.logo a { font-size: 1.4rem; line-height: 1.5rem; font-weight: 700; color: #333;}.articles { margin: -1rem 0; margin-bottom: 1rem;}.articles.sm { margin: -.5rem 0; margin-bottom: 0;}article { border-radius: 4px; overflow: hidden;}article.li { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); height: 20rem; overflow: hidden; margin: 1rem 0;}article.li > a { display: block; color: #333;}article.li .inner { padding: 1rem;}article.li .thumb { height: 8rem;}article.li .title { color: #333; font-size: 1.2rem; line-height: 1.5rem; margin-bottom: .5rem;}article.li .summary { font-size: .8rem; height: 6rem; overflow: hidden; margin-top: 1rem;}article.lism { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin: .5rem 0;}article.lism::after { content: ''; display: block; clear: both;}article.lism > a { display: block; color: #333;}article.lism .inner { display: table-cell; vertical-align: middle; height: 5rem; padding-left: .5rem;}article.lism .thumb { width: 5rem; height: 5rem; float: left;}article.lism .title { font-weight: 700; line-height: 1.25rem; margin-bottom: .25rem;}article.sn { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin-bottom: 1rem;}article.sn .thumb { height: 20rem;}@media (max-width: 768px) { article.sn .thumb { height: 10rem; }}article.sn > .article-header,article.sn > .article-body,article.sn .article-footer { padding: 2rem;}article.sn > .article-body { padding: 0 2rem;}@media (max-width: 768px) { article.sn > .article-header, article.sn > .article-body, article.sn .article-footer { padding: 1rem; } article.sn > .article-body { padding: 0 1rem; }}article.sn > .article-header .title { font-size: 1.8rem; line-height: 2rem; margin-bottom: .5rem;}@media (max-width: 768px) { article.sn > .article-header .title { font-size: 1.4rem; line-height: 1.5rem; }}article.sn > .article-header .facts { margin-bottom: 1rem;}article.sn > .article-body { margin-bottom: 1.5rem; word-break: break-all;}article.sn > .article-body h2 { border-bottom: .25rem solid #333; font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; padding: .5rem 0;}article.sn > .article-body h3 { border-left: .5rem solid #333; line-height: 1.5rem; margin: 1.5rem 0; padding: .125rem .5rem;}article.sn > .article-body ul,article.sn > .article-body ol { margin: 1.5rem 0; padding-left: 1.5rem;}article.sn > .article-body li { padding-bottom: .5rem; line-height: 1.5rem;}article.sn > .article-body li:last-child { padding-bottom: 0;}article.sn > .article-body p { margin: 1rem 0; line-height: 1.5rem;}article.sn > .article-body strong,article.sn > .article-body em { font-style: normal; font-weight: 700;}article.sn > .article-body strong { box-shadow: 0 -.5rem 0 0 #ffc107 inset;}article.sn > .article-body em { color: #8bc34a;}article.sn > .article-body code,article.sn > .article-body pre { font-family: Menlo, Consolas, monospace; font-size: .7rem;}article.sn > .article-body pre { background-color: #333; color: #fff; line-height: 1rem; margin: 1.5rem -2rem; overflow: auto;}@media (max-width: 768px) { article.sn > .article-body pre { margin: 1.5rem -1rem; }}article.sn > .article-body pre > code { display: block; padding: 1rem 2rem;}@media (max-width: 768px) { article.sn > .article-body pre > code { padding: 1rem; }}article.sn > .article-body p code { background-color: #eceff1; color: #333; border-radius: 4px; margin: 0 .25rem; padding: .375rem; white-space: nowrap;}article.sn > .article-body blockquote { position: relative; border-left: .25rem solid #333; font-size: .8rem; padding: .125rem 1rem; margin: 1.5rem 0;}@media (max-width: 768px) { article.sn > .article-body blockquote { font-size: 1rem; }}article.sn > .article-body blockquote p { margin: .5rem 0; line-height: 1rem;}article.sn > .article-body figure { margin: 1.5rem 0;}article.sn > .article-body figure img,article.sn > .article-body figure amp-img { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); max-width: 100%;}article.sn > .article-body figcaption { color: #cfd8dc; font-size: .8rem; font-weight: 700; margin-top: .5rem;}.facts li { display: inline; font-size: .8rem; margin-right: 1rem;}.facts i { color: #cfd8dc; margin-right: .5em;}.facts.sm li { font-size: .7rem;}.sections.sidebar { margin: -1rem 0;}.sections.footer { margin: -1rem 0;}section.sidebar { margin: 2rem 0;}section.sidebar > header { font-size: .8rem; font-weight: 700; letter-spacing: 4px; text-align: center; margin: 1.5rem 0;}section.footer { margin: 1rem 0;}section.footer > header { font-size: .8rem; margin: .5rem 0;}section.footer > header::before { content: "- ";}section.footer > header a { font-weight: 700; color: #333; text-decoration: underline;}.terms { margin: -.25rem;}.terms li { display: inline-block;}.terms a { display: block; float: left; background-color: #333; border-radius: 4px; color: #fff; font-size: .7rem; margin: .25rem; padding: 0 .75rem; line-height: 1.75rem;}.paging { text-align: center; padding: 1rem 0;}.paging a { display: inline-block; background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); border-radius: 4px; color: #333; padding: 0 1rem; line-height: 3rem;}.page-title { text-align: center; margin: 1rem 0;}.page-title::after { content: ''; display: block; border-bottom: .25rem solid #333; width: 3rem; margin: 1.5rem auto;}.page-title > .title { font-size: 1.2rem; line-height: 1.5rem;}/* Parts:breadcrumb */.crumb ol { text-overflow: ellipsis; color: #cfd8dc; white-space: nowrap; overflow: hidden;}.crumb li { display: inline; font-size: .8rem;}.crumb li::after { content: '›'; margin: 0 .25rem 0 .5rem;}.crumb li:last-child::after { content: '';}.crumb a { color: #cfd8dc;}.crumb i { margin-right: .5em;}.share { padding: 0;}.share a { display: inline-block; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); min-width: 1rem; height: 2rem; border-radius: 4px; color: #333; font-size: .8rem; font-weight: 700; line-height: 2rem; text-align: center; padding: 0 .5rem;}.adj article.lism { margin-bottom: 1rem;}.adj header { font-weight: 700; font-size: .8rem;}.toc { padding: 0 2rem;}@media (max-width: 768px) { .toc { padding: 0 1rem; }}.toc { margin: 1rem 0;}.toc nav>ul { background-color: #eceff1; border-radius: 4px; display: inline-block; font-size: .8rem; padding: .5rem 1rem; word-break: break-all; list-style: none;}.toc ul { padding: 0;}.toc ul ul { padding-left: 1rem;}.toc ul ul ul { padding-left: 1rem;}.toc li { color: #90a4ae;}.toc ul ul>li { font-weight: 700; margin: .5rem 0; list-style-type: decimal;}.toc ul ul ul>li { list-style-type: disc; font-weight: 500;}.thumb { background-image: url(http://tjchester.github.io/images/default.jpg); background-size: cover;}.thumb-161ea488772a611c68ae338f28c6ff01 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-e701422d5d79d3a6784393e8f5f859f7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-9c06832134ac3b1bf5ac505f44f972e7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-e2fc3f612fd039b967f1bec3ce76b2e6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-0b0cda628be80f0d61e5448c8fc42fd0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-32f88f5a104c180ca0e2c5598b72ee39 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-ea1d53287313d452e54fbfcd6f08a7cf { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-a104fb8a18bd0de47f233c01bf2e7479 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-938a1f711bc39c21459842955cb4a3fc { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-89b38bad6ca604794ee7fbad564408a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-3c4116e0c0758d85af1236a2a437f985 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-ea20ca6e433a2829b5be53dc2eafe393 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-aed55365eccf97e5c290a3e12317108e { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-abd38d5b85b8b17ee3913acdb5cea5c5 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-f625bb597fe06739be42d9478a39e309 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-6efc84aba56ee6c729401c3b786fddac { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-1ca01e36e8ea1c36087086fc322b82ad { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1891628ad0db83c0a00b880b6c17974c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-9756858709cfd2e412619c2a284493b3 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-1cf3d78b95eb200c427a3e487128426c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-bb175006c256441fed31e035fcd454a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-508618ae10dd76aa38789fccbb50fb76 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-80814d5c7659bffa0b562563d29bc98c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-fda34b02421a4f884291523c4ad49d32 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-963b9700f2a58d526bfd16e0004911d8 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-a86fb5985e759d8a858551602a42be71 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-633b5e63fc7775442ffc225297502a1a { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-f6d0788325ae45084d3ebe6e7baf6c52 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-33cc6a32e49ca50523d31820a54cfcbb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-6fbec6ca8cc6335a412d8b2210ec2c23 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-e06b60ef112096b1249f29bcaa30cf46 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-052660c3e6eabd122d8f3931ab383dd6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-6bbfa922acab3dec818390ad7aee5e91 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-2aa42f120abcb5a6d78ae24187f4ea74 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-62b31a793be89a89cd160b9dc5be26bb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-8ac4e8461a27760ccbddd69d69e40911 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-5aff53c7421c80d2bd68aa4977270977 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-27abff142ce9069dcbc65786087f931d { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-bb7a4b292816e52cc39ec3a59baf5053 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1770d4fe2262c48ffa32f35c66384410 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-d1d552cdb71d70c0ee72fdb4deb0ab90 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}
+       body { font-family: Lato,YuGothic,'Hiragino Kaku Gothic Pro',Meiryo,sans-serif; } 
+       .h-logo { font-family: Lobster, cursive; } 
+    </style>
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <div class="l-container">
+        <div class="logo">
+          <a href="http://tjchester.github.io/">Thomas Chester&#39;s Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="l-container">
+        
+<div class="mrow">
+  <div class="mcol c8">
+
+    <article class="sn">
+
+  <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+  <header class="article-header">
+    <h1 class="title">Fixing Windows Update Error 0x80072F8F</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://tjchester.github.io/post/">POST</a></li>
+      
+    </ul>
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&title=Fixing%20Windows%20Update%20Error%200x80072F8F" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&text=Fixing%20Windows%20Update%20Error%200x80072F8F&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&t=Fixing%20Windows%20Update%20Error%200x80072F8F" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&title=Fixing%20Windows%20Update%20Error%200x80072F8F" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?Fixing%20Windows%20Update%20Error%200x80072F8F http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+  </header>
+
+  
+
+  <div class="article-body"><p>The posts discusses a method of addressing Windows Update error 0x80072F8F in the context of SCCM and non-domain joined machines.</p>
+
+<p></p>
+
+<p>I recently came across an issue using SCCM to push Windows Updates to our non-domain joined servers residing in the DMZ. The strange part was that this was previously working. When I attempted to run the Windows Update check to our SCCM server the following error was displayed:</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-001.png" alt="Windows Update Error" /></p>
+
+<p>The built-in <em>Get help with this error</em> was unsuccessful so a quick search of the internet identified this article at <a href="http://blogs.technet.com/b/win7/archive/2011/11/08/windows-update-error-80072f8f.aspx">Technet</a>. This article stated that the the error code meant <strong>ERROR_INTERNET_DECODING_FAILED</strong>, and indicated a time mismatch between the update server and the target computer. This led to an error verifying the SSL certificate and in turn triggered the error I was seeing. Other posts on the internet seemed to confirm the same theory. The problem was that the target server and the SCCM server both had the correct time zone and time settings.</p>
+
+<p>My next line of thinking was that possibly the internal firewall rules had been changed for the DMZ servers. From the target server I opened a web browser session to the SCCM server (e.g. <a href="https://wsus_server:8531">https://wsus_server:8531</a>). I was greeted by the following page, which identified the problem as an untrusted certifcate.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-002.png" alt="Untrusted Certificate Warning" /></p>
+
+<p>The untrusted certificate identified it as being distributed from the internal AD Certificate Authority. I next compared this certificate information against the same certificate on one of the domain joined servers. This comparison confirmed that the original certificate had expired and a new one had been issued, but it had not been pushed to the non-domain servers.</p>
+
+<p>Using the Certificate Manager MMC plugin (certmgr.msc) I exported the certificate from an domain joined server and copied the certificate file to the DMZ server. Then on the DMZ server I double-clicked it to invoke the Certificate Import Wizard. I selected <em>Automatically select the certificate store based on the type of certificate</em> option and successfully imported the certificate.</p>
+
+<p>Now with the newly imported certificate, I re-opened the web browser to the SCCM server, and surprisingly, was once again greeted with the <em>There is a problem with this website&rsquo;s security certificate</em> error. I still believed the original issue was related to the SSL certificate so back to the internet I went. This time I came across this <a href="http://blogs.msdn.com/b/saurabh_singh/archive/2007/11/07/you-get-a-security-alert-when-you-try-to-access-an-ssl-enabled-web-site-when-certificate-has-been-issued-by-an-internal-root-ca.aspx">MSDN article</a>. The article seemed to indicate that while the certificate had been exported successfully the certificate chain was broken.</p>
+
+<p>Based on the steps in the article, I opened the Certificate Management snap-in on the <strong>domain joined</strong> server:</p>
+
+<ol>
+<li>Start the Microsoft Management Console (i.e. mmc.exe)</li>
+<li>From the <strong>File</strong> menu select <strong>Add/Remove Snap-In&hellip;</strong></li>
+<li>Select <strong>Certificates</strong> from the <em>Available snap-ins</em> and click <strong>Add</strong></li>
+<li>Select <strong>Computer account</strong> from the <em>Certificates snap-in</em> dialog and click <strong>Next</strong></li>
+<li>Select <strong>Local computer</strong> and click <strong>Finish</strong></li>
+<li>Click <strong>OK</strong> on the <em>Add or Remove Snap-ins</em> dialog</li>
+<li>Expand the <strong>Trusted Root Certification Authorities</strong> folder</li>
+<li>Select the <strong>Certificates</strong> folder</li>
+<li>Highlight the <strong>&lt;Domain&gt; Corporate Root CA1</strong> certificate</li>
+<li>Right-click this certificate and select <strong>All Tasks</strong> then <strong>Export&hellip;</strong></li>
+</ol>
+
+<p>At this point the <strong>Export Certificate Wizard</strong> will open up.</p>
+
+<p>On the initial wizard page just click the <strong>Next</strong> button.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-005.png" alt="Certificate Export Wizard Page 1" /></p>
+
+<p>On the <em>Export File Format</em> settings page, select the <strong>Cryptographic Message Syntax Standard - PKCS #7 Certificates (.P7B)</strong> option and make sure that the <strong>Include all certificates in the certification path if possible</strong> option is selected as well.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-006.png" alt="Certificate Export Wizard Page 2" /></p>
+
+<p>On the <em>File to Export</em> settings page, specify a path and file name for the exported certificate.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-007.png" alt="Certificate Export Wizard Page 3" /></p>
+
+<p>On the the <em>Completing the Certificate Export Wizard</em> page, just click the <strong>Finish</strong> button.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-008.png" alt="Certificate Export Wizard Page 4" /></p>
+
+<p>A window appeared stating <em>The export was successful</em>, and I clicked the <strong>OK</strong> button to close the dialog. Next I copied the exported certificate file (i.e *.p7b) file to the DMZ server.</p>
+
+<p>On the DMZ server, I right-clicked the certificate file and selected <strong>Install Certificate</strong>. This started the <strong>Import Certificate Wizard</strong>.</p>
+
+<p>On the initial wizard page, just click the <strong>Next</strong> button.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-010.png" alt="Certificate Import Wizard Page 1" /></p>
+
+<p>On the <em>Certificate Store</em> settings page, select the <strong>Place all certificates in the following store</strong> option and then click the <strong>Browse&hellip;</strong> button.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-011.png" alt="Certificate Import Wizard Page 2" /></p>
+
+<p>When the <em>Select Certificate Store</em> page opens, first click the <strong>Show physical stores</strong> option, expand the selection tree under the <strong>Trusted Root Certification Authorities</strong> container, select <strong>Local Computer</strong>, and then click <strong>OK</strong>.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-012.png" alt="Certificate Import Wizard Page 3" /></p>
+
+<p>Back on the <em>Certificate Store</em> page, <em>Trusted Root Certification Authorities\Local Computer</em> is now filled in as the certificate store. Click <strong>Next</strong> to continue.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-013.png" alt="Certificate Import Wizard Page 4" /></p>
+
+<p>On the the <em>Completing the Certificate Export Wizard</em> page, just click the <strong>Finish</strong> button.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-014.png" alt="Certificate Import Wizard Page 5" /></p>
+
+<p>A dialog appeared stating <em>The import was successful</em> and I clicked <strong>OK</strong> to close it out. Finally, I opened a web browser to the SCCM server as I had originally done. This time I was not presented with the untrusted certificate warning. Since this looked promising, I went to Windows Update in the Control Panel and told it to check for updates. After a few moments I was presented with the message below which indicated that everything was working again.</p>
+
+<p><img src="/images/posts/fixing-windows-update-error-80072F8F-020.png" alt="Windows Update Now Working" /></p>
+
+<p>So in conclusion, the <em>0x80072F8F</em> error is related to an SSL certificate issue due to a time mismatch or a broken certificate chain. This article focused on the latter issue which was resolved by first exporting the certificate, including the certificate chain, from an internal server. Then the certificate was copied to and imported into the DMZ server, specifically the local computer&rsquo;s trusted certificate physical store. Lastly, it was verified that the web browser and Windows Update errors were not occurring anymore.</p></div>
+
+  <footer class="article-footer">
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&title=Fixing%20Windows%20Update%20Error%200x80072F8F" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&text=Fixing%20Windows%20Update%20Error%200x80072F8F&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&t=Fixing%20Windows%20Update%20Error%200x80072F8F" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f&title=Fixing%20Windows%20Update%20Error%200x80072F8F" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?Fixing%20Windows%20Update%20Error%200x80072F8F http%3a%2f%2ftjchester.github.io%2fpost%2f2015-11-15-fixing-windows-update-error-80072f8f%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+
+    <section class="footer">
+      <div>
+        <nav class="crumb">
+          <ol>
+            <li><a href="http://tjchester.github.io/"><i class="fa fa-home" aria-hidden="true"></i>TOP</a></li>
+            
+            <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://tjchester.github.io/post/" itemprop="url"><span itemprop="title">POST</span></a></li>
+            
+            <li class="active">Fixing Windows Update Error 0x80072F8F</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/categories/">CATEGORIES</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/categories/technote/">TechNote</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/tags/">TAGS</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/tags/windows-server/">Windows Server</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/wsus/">WSUS</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/sccm/">SCCM</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/windows-update/">Windows Update</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    <div class="adj">
+      <div class="mrow">
+        
+        <div class="mcol c6">
+          <header>Previous Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+        
+        <div class="mcol c6">
+          <header>Next Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="mcol c4">
+    <aside class="l-sidebar">
+
+  <div class="sections sidebar">
+    <section class="sidebar">
+      <header>LATESTS</header>
+      <div>
+        <div class="articles sm">
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/">
+    <div class="thumb thumb-161ea488772a611c68ae338f28c6ff01"></div>
+
+    <div class="inner">
+      <div class="title">Lost Disk Space to Fuslogvw</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-12-07T00:00:00JST">December 7, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/">
+    <div class="thumb thumb-e701422d5d79d3a6784393e8f5f859f7"></div>
+
+    <div class="inner">
+      <div class="title">Using the bpod Gem</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-09-03T00:00:00JST">September 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/">
+    <div class="thumb thumb-9c06832134ac3b1bf5ac505f44f972e7"></div>
+
+    <div class="inner">
+      <div class="title">Palindromic Prime Calculation</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-08-30T00:00:00JST">August 30, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/">
+    <div class="thumb thumb-e2fc3f612fd039b967f1bec3ce76b2e6"></div>
+
+    <div class="inner">
+      <div class="title">Disable Google Chrome Updates [Updated]</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-07-20T00:00:00JST">July 20, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+    <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+    <div class="inner">
+      <div class="title">Generating Test Data for Rails Projects</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+    <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+    <div class="inner">
+      <div class="title">Fixing Windows Update Error 0x80072F8F</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="sidebar">
+      <header>CATEGORIES</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/categories/technote">technote</a></li><li><a href="http://tjchester.github.io/categories/howto">howto</a></li><li><a href="http://tjchester.github.io/categories/post">post</a></li><li><a href="http://tjchester.github.io/categories/plug">plug</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="sidebar">
+      <header>TAGS</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/tags/sql-server">sql-server</a></li><li><a href="http://tjchester.github.io/tags/linux">linux</a></li><li><a href="http://tjchester.github.io/tags/windows-server">windows-server</a></li><li><a href="http://tjchester.github.io/tags/bids">bids</a></li><li><a href="http://tjchester.github.io/tags/macos">macos</a></li><li><a href="http://tjchester.github.io/tags/registry">registry</a></li><li><a href="http://tjchester.github.io/tags/ruby">ruby</a></li><li><a href="http://tjchester.github.io/tags/.net">.net</a></li><li><a href="http://tjchester.github.io/tags/archlinux">archlinux</a></li><li><a href="http://tjchester.github.io/tags/backup/restore">backup/restore</a></li>
+        </ul>
+      </div>
+    </section>
+    
+  </div>
+
+</aside>
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <p><span class="h-logo">&copy; Thomas Chester&#39;s Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

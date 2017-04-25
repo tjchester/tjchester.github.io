@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plug on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/categories/plug/</link>
+    <description>Recent content in Plug on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Apr 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/categories/plug/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing an IPFire Based Firewall (Plug)</title>
+      <link>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</guid>
+      <description>&lt;p&gt;This is both humorous and a shamless plug at the same time for my previous article, &lt;strong&gt;Installing an IPFire Based Firewall&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dell Poweredge on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/dell-poweredge/</link>
+    <description>Recent content in Dell Poweredge on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Dec 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/dell-poweredge/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dell PowerEdge OpenManage Firmware Notice</title>
+      <link>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</link>
+      <pubDate>Thu, 18 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</guid>
+      <description>&lt;p&gt;This brief note talks about how to turn off the Dell OpenManage disk firmware and driver checks.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dell PowerEdge Degraded Backplane Error</title>
+      <link>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</link>
+      <pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</guid>
+      <description>&lt;p&gt;This brief note talks about an issue I encountered with the Dell OpenManage agents after replacing a failed disk.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

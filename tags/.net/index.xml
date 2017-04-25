@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>.Net on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/.net/</link>
+    <description>Recent content in .Net on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lost Disk Space to Fuslogvw</title>
+      <link>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</guid>
+      <description>&lt;p&gt;This post will discuss a recent problem I encountered when installing Visual Studio 2015 &lt;em&gt;(although the actual software being installed does not matter)&lt;/em&gt;. During the installation process, the 250GB drive in my computer ran out of space.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Entity Framework Error When Calling SaveChanges Method</title>
+      <link>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a potential transaction error when calling the SaveChanges method on an Entity Framework context variable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

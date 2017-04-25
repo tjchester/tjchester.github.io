@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="theme-color" content="#263238">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+<link rel="apple-touch-icon" href="http://tjchester.github.io/images/logo.png">
+
+
+<link rel="canonical" href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster%7cLato:400,700" rel="stylesheet">
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>Generating Test Data for Rails Projects - Thomas Chester&#39;s Blog</title>
+    
+
+<meta name="description" content="Discusses the development of a script for populating a new Rails database with test data.">
+
+<meta property="og:title" content="Generating Test Data for Rails Projects - Thomas Chester&#39;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+<meta property="og:image" content="http://tjchester.github.io/images/theme/thumbnail-03.jpg">
+<meta property="og:site_name" content="Thomas Chester&#39;s Blog">
+<meta property="og:description" content="Discusses the development of a script for populating a new Rails database with test data.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Thomas Chester&#39;s Blog">
+<meta name="twitter:url" content="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+<meta name="twitter:title" content="Generating Test Data for Rails Projects - Thomas Chester&#39;s Blog">
+<meta name="twitter:description" content="Discusses the development of a script for populating a new Rails database with test data.">
+<meta name="twitter:image" content="http://tjchester.github.io/images/theme/thumbnail-03.jpg">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http://tjchester.github.io/"
+    },
+    "headline": "Generating Test Data for Rails Projects - Thomas Chester&#39;s Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http://tjchester.github.io/images/theme/thumbnail-03.jpg",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2016-03-17T00:00:00JST",
+    "dateModified": "2016-03-17T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Chester&#39;s Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Thomas Chester&#39;s Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http://tjchester.github.io/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "Discusses the development of a script for populating a new Rails database with test data."
+  }
+</script>
+
+
+    <style>
+      html { font-size: 18px; background-color: rgba(236,239,241,.5);}@media (max-width: 768px) { html { font-size: 15px; }}body { color: #333; font-family: 'Roboto Slab','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-feature-settings : "palt"; font-size: inherit; line-height: 1rem; margin: 0; padding: 0;}h1, h2, h3, h4, h5 ,h6 { font-size: 1rem; font-weight: 700; line-height: 1rem; margin: 0;}hr { border: 0; border-top: 1px dashed #cfd8dc; margin: 1rem 0;}p { margin: 0; line-height: 1rem;}a { color: #2196f3; text-decoration: none; transition-duration: .3s;}ul, ol { margin: 0; padding: 0;}table { border-collapse: collapse;}th, td { font-size: .8rem; padding: .5rem;}tr { border-bottom: 1px dashed #ddd;}/* Layouts */main,aside { display: block;}main { padding: 1rem 0 3rem 0; }aside.h { padding: 3rem 0; }main.f,aside.f { background-color: #333; border-top: 2px dashed #fff; border-bottom: 2px dashed #fff;}.l-container { position: relative; max-width: 68rem; margin: 0 auto; padding: 0 1rem;}.l-container.thin { max-width: 44rem;}.l-header { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); padding: 1rem 0; text-align: center;}.l-footer { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); font-size: .6rem; font-weight: 700; padding: 1rem 0;}@media (max-width: 768px) { .l-sidebar { margin-top: 4rem; }}.mrow { margin: 0 -1rem; overflow: hidden;}.mcol { box-sizing: border-box; float: left; padding: 0 1rem;}.c6 { width: 50%; }.c4 { width: 33.26323833%; }.c8 { width: 66.66666%; }@media (max-width: 768px) { .mcol { width: 100%; float: none; }}.logo a { font-size: 1.4rem; line-height: 1.5rem; font-weight: 700; color: #333;}.articles { margin: -1rem 0; margin-bottom: 1rem;}.articles.sm { margin: -.5rem 0; margin-bottom: 0;}article { border-radius: 4px; overflow: hidden;}article.li { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); height: 20rem; overflow: hidden; margin: 1rem 0;}article.li > a { display: block; color: #333;}article.li .inner { padding: 1rem;}article.li .thumb { height: 8rem;}article.li .title { color: #333; font-size: 1.2rem; line-height: 1.5rem; margin-bottom: .5rem;}article.li .summary { font-size: .8rem; height: 6rem; overflow: hidden; margin-top: 1rem;}article.lism { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin: .5rem 0;}article.lism::after { content: ''; display: block; clear: both;}article.lism > a { display: block; color: #333;}article.lism .inner { display: table-cell; vertical-align: middle; height: 5rem; padding-left: .5rem;}article.lism .thumb { width: 5rem; height: 5rem; float: left;}article.lism .title { font-weight: 700; line-height: 1.25rem; margin-bottom: .25rem;}article.sn { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin-bottom: 1rem;}article.sn .thumb { height: 20rem;}@media (max-width: 768px) { article.sn .thumb { height: 10rem; }}article.sn > .article-header,article.sn > .article-body,article.sn .article-footer { padding: 2rem;}article.sn > .article-body { padding: 0 2rem;}@media (max-width: 768px) { article.sn > .article-header, article.sn > .article-body, article.sn .article-footer { padding: 1rem; } article.sn > .article-body { padding: 0 1rem; }}article.sn > .article-header .title { font-size: 1.8rem; line-height: 2rem; margin-bottom: .5rem;}@media (max-width: 768px) { article.sn > .article-header .title { font-size: 1.4rem; line-height: 1.5rem; }}article.sn > .article-header .facts { margin-bottom: 1rem;}article.sn > .article-body { margin-bottom: 1.5rem; word-break: break-all;}article.sn > .article-body h2 { border-bottom: .25rem solid #333; font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; padding: .5rem 0;}article.sn > .article-body h3 { border-left: .5rem solid #333; line-height: 1.5rem; margin: 1.5rem 0; padding: .125rem .5rem;}article.sn > .article-body ul,article.sn > .article-body ol { margin: 1.5rem 0; padding-left: 1.5rem;}article.sn > .article-body li { padding-bottom: .5rem; line-height: 1.5rem;}article.sn > .article-body li:last-child { padding-bottom: 0;}article.sn > .article-body p { margin: 1rem 0; line-height: 1.5rem;}article.sn > .article-body strong,article.sn > .article-body em { font-style: normal; font-weight: 700;}article.sn > .article-body strong { box-shadow: 0 -.5rem 0 0 #ffc107 inset;}article.sn > .article-body em { color: #8bc34a;}article.sn > .article-body code,article.sn > .article-body pre { font-family: Menlo, Consolas, monospace; font-size: .7rem;}article.sn > .article-body pre { background-color: #333; color: #fff; line-height: 1rem; margin: 1.5rem -2rem; overflow: auto;}@media (max-width: 768px) { article.sn > .article-body pre { margin: 1.5rem -1rem; }}article.sn > .article-body pre > code { display: block; padding: 1rem 2rem;}@media (max-width: 768px) { article.sn > .article-body pre > code { padding: 1rem; }}article.sn > .article-body p code { background-color: #eceff1; color: #333; border-radius: 4px; margin: 0 .25rem; padding: .375rem; white-space: nowrap;}article.sn > .article-body blockquote { position: relative; border-left: .25rem solid #333; font-size: .8rem; padding: .125rem 1rem; margin: 1.5rem 0;}@media (max-width: 768px) { article.sn > .article-body blockquote { font-size: 1rem; }}article.sn > .article-body blockquote p { margin: .5rem 0; line-height: 1rem;}article.sn > .article-body figure { margin: 1.5rem 0;}article.sn > .article-body figure img,article.sn > .article-body figure amp-img { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); max-width: 100%;}article.sn > .article-body figcaption { color: #cfd8dc; font-size: .8rem; font-weight: 700; margin-top: .5rem;}.facts li { display: inline; font-size: .8rem; margin-right: 1rem;}.facts i { color: #cfd8dc; margin-right: .5em;}.facts.sm li { font-size: .7rem;}.sections.sidebar { margin: -1rem 0;}.sections.footer { margin: -1rem 0;}section.sidebar { margin: 2rem 0;}section.sidebar > header { font-size: .8rem; font-weight: 700; letter-spacing: 4px; text-align: center; margin: 1.5rem 0;}section.footer { margin: 1rem 0;}section.footer > header { font-size: .8rem; margin: .5rem 0;}section.footer > header::before { content: "- ";}section.footer > header a { font-weight: 700; color: #333; text-decoration: underline;}.terms { margin: -.25rem;}.terms li { display: inline-block;}.terms a { display: block; float: left; background-color: #333; border-radius: 4px; color: #fff; font-size: .7rem; margin: .25rem; padding: 0 .75rem; line-height: 1.75rem;}.paging { text-align: center; padding: 1rem 0;}.paging a { display: inline-block; background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); border-radius: 4px; color: #333; padding: 0 1rem; line-height: 3rem;}.page-title { text-align: center; margin: 1rem 0;}.page-title::after { content: ''; display: block; border-bottom: .25rem solid #333; width: 3rem; margin: 1.5rem auto;}.page-title > .title { font-size: 1.2rem; line-height: 1.5rem;}/* Parts:breadcrumb */.crumb ol { text-overflow: ellipsis; color: #cfd8dc; white-space: nowrap; overflow: hidden;}.crumb li { display: inline; font-size: .8rem;}.crumb li::after { content: '›'; margin: 0 .25rem 0 .5rem;}.crumb li:last-child::after { content: '';}.crumb a { color: #cfd8dc;}.crumb i { margin-right: .5em;}.share { padding: 0;}.share a { display: inline-block; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); min-width: 1rem; height: 2rem; border-radius: 4px; color: #333; font-size: .8rem; font-weight: 700; line-height: 2rem; text-align: center; padding: 0 .5rem;}.adj article.lism { margin-bottom: 1rem;}.adj header { font-weight: 700; font-size: .8rem;}.toc { padding: 0 2rem;}@media (max-width: 768px) { .toc { padding: 0 1rem; }}.toc { margin: 1rem 0;}.toc nav>ul { background-color: #eceff1; border-radius: 4px; display: inline-block; font-size: .8rem; padding: .5rem 1rem; word-break: break-all; list-style: none;}.toc ul { padding: 0;}.toc ul ul { padding-left: 1rem;}.toc ul ul ul { padding-left: 1rem;}.toc li { color: #90a4ae;}.toc ul ul>li { font-weight: 700; margin: .5rem 0; list-style-type: decimal;}.toc ul ul ul>li { list-style-type: disc; font-weight: 500;}.thumb { background-image: url(http://tjchester.github.io/images/default.jpg); background-size: cover;}.thumb-161ea488772a611c68ae338f28c6ff01 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-e701422d5d79d3a6784393e8f5f859f7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-9c06832134ac3b1bf5ac505f44f972e7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-e2fc3f612fd039b967f1bec3ce76b2e6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-0b0cda628be80f0d61e5448c8fc42fd0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-32f88f5a104c180ca0e2c5598b72ee39 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-ea1d53287313d452e54fbfcd6f08a7cf { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-a104fb8a18bd0de47f233c01bf2e7479 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-938a1f711bc39c21459842955cb4a3fc { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-89b38bad6ca604794ee7fbad564408a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-3c4116e0c0758d85af1236a2a437f985 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-ea20ca6e433a2829b5be53dc2eafe393 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-aed55365eccf97e5c290a3e12317108e { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-abd38d5b85b8b17ee3913acdb5cea5c5 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-f625bb597fe06739be42d9478a39e309 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-6efc84aba56ee6c729401c3b786fddac { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-1ca01e36e8ea1c36087086fc322b82ad { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1891628ad0db83c0a00b880b6c17974c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-9756858709cfd2e412619c2a284493b3 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-1cf3d78b95eb200c427a3e487128426c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-bb175006c256441fed31e035fcd454a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-508618ae10dd76aa38789fccbb50fb76 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-80814d5c7659bffa0b562563d29bc98c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-fda34b02421a4f884291523c4ad49d32 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-963b9700f2a58d526bfd16e0004911d8 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-a86fb5985e759d8a858551602a42be71 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-633b5e63fc7775442ffc225297502a1a { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-f6d0788325ae45084d3ebe6e7baf6c52 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-33cc6a32e49ca50523d31820a54cfcbb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-6fbec6ca8cc6335a412d8b2210ec2c23 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-e06b60ef112096b1249f29bcaa30cf46 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-052660c3e6eabd122d8f3931ab383dd6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-6bbfa922acab3dec818390ad7aee5e91 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-2aa42f120abcb5a6d78ae24187f4ea74 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-62b31a793be89a89cd160b9dc5be26bb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-8ac4e8461a27760ccbddd69d69e40911 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-5aff53c7421c80d2bd68aa4977270977 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-27abff142ce9069dcbc65786087f931d { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-bb7a4b292816e52cc39ec3a59baf5053 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1770d4fe2262c48ffa32f35c66384410 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-d1d552cdb71d70c0ee72fdb4deb0ab90 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}
+       body { font-family: Lato,YuGothic,'Hiragino Kaku Gothic Pro',Meiryo,sans-serif; } 
+       .h-logo { font-family: Lobster, cursive; } 
+    </style>
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <div class="l-container">
+        <div class="logo">
+          <a href="http://tjchester.github.io/">Thomas Chester&#39;s Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="l-container">
+        
+<div class="mrow">
+  <div class="mcol c8">
+
+    <article class="sn">
+
+  <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+  <header class="article-header">
+    <h1 class="title">Generating Test Data for Rails Projects</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://tjchester.github.io/post/">POST</a></li>
+      
+    </ul>
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&title=Generating%20Test%20Data%20for%20Rails%20Projects" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&text=Generating%20Test%20Data%20for%20Rails%20Projects&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&t=Generating%20Test%20Data%20for%20Rails%20Projects" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&title=Generating%20Test%20Data%20for%20Rails%20Projects" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?Generating%20Test%20Data%20for%20Rails%20Projects http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+  </header>
+
+  
+
+  <div class="article-body"><p>How often have you created a database for a new Rails application and then sat staring at the empty tables? Often times when building a new application you need sample data to help flesh out the user interface or to show off the application to your customer. Rails provides a convenient method of loading this data via the <em>seeds.rb</em> file, but you still have to create the content for this file. This article will discuss a mostly automated way of generating content for your database.</p>
+
+<p></p>
+
+<p>But wait you say, this problem isn&rsquo;t new; there must be existing tools to do this. That is true. You can certainly use an existing and tested tool if you are under a time crunch (see the list below). But, if you have the time, you can create a tool that you will be familiar with and probably learn more about Ruby and Rails in the process. Sometimes the journey is worth more than the destination.</p>
+
+<blockquote>
+<h3 id="alternative-sample-data-generators">Alternative Sample Data Generators</h3>
+
+<ul>
+<li><a href="https://github.com/stympy/faker">Faker</a> - a port of Data::Faker from Perl to generate fake data</li>
+<li><a href="https://github.com/ffaker/ffaker">FFaker</a> - a diverged fork of Faker</li>
+<li><a href="https://github.com/sevenwire/forgery">Forgery</a> - a customizable generator</li>
+<li><a href="https://github.com/benburkert/randexp">Randexp</a> - generate data based on a regular expression template</li>
+<li><a href="http://www.mockaroo.com">Mockaroo</a> - an online service to generate small files of sample data</li>
+</ul>
+</blockquote>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>So let&rsquo;s get started. First we are going to need a Rails application to work with. I think a basic ecommerce-like site would give us a relatively common set of subject tables to work with. For the purposes of this article though, we are only going to look at the <em>customers</em> table. Using the rails command line program we create the <em>buyit</em> site.</p>
+
+<pre><code>$ rails new buyit
+      create  
+      create  README.rdoc
+      create  Rakefile
+      create  config.ru
+      create  .gitignore
+      create  Gemfile
+      create  app
+      create  app/assets/javascripts/application.js
+...
+Using web-console 2.3.0
+Bundle complete! 12 Gemfile dependencies, 54 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+         run  bundle exec spring binstub --all
+* bin/rake: spring inserted
+* bin/rails: spring inserted
+</code></pre>
+
+<p>All right, let&rsquo;s generate a model for our data. Since we are not going to focus on the user interface aspect of this application, we will generate scaffolding rather than just the model alone. When we populate our database with test data, we can immediate see how it looks through the application.</p>
+
+<pre><code>$ cd buyit
+$ rails generate scaffold customer firstName:string lastName:string birthDate:datetime \
+streetAddress1:string city:string state:string \
+zipCode:string phoneNumber:string email:string
+Running via Spring preloader in process 798
+      invoke  active_record
+      create    db/migrate/20160307135044_create_customers.rb
+      create    app/models/customer.rb
+      invoke    test_unit
+      create      test/models/customer_test.rb
+      create      test/fixtures/customers.yml
+...
+      create      app/assets/stylesheets/customers.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.scss
+$ rails db:migrate
+== 20160307135044 CreateCustomers: migrating ==================================
+-- create_table(:customers)
+   -&gt; 0.0023s
+== 20160307135044 CreateCustomers: migrated (0.0024s) =========================
+</code></pre>
+
+<blockquote>
+<p>The default database of a new Rails application uses SQLite, so the migrate command will create the database if it doesn&rsquo;t already exist. If we were using MySQL/MariaDB or PostgreSQL then we would have needed to precede the migration with a <em>rake db:create</em> first.</p>
+</blockquote>
+
+<p>The last step of the previous commands pushed our changes into the database. If we were to visualize what has been created it would look something like the image below.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-01.png" alt="Database Diagram" /></p>
+
+<p>We are now going to build our script to generate test data via an iterative process. Each step will bring us one step closer to the finished project.</p>
+
+<h2 id="listing-tables">Listing Tables</h2>
+
+<p>The first step that we need to accomplish is to connect to the database and get a list of tables. Since a database may contain many tables for which we do not want to generate test data for, this first step allows us to pare down the list to those ones we want.</p>
+
+<blockquote>
+<p>Since this is a Rails application we can take advantage of using ActiveRecord to do a lot of the database work for us. In fact, we can use ActiveRecord outside of the Rails application yet take advantage of the database configuration file (config/database.yml)</p>
+</blockquote>
+
+<p>In the code below, we establish a connection to the development database in our Rails application. We then use that connection to populate a hash table with the names of the tables in the database. At the same time, we are adding some additional tracking fields that the script will need.</p>
+
+<pre><code class="language-ruby">ActiveRecord::Base.establish_connection(
+  :adapter =&gt; 'sqlite3'
+  :host =&gt; nil,
+  :database =&gt; 'db/development.sqlite3',
+  :username =&gt; nil,
+  :password =&gt; nil,
+  :sslca =&gt; nil,       # Used for a secure connection
+  :sslcert =&gt; nil,     # ...
+  :sslkey =&gt; nil       # ...
+)
+
+tables = {}
+ActiveRecord::Base.connection.tables.each do |table_name|
+  tables[table_name] = { 
+    :records_to_load =&gt; 0,          # load table with test data if &gt; 0
+  :truncate_before_load =&gt; false  # delete all records before loading table?
+  }
+end
+</code></pre>
+
+<h2 id="configuration-management">Configuration Management</h2>
+
+<p>As we are building this program we are going to have the need to track different kinds of configuration information. This configuration information is going to need to be readable by both ourselves and our program. The easiest way to save and load our configuration files is to use Ruby&rsquo;s built-in ability to save and load objects using <a href="http://yaml.org">YAML</a>.</p>
+
+<pre><code class="language-ruby"># To save *contents* to &quot;tables.yml&quot; file
+File.open(&quot;tables.yml&quot;, &quot;w&quot;) { 
+  |file| file.write(YAML.dump(contents))
+}
+
+# To load *contents* from &quot;tables.yml&quot; file
+contents = YAML.load(File.read(&quot;tables.yml&quot;))
+</code></pre>
+
+<p>The list of tables our program generates will be stored in the <em>tables.yml</em> file. A file generated from our sample Rails program is shown below. I have gone ahead and annotated the file to indicate that we want to generate 10 test records and also empty the table before loading.</p>
+
+<pre><code class="language-yaml">---
+schema_migrations:
+  :records_to_load: 0           # ignore this table
+  :truncate_before_load: false
+customers:
+  :records_to_load: 10          # generate 10 records
+  :truncate_before_load: true   # empty table before load
+</code></pre>
+
+<h2 id="retrieving-column-information">Retrieving Column Information</h2>
+
+<p>Now we need to generate a list of columns and their attributes for the <em>customers</em> table in this example. We need to understand which fields are automatically handled by the database, which ones might be unique, the data type of the columns, and any limitations such as length or nullability.</p>
+
+<p>Similar to the way that we got a table list, we can iterate over our tables and ask ActiveRecord to return information about the columns in those tables. Also like the previous table list, we will be adding additional attributes for our purposes. Specifically that would be the <em>generator</em> property.</p>
+
+<pre><code class="language-ruby">columns = {}
+ActiveRecord::Base.connection.columns(table_name).each do |column|
+  columns[column.name] = {
+  :precision =&gt; column.precision,
+  :scale =&gt; column.scale,
+  :limit =&gt; column.limit,
+  :sql_type =&gt; column.sql_type,
+  :null =&gt; column.null,
+  :default =&gt; column.default,
+  :generator =&gt; &quot;ignore_generator&quot;   # added to assign data generator
+  }
+end
+</code></pre>
+
+<p>This process will create one YAML formatted file per table with the name of the table. In this case, that would mean <em>customers.yml</em>. Only the first two columns <em>id</em> and <em>firstName</em> have been shown below.</p>
+
+<pre><code class="language-yaml">---
+id:
+  :precision: 
+  :scale: 
+  :limit: 
+  :sql_type: INTEGER
+  :null: false
+  :default: 
+  :generator: ignore_generator
+firstName:
+  :precision: 
+  :scale: 
+  :limit: 
+  :sql_type: varchar
+  :null: true
+  :default: 
+  :generator: ignore_generator
+# ... rest of file omitted for brevity
+</code></pre>
+
+<h2 id="basic-generator">Basic Generator</h2>
+
+<p>At this stage, we have a list of columns that we would like to populate but currently have no means of populating them. Looks like we are going to need some generators. For this first pass, let&rsquo;s create a really basic string generator. While the data won&rsquo;t look that great, it will allow us to progress to the next steps of creating and then loading that data.</p>
+
+<pre><code class="language-ruby">module Generator
+  
+  class StringGenerator 
+  
+  # optionally specifying a seed helps to add repeatability
+  # to our random number generation
+    def initialize(seed=nil)
+      seed = Random.new_seed if seed.nil?
+      @prng = Random.new(seed)
+    end
+
+  # pick a random, mixed-case, alphabetic string of 
+  # the specified length
+    def value(length=1)
+      list = [('a'..'z').to_a, ('A'..'Z').to_a].flatten
+      
+    result = &quot;&quot;
+    length.times do 
+      result &lt;&lt; list[@prng.rand(list.length)]
+      end
+    result
+    end
+    
+  end
+    
+end
+</code></pre>
+
+<p>Now that we have a basic generator, we need to associate it with the database columns that we want to use it for. We do this by modifying the value of the <em>generator</em> property in our <em>customers.yml</em> file. Again, only the first two columns are being shown.</p>
+
+<pre><code class="language-yaml">---
+id:
+  :precision: 
+  :scale: 
+  :limit: 
+  :sql_type: INTEGER
+  :null: false
+  :default: 
+  :generator: ignore_generator
+firstName:
+  :precision: 
+  :scale: 
+  :limit: 
+  :sql_type: varchar
+  :null: true
+  :default: 
+  :generator: Generator::StringGenerator.new.value(8)
+# ... rest of file omitted for brevity
+</code></pre>
+
+<blockquote>
+<p>I have chosen a random string of 8 characters to be generated for the first name column.</p>
+</blockquote>
+
+<p>Now that we can generate data, we should try to load it into our database table.</p>
+
+<h2 id="loading-the-database">Loading the Database</h2>
+
+<p>To load a new record into the database, we need to pull all of our previous work together and use ActiveRecord once again. Sample code to do this follows, but first let&rsquo;s discuss the actual steps that we need to perform.</p>
+
+<ol>
+<li>Locate and bring all of the ActiveRecord models from our Rails project into our namespace</li>
+<li>Produce a list of tables that have a <em>records_to_load</em> property greater than zero</li>
+<li>Loop through these tables one at a time</li>
+<li>For each table, locate the ActiveRecord model associated with it</li>
+<li>Produce a list of columns for that table that have an associated generator</li>
+<li>Loop through the number of records that we want to load into the table</li>
+<li>Initialize a new record template from the current ActiveRecord table model</li>
+<li>Loop through each column</li>
+<li>Generate test data by evaluating the <em>generator</em> code and assign it to the current column</li>
+<li>After all columns have been processed, then save the record to the database</li>
+<li>Generate the next test record</li>
+<li>Process the next table in the list</li>
+</ol>
+
+<pre><code class="language-ruby"># load models from Rails project
+models = {}
+Dir[rails_model_path + &quot;/*.rb&quot;].each do |model_file|
+  require model_file
+  basename  = File.basename(model_file, File.extname(model_file))
+  models[basename.camelize] = { :klass =&gt; basename.camelize.constantize }
+end
+
+# loop through tables to load (assume already filtered)
+tables.each do |table, options|
+
+  # identify model associated with this table
+  model = models.detect { 
+    |model, options| options[:klass].table_name == table
+  }[1][:klass]
+
+  # find all columns that have a generator
+  columns = columns.reject { 
+    |column, options| options[:generator] == &quot;ignore_generator&quot;
+  }
+
+  # loop through number of records to load
+  options[:records_to_load].times do
+      # initialize a new ActiveRecord for the current table
+      record = model.new
+
+      # loop through each column that has an assigned generator
+      columns.each do |column, options|
+        generator = options[:generator]
+      record[column] = eval(generator)  # generate test data here
+      end
+
+      # save record to the database
+      record.save
+   end    
+end
+</code></pre>
+
+<h2 id="checking-our-progress">Checking Our Progress</h2>
+
+<p>At this point, we have selected a table to load, retrieved its column data, assigned a string generator to each column, and stored the data back in the database. Now would be a good time to see that data through the Rails interface.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-02.png" alt="Image of Not Pretty Load" /></p>
+
+<h2 id="improving-our-results">Improving Our Results</h2>
+
+<p>Well, it&rsquo;s functional but not pretty. If we use our domain knowledge to apply some heuristics to the generators then we can generate more reasonable looking data. Focusing on the fields related to the customer&rsquo;s name; if instead of generating random looking strings, we selected from a list of common names that would be a step in the right direction.</p>
+
+<p>The name generator below uses separate lists of names based on gender. When the generator is created it randomly chooses a gender and makes name choices based on it.</p>
+
+<pre><code class="language-ruby">module Generator
+
+  class NameGenerator
+
+  def initialize(seed=nil, gender=nil, culture='en-us')
+      seed = Random.new_seed if seed.nil?
+      @prng = Random.new(seed)
+
+      @first_names_male = ['John', 'Matthew', 'Martin']
+      @middle_names_male = ['Charles', 'Michael', 'William']
+      @first_names_female = ['Emma', 'Mia', 'Harper']
+      @middle_names_female = ['Elizabeth', 'Marie', 'Beverly']
+      @last_names = ['Clark', 'Smith', 'Johnson']s
+      @suffix_male = ['Jr', 'Sr', 'I']
+      
+    @gender = [&quot;m&quot;,&quot;f&quot;].shuffle[0] if gender == nil
+    end
+    
+    def first_name()
+    if @gender == 'm'
+      @first_names_male[@prng.rand(@first_names_male.length)]
+      else
+        @first_names_female[@prng.rand(@first_names_female.length)]
+      end
+  end
+  
+    # ... rest of class not shown 
+
+  end 
+
+end
+</code></pre>
+
+<p>Let&rsquo;s reload the table and see how it looks now. The image below shows more realistic looking data.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-03.png" alt="Image of Not Pretty Load" /></p>
+
+<h2 id="tidying-things-up">Tidying Things Up</h2>
+
+<p>That looks good and accomplishes what we need, but can we refine it a little further? What if, we moved the hard-coded lists to an external file and stored it in a folder using a localization code. We would then have the ability to customize the list without altering the tool as well as supporting data in multiple languages.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-04.png" alt="Image of External Data Files" /></p>
+
+<blockquote>
+<p>In the image above we can see several different data files that contain American-English (i.e. en-us) data in them.</p>
+</blockquote>
+
+<h2 id="better-generators">Better Generators</h2>
+
+<p>If we look closely at the output data, while it looks reasonable, there is still a subtle issue going on. Since the generators do not maintain state, subsequent calls return unrelated data. For instance, we have a data file that contains U.S. states and their capitals. When we are loading records, we make separate calls to get the city and state values. This means that the random selection most likely selected different rows for each value. This results, in our example, with a row where Little Rock, the capital of Arkansas, is incorrectly paired with the state of Idaho. This can also result in the pairing of a male first name with a female middle name when handling demographics fields.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-05.png" alt="Image of City Mismatch" />)</p>
+
+<blockquote>
+<p>The image above highlights the incorrect pairings of cities and states that can occur with our current implementation.</p>
+</blockquote>
+
+<p>In the code for a modified generator for the address fields shown below, we can see several improvements. First we are now loading our data from a external file with an optional culture code. Secondly, there is a consistent method named <em>generate</em> which sets the state of the generator. This will provide a consistent set of multiple values until it is <em>re-generated</em> again. Finally, we access the generated values via read-only properties such as <em>city</em>.</p>
+
+<pre><code class="language-ruby">module Generator
+
+  class AddressGenerator
+
+    attr_reader :city
+
+    def initialize(seed=nil, culture='en-us')
+      seed = Random.new_seed if seed.nil?
+
+      @prng = Random.new(seed)
+    
+      data_dir = File.dirname(__FILE__) + &quot;/data/#{culture}/&quot;
+      
+      @states = CSV.readlines(&quot;#{data_dir}us_states_and_capitals.csv&quot;)
+    end
+
+    def generate
+      state_record = sample(@states)
+
+      @city = state_record[2]
+      @state_name  = state_record[0]
+      @state_abbrev = state_record[1]
+
+      # Return a link to the object so that methods can be chained
+      self
+    end
+
+  private
+
+    def sample(list)
+      # Isolate random sampling so that all values use the 
+      # same (repeatable) seed value if specified
+      list[@prng.rand(list.length)]
+    end
+
+  end
+
+end
+</code></pre>
+
+<p>After reloading the <em>customers</em> table using our new generators; in the image below, we can now see the correct pairing between capital and state.</p>
+
+<p><img src="/images/posts/generating-test-data-for-rails-projects-06.png" alt="Image of City Match" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We have accomplished a lot in just this first pass. We started with a Rails project that we wanted to generate test data for. We then used ActiveRecord, outside of a Rails project, to retrieve a list of tables and the columns for those tables. Then we decided on using YAML to store our configuration data, due to its easy readability and Ruby&rsquo;s built-in support for serializing objects to and from it. Next we created a simple string generator, that while accomplishing our initial goal, was not very pretty to look at. We then refined our basic generator with more specific generators for common data fields such as names and addresses. To make the data more customizable we moved it out of our classes and into separate files, stored by country code. Finally we modified our improved generators so that they maintained state, allowing us to produce more cohesive data for related fields such as cities, states, and names.</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>So where do we go from here? Well, to start, we need a lot more generators to cover the different kinds of data that we might want to create such as random text paragraphs for descriptions, ip addresses, company names, or unique employee ids. Also the generators could be made more intelligent, where they could refer to other fields within the current record when making decisions about data to generate. One big issue with our current setup is that we don&rsquo;t have an easy way of incorporating foreign key relationships exposed by the <em>has_many</em> and <em>belongs_to</em> ActiveRecord association types.</p>
+
+<p>So you can see that we have only just begun. If you would like to see the application so far and contribute to its growth, check out the project at <a href="https://github.com/tjchester/gendata">GitHub</a>. Have fun!</p></div>
+
+  <footer class="article-footer">
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&title=Generating%20Test%20Data%20for%20Rails%20Projects" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&text=Generating%20Test%20Data%20for%20Rails%20Projects&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&t=Generating%20Test%20Data%20for%20Rails%20Projects" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f&title=Generating%20Test%20Data%20for%20Rails%20Projects" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?Generating%20Test%20Data%20for%20Rails%20Projects http%3a%2f%2ftjchester.github.io%2fpost%2f2016-03-17-generating-test-data-for-rails-projects%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+
+    <section class="footer">
+      <div>
+        <nav class="crumb">
+          <ol>
+            <li><a href="http://tjchester.github.io/"><i class="fa fa-home" aria-hidden="true"></i>TOP</a></li>
+            
+            <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://tjchester.github.io/post/" itemprop="url"><span itemprop="title">POST</span></a></li>
+            
+            <li class="active">Generating Test Data for Rails Projects</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/categories/">CATEGORIES</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/categories/post/">Post</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/tags/">TAGS</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/tags/database/">Database</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/rails/">Rails</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/ruby/">Ruby</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    <div class="adj">
+      <div class="mrow">
+        
+        <div class="mcol c6">
+          <header>Previous Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+        
+        <div class="mcol c6">
+          <header>Next Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="mcol c4">
+    <aside class="l-sidebar">
+
+  <div class="sections sidebar">
+    <section class="sidebar">
+      <header>LATESTS</header>
+      <div>
+        <div class="articles sm">
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/">
+    <div class="thumb thumb-161ea488772a611c68ae338f28c6ff01"></div>
+
+    <div class="inner">
+      <div class="title">Lost Disk Space to Fuslogvw</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-12-07T00:00:00JST">December 7, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/">
+    <div class="thumb thumb-e701422d5d79d3a6784393e8f5f859f7"></div>
+
+    <div class="inner">
+      <div class="title">Using the bpod Gem</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-09-03T00:00:00JST">September 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/">
+    <div class="thumb thumb-9c06832134ac3b1bf5ac505f44f972e7"></div>
+
+    <div class="inner">
+      <div class="title">Palindromic Prime Calculation</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-08-30T00:00:00JST">August 30, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/">
+    <div class="thumb thumb-e2fc3f612fd039b967f1bec3ce76b2e6"></div>
+
+    <div class="inner">
+      <div class="title">Disable Google Chrome Updates [Updated]</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-07-20T00:00:00JST">July 20, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+    <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+    <div class="inner">
+      <div class="title">Generating Test Data for Rails Projects</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+    <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+    <div class="inner">
+      <div class="title">Fixing Windows Update Error 0x80072F8F</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="sidebar">
+      <header>CATEGORIES</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/categories/technote">technote</a></li><li><a href="http://tjchester.github.io/categories/howto">howto</a></li><li><a href="http://tjchester.github.io/categories/post">post</a></li><li><a href="http://tjchester.github.io/categories/plug">plug</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="sidebar">
+      <header>TAGS</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/tags/sql-server">sql-server</a></li><li><a href="http://tjchester.github.io/tags/linux">linux</a></li><li><a href="http://tjchester.github.io/tags/windows-server">windows-server</a></li><li><a href="http://tjchester.github.io/tags/bids">bids</a></li><li><a href="http://tjchester.github.io/tags/macos">macos</a></li><li><a href="http://tjchester.github.io/tags/registry">registry</a></li><li><a href="http://tjchester.github.io/tags/ruby">ruby</a></li><li><a href="http://tjchester.github.io/tags/.net">.net</a></li><li><a href="http://tjchester.github.io/tags/archlinux">archlinux</a></li><li><a href="http://tjchester.github.io/tags/backup/restore">backup/restore</a></li>
+        </ul>
+      </div>
+    </section>
+    
+  </div>
+
+</aside>
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <p><span class="h-logo">&copy; Thomas Chester&#39;s Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

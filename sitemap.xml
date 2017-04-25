@@ -1,15 +1,508 @@
----
----
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {% for link in site.links %}{% if link.external %}{% endif %} 
-    <url>
-        <loc>{{ site.url }}{{ link.url }}</loc>
-    </url>{% endfor %}
-    
-    {% for post in site.posts %}
-    <url>
-        <loc>{{ site.url }}{{ post.url }}</loc>
-    </url>
-    {% endfor %}
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</loc>
+    <lastmod>2016-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</loc>
+    <lastmod>2016-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</loc>
+    <lastmod>2016-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/</loc>
+    <lastmod>2016-04-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</loc>
+    <lastmod>2016-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</loc>
+    <lastmod>2016-03-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2016-03-03-what-is-a-database/</loc>
+    <lastmod>2016-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/</loc>
+    <lastmod>2015-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</loc>
+    <lastmod>2015-10-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/</loc>
+    <lastmod>2015-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</loc>
+    <lastmod>2015-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</loc>
+    <lastmod>2015-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</loc>
+    <lastmod>2015-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</loc>
+    <lastmod>2015-03-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</loc>
+    <lastmod>2014-12-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</loc>
+    <lastmod>2014-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</loc>
+    <lastmod>2014-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</loc>
+    <lastmod>2014-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-10-10-powershell-tips-for-remote-maintenance/</loc>
+    <lastmod>2014-10-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</loc>
+    <lastmod>2014-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</loc>
+    <lastmod>2014-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</loc>
+    <lastmod>2014-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-06-18-how-to-add-drivers-to-a-windows-deployment-image-troubleshooting/</loc>
+    <lastmod>2014-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-06-15-error-running-sql-2012-bpa/</loc>
+    <lastmod>2014-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</loc>
+    <lastmod>2014-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</loc>
+    <lastmod>2014-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</loc>
+    <lastmod>2014-01-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/</loc>
+    <lastmod>2013-06-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-06-10-sql-server-database-mirroring-failover-notes/</loc>
+    <lastmod>2013-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</loc>
+    <lastmod>2013-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</loc>
+    <lastmod>2013-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</loc>
+    <lastmod>2013-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2012-03-30-sql-server-source-control/</loc>
+    <lastmod>2012-03-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</loc>
+    <lastmod>2010-12-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</loc>
+    <lastmod>2010-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</loc>
+    <lastmod>2010-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/.net/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/archlinux/</loc>
+    <lastmod>2015-07-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/backup/restore/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/bids/</loc>
+    <lastmod>2014-04-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/bpa/</loc>
+    <lastmod>2014-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/database/</loc>
+    <lastmod>2016-03-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/database-mirroring/</loc>
+    <lastmod>2013-06-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/debian/</loc>
+    <lastmod>2014-09-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/dell-openmanage/</loc>
+    <lastmod>2014-12-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/dell-poweredge/</loc>
+    <lastmod>2014-12-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/dism/</loc>
+    <lastmod>2014-06-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/entity-framework/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/failure/</loc>
+    <lastmod>2016-03-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/fedora/</loc>
+    <lastmod>2014-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/fuslogvw/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/google-chrome/</loc>
+    <lastmod>2016-07-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/group-policy/</loc>
+    <lastmod>2016-07-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/categories/howto/</loc>
+    <lastmod>2016-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/ipfire/</loc>
+    <lastmod>2015-04-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/kms/</loc>
+    <lastmod>2013-06-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/linux/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/macos/</loc>
+    <lastmod>2016-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/math/</loc>
+    <lastmod>2016-08-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/mysql/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/owncloud/</loc>
+    <lastmod>2015-07-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/categories/plug/</loc>
+    <lastmod>2015-04-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/categories/post/</loc>
+    <lastmod>2016-04-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/post/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/powershell/</loc>
+    <lastmod>2016-03-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/processing/</loc>
+    <lastmod>2015-10-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/rabbitmq/</loc>
+    <lastmod>2014-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/rails/</loc>
+    <lastmod>2016-03-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/recovery/</loc>
+    <lastmod>2015-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/registry/</loc>
+    <lastmod>2014-01-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/ruby/</loc>
+    <lastmod>2016-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/sccm/</loc>
+    <lastmod>2015-11-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/server/</loc>
+    <lastmod>2016-03-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/source-control/</loc>
+    <lastmod>2012-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/sql-server/</loc>
+    <lastmod>2015-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/sql-server-agent/</loc>
+    <lastmod>2010-11-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/ssis/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/categories/technote/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/windows/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/windows-server/</loc>
+    <lastmod>2016-04-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/windows-update/</loc>
+    <lastmod>2015-11-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/wsus/</loc>
+    <lastmod>2015-11-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/zenoss/</loc>
+    <lastmod>2014-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
 </urlset>

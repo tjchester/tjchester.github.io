@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Registry on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/registry/</link>
+    <description>Recent content in Registry on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Jan 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Transaction Response Timeout from Service Manager</title>
+      <link>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a timeout error that occurs during a service startup.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Alias Registry Settings</title>
+      <link>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</guid>
+      <description>&lt;p&gt;In this post we will discuss where SQL Server Aliases, defined through the SQL Server Configuration Manager, are stored in the Windows registry.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ConvertStringSidToSid Error from the Volume Shadow Copy Service</title>
+      <link>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</guid>
+      <description>&lt;p&gt;In this post we discuss how to fix the ConvertStringSidToSid error from the Volume Shadow Copy Service.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

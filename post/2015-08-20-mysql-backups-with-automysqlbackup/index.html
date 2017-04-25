@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="theme-color" content="#263238">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+<link rel="apple-touch-icon" href="http://tjchester.github.io/images/logo.png">
+
+
+<link rel="canonical" href="http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/">
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster%7cLato:400,700" rel="stylesheet">
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>MySQL Backups with AutoMySQLBackup - Thomas Chester&#39;s Blog</title>
+    
+
+<meta name="description" content="Describes how to setup AutoMySQLBackup to perform scheduled backups of your MySQL database and then to rsync a redundant copy to another computer.">
+
+<meta property="og:title" content="MySQL Backups with AutoMySQLBackup - Thomas Chester&#39;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/">
+<meta property="og:image" content="http://tjchester.github.io/images/theme/thumbnail-09.jpg">
+<meta property="og:site_name" content="Thomas Chester&#39;s Blog">
+<meta property="og:description" content="Describes how to setup AutoMySQLBackup to perform scheduled backups of your MySQL database and then to rsync a redundant copy to another computer.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Thomas Chester&#39;s Blog">
+<meta name="twitter:url" content="http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/">
+<meta name="twitter:title" content="MySQL Backups with AutoMySQLBackup - Thomas Chester&#39;s Blog">
+<meta name="twitter:description" content="Describes how to setup AutoMySQLBackup to perform scheduled backups of your MySQL database and then to rsync a redundant copy to another computer.">
+<meta name="twitter:image" content="http://tjchester.github.io/images/theme/thumbnail-09.jpg">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http://tjchester.github.io/"
+    },
+    "headline": "MySQL Backups with AutoMySQLBackup - Thomas Chester&#39;s Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http://tjchester.github.io/images/theme/thumbnail-09.jpg",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2015-08-20T00:00:00JST",
+    "dateModified": "2015-08-20T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Chester&#39;s Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Thomas Chester&#39;s Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http://tjchester.github.io/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "Describes how to setup AutoMySQLBackup to perform scheduled backups of your MySQL database and then to rsync a redundant copy to another computer."
+  }
+</script>
+
+
+    <style>
+      html { font-size: 18px; background-color: rgba(236,239,241,.5);}@media (max-width: 768px) { html { font-size: 15px; }}body { color: #333; font-family: 'Roboto Slab','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-feature-settings : "palt"; font-size: inherit; line-height: 1rem; margin: 0; padding: 0;}h1, h2, h3, h4, h5 ,h6 { font-size: 1rem; font-weight: 700; line-height: 1rem; margin: 0;}hr { border: 0; border-top: 1px dashed #cfd8dc; margin: 1rem 0;}p { margin: 0; line-height: 1rem;}a { color: #2196f3; text-decoration: none; transition-duration: .3s;}ul, ol { margin: 0; padding: 0;}table { border-collapse: collapse;}th, td { font-size: .8rem; padding: .5rem;}tr { border-bottom: 1px dashed #ddd;}/* Layouts */main,aside { display: block;}main { padding: 1rem 0 3rem 0; }aside.h { padding: 3rem 0; }main.f,aside.f { background-color: #333; border-top: 2px dashed #fff; border-bottom: 2px dashed #fff;}.l-container { position: relative; max-width: 68rem; margin: 0 auto; padding: 0 1rem;}.l-container.thin { max-width: 44rem;}.l-header { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); padding: 1rem 0; text-align: center;}.l-footer { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); font-size: .6rem; font-weight: 700; padding: 1rem 0;}@media (max-width: 768px) { .l-sidebar { margin-top: 4rem; }}.mrow { margin: 0 -1rem; overflow: hidden;}.mcol { box-sizing: border-box; float: left; padding: 0 1rem;}.c6 { width: 50%; }.c4 { width: 33.26323833%; }.c8 { width: 66.66666%; }@media (max-width: 768px) { .mcol { width: 100%; float: none; }}.logo a { font-size: 1.4rem; line-height: 1.5rem; font-weight: 700; color: #333;}.articles { margin: -1rem 0; margin-bottom: 1rem;}.articles.sm { margin: -.5rem 0; margin-bottom: 0;}article { border-radius: 4px; overflow: hidden;}article.li { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); height: 20rem; overflow: hidden; margin: 1rem 0;}article.li > a { display: block; color: #333;}article.li .inner { padding: 1rem;}article.li .thumb { height: 8rem;}article.li .title { color: #333; font-size: 1.2rem; line-height: 1.5rem; margin-bottom: .5rem;}article.li .summary { font-size: .8rem; height: 6rem; overflow: hidden; margin-top: 1rem;}article.lism { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin: .5rem 0;}article.lism::after { content: ''; display: block; clear: both;}article.lism > a { display: block; color: #333;}article.lism .inner { display: table-cell; vertical-align: middle; height: 5rem; padding-left: .5rem;}article.lism .thumb { width: 5rem; height: 5rem; float: left;}article.lism .title { font-weight: 700; line-height: 1.25rem; margin-bottom: .25rem;}article.sn { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin-bottom: 1rem;}article.sn .thumb { height: 20rem;}@media (max-width: 768px) { article.sn .thumb { height: 10rem; }}article.sn > .article-header,article.sn > .article-body,article.sn .article-footer { padding: 2rem;}article.sn > .article-body { padding: 0 2rem;}@media (max-width: 768px) { article.sn > .article-header, article.sn > .article-body, article.sn .article-footer { padding: 1rem; } article.sn > .article-body { padding: 0 1rem; }}article.sn > .article-header .title { font-size: 1.8rem; line-height: 2rem; margin-bottom: .5rem;}@media (max-width: 768px) { article.sn > .article-header .title { font-size: 1.4rem; line-height: 1.5rem; }}article.sn > .article-header .facts { margin-bottom: 1rem;}article.sn > .article-body { margin-bottom: 1.5rem; word-break: break-all;}article.sn > .article-body h2 { border-bottom: .25rem solid #333; font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; padding: .5rem 0;}article.sn > .article-body h3 { border-left: .5rem solid #333; line-height: 1.5rem; margin: 1.5rem 0; padding: .125rem .5rem;}article.sn > .article-body ul,article.sn > .article-body ol { margin: 1.5rem 0; padding-left: 1.5rem;}article.sn > .article-body li { padding-bottom: .5rem; line-height: 1.5rem;}article.sn > .article-body li:last-child { padding-bottom: 0;}article.sn > .article-body p { margin: 1rem 0; line-height: 1.5rem;}article.sn > .article-body strong,article.sn > .article-body em { font-style: normal; font-weight: 700;}article.sn > .article-body strong { box-shadow: 0 -.5rem 0 0 #ffc107 inset;}article.sn > .article-body em { color: #8bc34a;}article.sn > .article-body code,article.sn > .article-body pre { font-family: Menlo, Consolas, monospace; font-size: .7rem;}article.sn > .article-body pre { background-color: #333; color: #fff; line-height: 1rem; margin: 1.5rem -2rem; overflow: auto;}@media (max-width: 768px) { article.sn > .article-body pre { margin: 1.5rem -1rem; }}article.sn > .article-body pre > code { display: block; padding: 1rem 2rem;}@media (max-width: 768px) { article.sn > .article-body pre > code { padding: 1rem; }}article.sn > .article-body p code { background-color: #eceff1; color: #333; border-radius: 4px; margin: 0 .25rem; padding: .375rem; white-space: nowrap;}article.sn > .article-body blockquote { position: relative; border-left: .25rem solid #333; font-size: .8rem; padding: .125rem 1rem; margin: 1.5rem 0;}@media (max-width: 768px) { article.sn > .article-body blockquote { font-size: 1rem; }}article.sn > .article-body blockquote p { margin: .5rem 0; line-height: 1rem;}article.sn > .article-body figure { margin: 1.5rem 0;}article.sn > .article-body figure img,article.sn > .article-body figure amp-img { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); max-width: 100%;}article.sn > .article-body figcaption { color: #cfd8dc; font-size: .8rem; font-weight: 700; margin-top: .5rem;}.facts li { display: inline; font-size: .8rem; margin-right: 1rem;}.facts i { color: #cfd8dc; margin-right: .5em;}.facts.sm li { font-size: .7rem;}.sections.sidebar { margin: -1rem 0;}.sections.footer { margin: -1rem 0;}section.sidebar { margin: 2rem 0;}section.sidebar > header { font-size: .8rem; font-weight: 700; letter-spacing: 4px; text-align: center; margin: 1.5rem 0;}section.footer { margin: 1rem 0;}section.footer > header { font-size: .8rem; margin: .5rem 0;}section.footer > header::before { content: "- ";}section.footer > header a { font-weight: 700; color: #333; text-decoration: underline;}.terms { margin: -.25rem;}.terms li { display: inline-block;}.terms a { display: block; float: left; background-color: #333; border-radius: 4px; color: #fff; font-size: .7rem; margin: .25rem; padding: 0 .75rem; line-height: 1.75rem;}.paging { text-align: center; padding: 1rem 0;}.paging a { display: inline-block; background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); border-radius: 4px; color: #333; padding: 0 1rem; line-height: 3rem;}.page-title { text-align: center; margin: 1rem 0;}.page-title::after { content: ''; display: block; border-bottom: .25rem solid #333; width: 3rem; margin: 1.5rem auto;}.page-title > .title { font-size: 1.2rem; line-height: 1.5rem;}/* Parts:breadcrumb */.crumb ol { text-overflow: ellipsis; color: #cfd8dc; white-space: nowrap; overflow: hidden;}.crumb li { display: inline; font-size: .8rem;}.crumb li::after { content: '›'; margin: 0 .25rem 0 .5rem;}.crumb li:last-child::after { content: '';}.crumb a { color: #cfd8dc;}.crumb i { margin-right: .5em;}.share { padding: 0;}.share a { display: inline-block; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); min-width: 1rem; height: 2rem; border-radius: 4px; color: #333; font-size: .8rem; font-weight: 700; line-height: 2rem; text-align: center; padding: 0 .5rem;}.adj article.lism { margin-bottom: 1rem;}.adj header { font-weight: 700; font-size: .8rem;}.toc { padding: 0 2rem;}@media (max-width: 768px) { .toc { padding: 0 1rem; }}.toc { margin: 1rem 0;}.toc nav>ul { background-color: #eceff1; border-radius: 4px; display: inline-block; font-size: .8rem; padding: .5rem 1rem; word-break: break-all; list-style: none;}.toc ul { padding: 0;}.toc ul ul { padding-left: 1rem;}.toc ul ul ul { padding-left: 1rem;}.toc li { color: #90a4ae;}.toc ul ul>li { font-weight: 700; margin: .5rem 0; list-style-type: decimal;}.toc ul ul ul>li { list-style-type: disc; font-weight: 500;}.thumb { background-image: url(http://tjchester.github.io/images/default.jpg); background-size: cover;}.thumb-161ea488772a611c68ae338f28c6ff01 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-e701422d5d79d3a6784393e8f5f859f7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-9c06832134ac3b1bf5ac505f44f972e7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-e2fc3f612fd039b967f1bec3ce76b2e6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-0b0cda628be80f0d61e5448c8fc42fd0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-32f88f5a104c180ca0e2c5598b72ee39 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-ea1d53287313d452e54fbfcd6f08a7cf { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-a104fb8a18bd0de47f233c01bf2e7479 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-938a1f711bc39c21459842955cb4a3fc { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-89b38bad6ca604794ee7fbad564408a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-3c4116e0c0758d85af1236a2a437f985 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-ea20ca6e433a2829b5be53dc2eafe393 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-aed55365eccf97e5c290a3e12317108e { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-abd38d5b85b8b17ee3913acdb5cea5c5 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-f625bb597fe06739be42d9478a39e309 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-6efc84aba56ee6c729401c3b786fddac { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-1ca01e36e8ea1c36087086fc322b82ad { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1891628ad0db83c0a00b880b6c17974c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-9756858709cfd2e412619c2a284493b3 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-1cf3d78b95eb200c427a3e487128426c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-bb175006c256441fed31e035fcd454a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-508618ae10dd76aa38789fccbb50fb76 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-80814d5c7659bffa0b562563d29bc98c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-fda34b02421a4f884291523c4ad49d32 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-963b9700f2a58d526bfd16e0004911d8 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-a86fb5985e759d8a858551602a42be71 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-633b5e63fc7775442ffc225297502a1a { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-f6d0788325ae45084d3ebe6e7baf6c52 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-33cc6a32e49ca50523d31820a54cfcbb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-6fbec6ca8cc6335a412d8b2210ec2c23 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-e06b60ef112096b1249f29bcaa30cf46 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-052660c3e6eabd122d8f3931ab383dd6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-6bbfa922acab3dec818390ad7aee5e91 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-2aa42f120abcb5a6d78ae24187f4ea74 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-62b31a793be89a89cd160b9dc5be26bb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-8ac4e8461a27760ccbddd69d69e40911 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-5aff53c7421c80d2bd68aa4977270977 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-27abff142ce9069dcbc65786087f931d { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-bb7a4b292816e52cc39ec3a59baf5053 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1770d4fe2262c48ffa32f35c66384410 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-d1d552cdb71d70c0ee72fdb4deb0ab90 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}
+       body { font-family: Lato,YuGothic,'Hiragino Kaku Gothic Pro',Meiryo,sans-serif; } 
+       .h-logo { font-family: Lobster, cursive; } 
+    </style>
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <div class="l-container">
+        <div class="logo">
+          <a href="http://tjchester.github.io/">Thomas Chester&#39;s Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="l-container">
+        
+<div class="mrow">
+  <div class="mcol c8">
+
+    <article class="sn">
+
+  <div class="thumb thumb-3c4116e0c0758d85af1236a2a437f985"></div>
+
+  <header class="article-header">
+    <h1 class="title">MySQL Backups with AutoMySQLBackup</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-08-20T00:00:00JST">August 20, 2015</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://tjchester.github.io/post/">POST</a></li>
+      
+    </ul>
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&title=MySQL%20Backups%20with%20AutoMySQLBackup" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&text=MySQL%20Backups%20with%20AutoMySQLBackup&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&t=MySQL%20Backups%20with%20AutoMySQLBackup" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&title=MySQL%20Backups%20with%20AutoMySQLBackup" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?MySQL%20Backups%20with%20AutoMySQLBackup http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+  </header>
+
+  
+
+  <div class="article-body"><p>This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.</p>
+
+<p></p>
+
+<blockquote>
+<p>For this example, I will be show how it can be used to backup databases on a hosted server and then sending a copy of those backups to our computer at home.</p>
+</blockquote>
+
+<p>To limit the scope of this article I am going to assume that you already have a functioning MySQL server with databases that you want to backup. In addition, I am going to assume that you have root level authority to the computer where MySQL is installed.</p>
+
+<p>For the purposes of the examples in this article I am going to use an <a href="https://www.archlinux.org">ArchLinux</a> <a href="https://www.vagrantup.com">vagrant</a> box with <a href="https://mariadb.org">MariaDB</a> and the <em>world</em> database from <a href="http://dev.mysql.com/doc/index-other.html">here</a>.</p>
+
+<blockquote>
+<p>To differentiate commands entered on the vagrant machine vs the local Mac computer, I will use <strong>[vagrant@arch ~]$</strong> vs <strong>$</strong> respectively for the command prompt indicators.</p>
+</blockquote>
+
+<h2 id="software">Software</h2>
+
+<p>The first step is to download a copy of the AutoMySQLBackup software to the database server. The canonical site is located <a href="http://sourceforge.net/projects/automysqlbackup/">here</a>. The latest update, at the time of this article, was v3.0 RC6 (<em>automysqlbackup-v3.0_rc6.tar.gz</em>) released in December 2011.</p>
+
+<blockquote>
+<p>The maintainer mentioned on this site that he would like to hand it off to another person who has the time and interest to keep updating it. Consequently, there are several forks and backup copies of this script on <a href="http://github.com">GitHub</a> as well.</p>
+</blockquote>
+
+<p>To paraphrase the project&rsquo;s site, this software will help maintain a rotated copy of daily, weekly, and monthly backups of one or multiple MySQL databases.</p>
+
+<h2 id="installation">Installation</h2>
+
+<blockquote>
+<p>The release package contains an <em>install.sh</em> script but I was unable to get it to run successfully. Since the <em>application</em> only consists of a shell script and a configuration file, we can just handle the installation manually.</p>
+</blockquote>
+
+<pre><code>[vagrant@arch ~]$ mkdir -p ~/database/backups
+[vagrant@arch ~]$ mkdir -p ~/database/scripts
+[vagrant@arch ~]$ cp automysqlbackup ~/database/scripts
+[vagrant@arch ~]$ cp automysqlbackup.conf ~/database/scripts
+[vagrant@arch ~]$ chmod +x automysqlbackup
+</code></pre>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Edit the <strong>automysqlbackup.conf</strong> file using your favorite editor. At a minimum you should customize the parameters related to database username, password, host, and backup folder.</p>
+
+<blockquote>
+<p>NOTE: Any line that starts with a hash mark, <em>#</em>, is considered a comment and the value shown will be the default. This means that any parameters that you want to change will need the leading <em>#</em> character removed in order for your value to be used.</p>
+</blockquote>
+
+<ul>
+<li><p>Username to use to connect to the database server</p>
+
+<ul>
+<li>[Default] #CONFIG_mysql_dump_username=&lsquo;root&rsquo;</li>
+</ul></li>
+
+<li><p>Password to use to connect to the database server</p>
+
+<ul>
+<li>[Default] #CONFIG_mysql_dump_password=&rdquo;</li>
+</ul></li>
+
+<li><p>Host to use to connect to the database server</p>
+
+<ul>
+<li>[Default] #CONFIG_mysql_dump_host=&lsquo;localhost&rsquo;</li>
+</ul></li>
+
+<li><p>Folder name to use for hold the database backups</p>
+
+<ul>
+<li>[Default] #CONFIG_backup_dir=&lsquo;/var/backup/db&rsquo;</li>
+</ul></li>
+
+<li><p>List of database names to backup daily</p>
+
+<ul>
+<li>[Default] #CONFIG_db_names=()</li>
+</ul></li>
+
+<li><p>List of database names to backup monthly</p>
+
+<ul>
+<li>[Default] #CONFIG_db_month_names=()</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>NOTE: For any of the CONFIG_db_* arrays if you leave the default value then that implies all databases will be backed up. Otherwise you should one or more comma separated database names enclosed in single quotations marks. For example to backup the <em>test</em> and <em>marketing</em> databases daily you would enter a <em>CONFIG_db_names=(&lsquo;test&rsquo;,&lsquo;marketing&rsquo;)</em></p>
+</blockquote>
+
+<h2 id="running-manually">Running Manually</h2>
+
+<p>Assuming at this stage we have installed the script and modified the configuration file, before we automate the backups with cron, we should run the backup manually to make sure it works.</p>
+
+<p>Within a shell window, either on the host or remotely via SSH, you want to run the script passing the <strong>-c</strong> parameter to identify the configuration file to use, and the <strong>-b</strong> parameter to perform a backup.</p>
+
+<p>In the window below, we can see the command and its results.</p>
+
+<pre><code>[vagrant@arch ~]$ /home/vagrant/database/scripts/automysqlbackup -c /home/vagrant/database/scripts/automysqlbackup.conf -b
+
+Using &quot;/home/vagrant/database/scripts/automysqlbackup.conf&quot; as optional config file.
+
+MySQL backup method invoked.
+
+
+# Checking for permissions to write to folders:
+base folder /home/vagrant/database ... exists ... ok.
+backup folder /home/vagrant/database/backups ... exists ... writable? yes. Proceeding.
+checking directory &quot;/home/vagrant/database/backups/daily&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/weekly&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/monthly&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/latest&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/tmp&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/fullschema&quot; ... exists.
+checking directory &quot;/home/vagrant/database/backups/status&quot; ... exists.
+
+# Testing for installed programs
+WARNING: Turning off multicore support, since pigz isn't there.
+mysql ... found.
+mysqldump ... found.
+
+# Parsing databases ... done.
+======================================================================
+AutoMySQLBackup version 3.0
+http://sourceforge.net/projects/automysqlbackup/
+
+Backup of Database Server - localhost
+Databases - world
+Databases (monthly) - world
+======================================================================
+======================================================================
+Dump full schema.
+
+Rotating 4 month backups for 
+
+======================================================================
+
+======================================================================
+Dump status.
+
+Rotating 4 month backups for 
+
+======================================================================
+
+Backup Start Time Wed Aug 19 16:06:42 EDT 2015
+======================================================================
+Daily Backup ...
+
+Daily Backup of Database ( world )
+Rotating 6 day backups for world
+----------------------------------------------------------------------
+
+Backup End Time Wed Aug 19 16:06:42 EDT 2015
+======================================================================
+Total disk space used for backup storage...
+Size - Location
+744K /home/vagrant/database/backups
+
+======================================================================
+</code></pre>
+
+<h2 id="running-automatically-with-cron">Running Automatically With Cron</h2>
+
+<blockquote>
+<p>NOTE: By default, ArchLinux, used in this example, uses <a href="https://wiki.archlinux.org/index.php/Systemd/Timers">Systemd Timers</a> but since we are emulating a hosted server situation, it is most likely that cron will be available so we will use that instead.</p>
+</blockquote>
+
+<p>Setting up periodic jobs will vary among the hosted server implementations, so for our purposes we are going to assume that user crontab files are allowed.</p>
+
+<p>To edit an existing file or create a new one we use the <strong>-e</strong> parameter to the <strong>crontab</strong> program.</p>
+
+<p>In the example below I am configuring the backup to run everyday at 4:50 PM (server time).</p>
+
+<pre><code>[vagrant@arch ~]$ crontab -e
+no crontab for vagrant - using an empty one
+
+50 16 * * * sh -c $'/home/vagrant/database/scripts/automysqlbackup -c /home/vagrant/database/scripts/automysqlbackup.conf -b'
+
+crontab: installing new crontab
+</code></pre>
+
+<p>The basic format of each line in the crontab file is:</p>
+
+<pre><code>[minute] [hour] [day_of_month] [month] [day_of_week] [command_to_run]
+</code></pre>
+
+<p>Where the <em>minute</em> ranges from <em>0</em> to <em>59</em>, the hour ranges from <em>0</em> to <em>23</em>, the day_of_month ranges from <em>1</em> to <em>31</em>, the month ranges from <em>1</em> to <em>12</em>, and the day_of_week ranges from <em>0</em> (i.e. Sunday) to <em>6</em>.</p>
+
+<p>To view our existing crontab entries we can use the <strong>-l</strong> parameter:</p>
+
+<pre><code>[vagrant@arch ~]$ crontab -l
+50 16 * * * sh -c $'/home/vagrant/database/scripts/automysqlbackup -c /home/vagrant/database/scripts/automysqlbackup.conf -b'
+</code></pre>
+
+<blockquote>
+<p>NOTE: Typically, but not shown here, you would also configure cron and the backup script to email the results of the run to you so that you know it is running correctly. You don&rsquo;t want to find out that the backups had been failing when you actually need them to perform a restore. Once again, I am going to assume that the hosted server has mail already configured and I am just going to show you what configuration entries to change and how to modify your crontab file.</p>
+</blockquote>
+
+<h4 id="optional-parameters-to-review">Optional Parameters To Review</h4>
+
+<p>Within the <strong>automysqlbackup.conf</strong> file we are going to want to locate the parameters shown below and edit them.</p>
+
+<ul>
+<li>CONFIG_mailcontent=&lsquo;log&rsquo;</li>
+<li>CONFIG_mail_address=&lsquo;me@example.com&rsquo;</li>
+</ul>
+
+<p>In the crontab file, I can also add a <em>MAILTO</em> directive as well. Cron has the ability to mail the results from the standard output and standard error output.</p>
+
+<pre><code>[vagrant@arch ~]$ crontab -e
+
+MAILTO=me@example.com
+50 16 * * * sh -c $'/home/vagrant/database/scripts/automysqlbackup -c /home/vagrant/database/scripts/automysqlbackup.conf -b'
+
+</code></pre>
+
+<h2 id="off-host-backup">Off-Host Backup</h2>
+
+<p>So we have tested the backup manually and scheduled it so that it runs everyday; we now want to setup remote copies of the backups for extra safety.</p>
+
+<p>To accomplish this using an iMac we are going to need to do three things:</p>
+
+<ol>
+<li>Configure password-less SSH to the host server for my account</li>
+<li>Create a shell script that will use rsync over SSH to perform the copies</li>
+<li>Create a <em>launchd</em> agent script to run the copy at scheduled intervals</li>
+</ol>
+
+<h3 id="set-password-less-ssh">Set Password-less SSH</h3>
+
+<blockquote>
+<p>When I was initially setting this up I was unable to locate the <em>ssh-copy-id</em> program so I needed to install it using the <a href="http://brew.sh">Homebrew</a> package manager.</p>
+</blockquote>
+
+<p>First I need to generate a public/private key pair for myself. Since I already have one, the example shown below was for the <em>vagrant</em> user, but normally you would do it for the user on your Mac that will be receiving the offsite copies.</p>
+
+<pre><code>[vagrant@arch ~]$ ssh-keygen
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/vagrant/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/vagrant/.ssh/id_rsa.
+Your public key has been saved in /home/vagrant/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:j7HRjCnpnaLOBRtWna9s9vY0Xbx9HqMxynJbijtuMKI vagrant@arch
+The key's randomart image is:
++---[RSA 2048]----+
+|                 |
+|       . .       |
+|      . o        |
+|     . . *     . |
+|    + o S +     o|
+|   . * * O   . .o|
+|    o = % . o+.+o|
+|   E o + =+o+.+.+|
+|   .+   o=**o.  .|
++----[SHA256]-----+
+</code></pre>
+
+<p>If we look in the <em>vagrant</em> user&rsquo;s home directory we can see that an <strong>.ssh</strong> directory has been created and we can see the private key, <strong>id_rsa</strong>, and the public key, <strong>id_rsa.pub</strong>.</p>
+
+<pre><code>[vagrant@arch ~]$ ls -al
+total 24
+drwx------ 4 vagrant vagrant 4096 Aug 19 16:52 .
+drwxr-xr-x 3 root    root    4096 Sep 29  2014 ..
+-rw------- 1 vagrant vagrant  508 Aug 19 16:33 .bash_history
+drwxr-xr-x 4 vagrant vagrant 4096 Aug 14 19:32 database
+-rw------- 1 vagrant vagrant   78 Aug 19 16:04 .mysql_history
+drwx------ 2 vagrant vagrant 4096 Aug 19 17:00 .ssh
+[vagrant@arch ~]$ ls -al .ssh
+total 20
+drwx------ 2 vagrant vagrant 4096 Aug 19 17:00 .
+drwx------ 4 vagrant vagrant 4096 Aug 19 16:52 ..
+-rw------- 1 vagrant vagrant  389 Aug 13 04:54 authorized_keys
+-rw------- 1 vagrant vagrant 1679 Aug 19 17:00 id_rsa
+-rw-r--r-- 1 vagrant vagrant  394 Aug 19 17:00 id_rsa.pub
+[vagrant@arch ~]$ 
+</code></pre>
+
+<p>Next we need to get our public key into the <strong>authorized_keys</strong> file on the host server for the user that we will be connecting as. I used the <em>vagrant</em> user to demo the creation of the keys,  but in this step I am going to put my public key into the <em>vagrant</em> user&rsquo;s <em>authorized_keys</em> file using the <strong>ssh-copy-id</strong> command.</p>
+
+<pre><code>$ ssh-copy-id vagrant@localhost -p 2222
+
+The authenticity of host '[localhost]:2222 ([127.0.0.1]:2222)' can't be established.
+RSA key fingerprint is 02:55:ac:d6:26:19:fe:94:9c:6c:33:8f:c0:39:2a:22.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/local/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/local/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+vagrant@localhost's password: 
+
+Number of key(s) added:        1
+
+Now try logging into the machine, with:   &quot;ssh -p '2222' 'vagrant@localhost'&quot;
+and check to make sure that only the key(s) you wanted were added.
+</code></pre>
+
+<p>So let&rsquo;s try to login and see if it works without a password.</p>
+
+<pre><code>$ ssh vagrant@localhost -p 2222
+Last login: Wed Aug 19 16:34:21 2015 from 10.0.2.2
+</code></pre>
+
+<blockquote>
+<p>The default vagrant configuration remaps port 2222 on the localhost to port 22 on the virtual machine that is why I specified the <em>-p 2222</em> parameter.</p>
+</blockquote>
+
+<h3 id="create-rsync-script">Create rsync Script</h3>
+
+<p>All right, the next step is to create the shell script that will perform the copies of the database backups from the remote host.</p>
+
+<p>I am going to use the same folder that my <em>Vagrantfile</em> is in for demonstration purposes. I first create a <strong>backup.sh</strong> with the contents below.</p>
+
+<pre><code>$ vi ~/Vagrant/mysql/backup.sh
+
+/usr/bin/rsync -az -e 'ssh -p 2222' vagrant@localhost:/home/vagrant/database/backups /Users/tjchester/Vagrant/mysql/
+echo &quot;Exit code from rsync: $?&quot;
+</code></pre>
+
+<p>So the first part of the script calls the rsync command with the <em>-a</em> and <em>-z</em> arguments. The <em>-a</em> specifies archive mode and the <em>-z</em> indicates to use compression on the transfer. The <em>&ndash;delete</em> option says to delete any local files that do not exist on the remote side. If you want to keep all of your remote backups, then do not add this switch. One use of the <em>-e</em> option is to allow me to specify a non-standard SSH port to use. In this case, my vagrant machine exposes port 22 for SSH which is mapped to port 2222 on my host machine.  Next we specify the location to copy files from. Since I am copying from a remote host I specify the user name at (i.e. <em>@</em>) the specified host name, a colon, then the absolute path to where the backups are stored. The last argument is where on the local machine the backups should be copied to.</p>
+
+<p>Next we will test it by manually running it.</p>
+
+<pre><code>$ cd ~/Vagrant/mysql
+$ chmod +x ./backup.sh
+$ ./backup.sh
+Exit code from rsync: 0
+</code></pre>
+
+<h3 id="create-launchd-agent">Create Launchd Agent</h3>
+
+<p>Finally, we need a mechanism to run the rsync script on a scheduled basis. Fortunately, Mac OS X has such a framework named <a href="https://en.wikipedia.org/wiki/Launchd">launchd</a>.</p>
+
+<p>I just need to create a property list (i.e. plist) file, place in a particular folder, and then register it with the the <em>launchd</em> framework.</p>
+
+<p>I first open a terminal, change to my personal <strong>LaunchAgent</strong> folder, create an empty file, and finally edit it using the vi editor. In the example property file shown below, I set the script to be run everyday at 6 AM.</p>
+
+<pre><code>$ cd ~/Library/LaunchAgents/
+$ touch net.tjc.Backups.plist
+$ vi net.tjc.Backups.plist
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+        &lt;dict&gt;
+                &lt;key&gt;Label&lt;/key&gt;
+                &lt;string&gt;net.tjc.Backups&lt;/string&gt;
+                &lt;key&gt;ProgramArguments&lt;/key&gt;
+                &lt;array&gt;
+                    &lt;string&gt;/bin/bash&lt;/string&gt;
+                        &lt;string&gt;/Users/tjchester/Vagrant/mysql/backup.sh&lt;/string&gt;
+                &lt;/array&gt;
+                &lt;key&gt;StartCalendarInterval&lt;/key&gt;
+                &lt;dict&gt;
+                        &lt;key&gt;Hour&lt;/key&gt;
+                        &lt;integer&gt;6&lt;/integer&gt;
+                        &lt;key&gt;Minute&lt;/key&gt;
+                        &lt;integer&gt;00&lt;/integer&gt;
+                &lt;/dict&gt;
+        &lt;/dict&gt;
+&lt;/plist&gt;
+$
+</code></pre>
+
+<p>Next I need to register the property list with the launchd subsystem and then verify it has been accepted. This can be done through the <strong>launchctl</strong> command.</p>
+
+<pre><code>$ launchctl load net.tjc.Backups.plist 
+$ launchctl list | grep net.tjc.Backups
+-	0	net.tjc.Backups
+</code></pre>
+
+<blockquote>
+<p>You can unregister a task using the <em>launchctl unload [name of plist file]</em> command.</p>
+</blockquote>
+
+<p>For extra confidence, I am going to want to test it without waiting for 6 AM to role around. I can accomplish this using the aforementioned <em>launchctl</em> command. In the case of the <em>start</em> command we pass the string value we used for the <em>label</em> key in the property list.</p>
+
+<pre><code>$ launchctl start net.tjc.Backups
+</code></pre>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>So, in conclusion, with this walk-through I described how to install and configure AutoMySQLBackup to perform scheduled backups of one or more hosted MySQL databases. Then, for extra backup safety, I showed how you can use rsync and launchd on Mac OS X to make regular scheduled copies of the hosted database backups to an offsite machine. While I used a vagrant machine to demo the procedure, the steps are easily translatable to a real server setup.</p></div>
+
+  <footer class="article-footer">
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&title=MySQL%20Backups%20with%20AutoMySQLBackup" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&text=MySQL%20Backups%20with%20AutoMySQLBackup&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&t=MySQL%20Backups%20with%20AutoMySQLBackup" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f&title=MySQL%20Backups%20with%20AutoMySQLBackup" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?MySQL%20Backups%20with%20AutoMySQLBackup http%3a%2f%2ftjchester.github.io%2fpost%2f2015-08-20-mysql-backups-with-automysqlbackup%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+
+    <section class="footer">
+      <div>
+        <nav class="crumb">
+          <ol>
+            <li><a href="http://tjchester.github.io/"><i class="fa fa-home" aria-hidden="true"></i>TOP</a></li>
+            
+            <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://tjchester.github.io/post/" itemprop="url"><span itemprop="title">POST</span></a></li>
+            
+            <li class="active">MySQL Backups with AutoMySQLBackup</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/categories/">CATEGORIES</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/categories/howto/">HowTo</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/tags/">TAGS</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/tags/linux/">Linux</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/mysql/">MySQL</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/macos/">macOS</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/backup/restore/">Backup/Restore</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    <div class="adj">
+      <div class="mrow">
+        
+        <div class="mcol c6">
+          <header>Previous Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/">
+    <div class="thumb thumb-ea20ca6e433a2829b5be53dc2eafe393"></div>
+
+    <div class="inner">
+      <div class="title">Regain Access to SQL Server When Locked Out</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-07-08T00:00:00JST">July 8, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+        
+        <div class="mcol c6">
+          <header>Next Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="mcol c4">
+    <aside class="l-sidebar">
+
+  <div class="sections sidebar">
+    <section class="sidebar">
+      <header>LATESTS</header>
+      <div>
+        <div class="articles sm">
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/">
+    <div class="thumb thumb-161ea488772a611c68ae338f28c6ff01"></div>
+
+    <div class="inner">
+      <div class="title">Lost Disk Space to Fuslogvw</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-12-07T00:00:00JST">December 7, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/">
+    <div class="thumb thumb-e701422d5d79d3a6784393e8f5f859f7"></div>
+
+    <div class="inner">
+      <div class="title">Using the bpod Gem</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-09-03T00:00:00JST">September 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/">
+    <div class="thumb thumb-9c06832134ac3b1bf5ac505f44f972e7"></div>
+
+    <div class="inner">
+      <div class="title">Palindromic Prime Calculation</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-08-30T00:00:00JST">August 30, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/">
+    <div class="thumb thumb-e2fc3f612fd039b967f1bec3ce76b2e6"></div>
+
+    <div class="inner">
+      <div class="title">Disable Google Chrome Updates [Updated]</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-07-20T00:00:00JST">July 20, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+    <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+    <div class="inner">
+      <div class="title">Generating Test Data for Rails Projects</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+    <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+    <div class="inner">
+      <div class="title">Fixing Windows Update Error 0x80072F8F</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="sidebar">
+      <header>CATEGORIES</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/categories/technote">technote</a></li><li><a href="http://tjchester.github.io/categories/howto">howto</a></li><li><a href="http://tjchester.github.io/categories/post">post</a></li><li><a href="http://tjchester.github.io/categories/plug">plug</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="sidebar">
+      <header>TAGS</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/tags/sql-server">sql-server</a></li><li><a href="http://tjchester.github.io/tags/linux">linux</a></li><li><a href="http://tjchester.github.io/tags/windows-server">windows-server</a></li><li><a href="http://tjchester.github.io/tags/bids">bids</a></li><li><a href="http://tjchester.github.io/tags/macos">macos</a></li><li><a href="http://tjchester.github.io/tags/registry">registry</a></li><li><a href="http://tjchester.github.io/tags/ruby">ruby</a></li><li><a href="http://tjchester.github.io/tags/.net">.net</a></li><li><a href="http://tjchester.github.io/tags/archlinux">archlinux</a></li><li><a href="http://tjchester.github.io/tags/backup/restore">backup/restore</a></li>
+        </ul>
+      </div>
+    </section>
+    
+  </div>
+
+</aside>
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <p><span class="h-logo">&copy; Thomas Chester&#39;s Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

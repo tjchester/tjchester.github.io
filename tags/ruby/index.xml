@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/ruby/</link>
+    <description>Recent content in Ruby on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Sep 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using the bpod Gem</title>
+      <link>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</guid>
+      <description>&lt;p&gt;This post will discuss installing the &lt;strong&gt;bpod&lt;/strong&gt; gem on a macOS desktop and then scheduling it to change your desktop picture each day to the Bing home page image.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Palindromic Prime Calculation</title>
+      <link>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</link>
+      <pubDate>Tue, 30 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</guid>
+      <description>&lt;p&gt;This post will dicuss palindromic prime numbers using ruby code. It will also discuss several refinements made to the original attempt to speed up the performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Generating Test Data for Rails Projects</title>
+      <link>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</link>
+      <pubDate>Thu, 17 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</guid>
+      <description>&lt;p&gt;How often have you created a database for a new Rails application and then sat staring at the empty tables? Often times when building a new application you need sample data to help flesh out the user interface or to show off the application to your customer. Rails provides a convenient method of loading this data via the &lt;em&gt;seeds.rb&lt;/em&gt; file, but you still have to create the content for this file. This article will discuss a mostly automated way of generating content for your database.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

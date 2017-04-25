@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Aug 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL Backups with AutoMySQLBackup</title>
+      <link>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</link>
+      <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</guid>
+      <description>&lt;p&gt;This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing ownCloud on ArchLinux</title>
+      <link>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</link>
+      <pubDate>Sun, 05 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</guid>
+      <description>&lt;p&gt;Do you like the idea of DropBox but want to host the files on a server that you control. This how-to will walkthrough installing ownCloud on an ArchLinux installation and then configuring a Mac client to sync with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Setup an ArchLinux System</title>
+      <link>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</guid>
+      <description>&lt;p&gt;This walk-through will focus on a fresh installation of ArchLinux on a HP Envy TouchSmart SE all-in-one computer. The all-in-one has an existing installation of Windows 8.1 that will be replaced.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing an IPFire Based Firewall (Plug)</title>
+      <link>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</guid>
+      <description>&lt;p&gt;This is both humorous and a shamless plug at the same time for my previous article, &lt;strong&gt;Installing an IPFire Based Firewall&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fedora Fails to Boot After Install</title>
+      <link>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</link>
+      <pubDate>Wed, 03 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</guid>
+      <description>&lt;p&gt;In this post I discuss a fatal bug that I ran into while installing Fedora 20.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create a Debian Bootable Install Disk</title>
+      <link>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</guid>
+      <description>&lt;p&gt;In this post I discuss how to create a bootable USB disk on Mac OS X for the Debian &amp;ldquo;Testing&amp;rdquo; network installer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing an IPFire Based Firewall</title>
+      <link>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</link>
+      <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</guid>
+      <description>&lt;p&gt;In this post I will discuss setting up an IPFire based firewall appliance via a console serial cable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google Chrome on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/google-chrome/</link>
+    <description>Recent content in Google Chrome on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Jul 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/google-chrome/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Disable Google Chrome Updates [Updated]</title>
+      <link>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</guid>
+      <description>&lt;p&gt;In this article we look at using the Administative Template in ADMX format for Windows 7 and later. The original article, &lt;strong&gt;Disable Google Chrome Updates&lt;/strong&gt;, used the Administrative Template in ADM format for versions of Windows prior to Windows 7.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Disable Google Chrome Updates</title>
+      <link>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</guid>
+      <description>&lt;p&gt;Google publishes information on how to disable the automatic updating of Chrome on Windows machines via group policy. That information is not easily to locate on Google&amp;rsquo;s site, so this article will distill that information into an easily referenced procedure.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

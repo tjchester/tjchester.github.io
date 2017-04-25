@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="theme-color" content="#263238">
+
+<meta name="generator" content="Hugo 0.20.2" />
+
+<link rel="apple-touch-icon" href="http://tjchester.github.io/images/logo.png">
+
+
+<link rel="canonical" href="http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/">
+
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster%7cLato:400,700" rel="stylesheet">
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>SSIS Multi-Environment Configration - Thomas Chester&#39;s Blog</title>
+    
+
+<meta name="description" content="Describes how to store multiple environment settings for SSIS packages in support of automatic deployment scenarios.">
+
+<meta property="og:title" content="SSIS Multi-Environment Configration - Thomas Chester&#39;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/">
+<meta property="og:image" content="http://tjchester.github.io/images/theme/thumbnail-01.jpg">
+<meta property="og:site_name" content="Thomas Chester&#39;s Blog">
+<meta property="og:description" content="Describes how to store multiple environment settings for SSIS packages in support of automatic deployment scenarios.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Thomas Chester&#39;s Blog">
+<meta name="twitter:url" content="http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/">
+<meta name="twitter:title" content="SSIS Multi-Environment Configration - Thomas Chester&#39;s Blog">
+<meta name="twitter:description" content="Describes how to store multiple environment settings for SSIS packages in support of automatic deployment scenarios.">
+<meta name="twitter:image" content="http://tjchester.github.io/images/theme/thumbnail-01.jpg">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http://tjchester.github.io/"
+    },
+    "headline": "SSIS Multi-Environment Configration - Thomas Chester&#39;s Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http://tjchester.github.io/images/theme/thumbnail-01.jpg",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2013-06-13T00:00:00JST",
+    "dateModified": "2013-06-13T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Chester&#39;s Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Thomas Chester&#39;s Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http://tjchester.github.io/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "Describes how to store multiple environment settings for SSIS packages in support of automatic deployment scenarios."
+  }
+</script>
+
+
+    <style>
+      html { font-size: 18px; background-color: rgba(236,239,241,.5);}@media (max-width: 768px) { html { font-size: 15px; }}body { color: #333; font-family: 'Roboto Slab','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,sans-serif; font-feature-settings : "palt"; font-size: inherit; line-height: 1rem; margin: 0; padding: 0;}h1, h2, h3, h4, h5 ,h6 { font-size: 1rem; font-weight: 700; line-height: 1rem; margin: 0;}hr { border: 0; border-top: 1px dashed #cfd8dc; margin: 1rem 0;}p { margin: 0; line-height: 1rem;}a { color: #2196f3; text-decoration: none; transition-duration: .3s;}ul, ol { margin: 0; padding: 0;}table { border-collapse: collapse;}th, td { font-size: .8rem; padding: .5rem;}tr { border-bottom: 1px dashed #ddd;}/* Layouts */main,aside { display: block;}main { padding: 1rem 0 3rem 0; }aside.h { padding: 3rem 0; }main.f,aside.f { background-color: #333; border-top: 2px dashed #fff; border-bottom: 2px dashed #fff;}.l-container { position: relative; max-width: 68rem; margin: 0 auto; padding: 0 1rem;}.l-container.thin { max-width: 44rem;}.l-header { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); padding: 1rem 0; text-align: center;}.l-footer { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); font-size: .6rem; font-weight: 700; padding: 1rem 0;}@media (max-width: 768px) { .l-sidebar { margin-top: 4rem; }}.mrow { margin: 0 -1rem; overflow: hidden;}.mcol { box-sizing: border-box; float: left; padding: 0 1rem;}.c6 { width: 50%; }.c4 { width: 33.26323833%; }.c8 { width: 66.66666%; }@media (max-width: 768px) { .mcol { width: 100%; float: none; }}.logo a { font-size: 1.4rem; line-height: 1.5rem; font-weight: 700; color: #333;}.articles { margin: -1rem 0; margin-bottom: 1rem;}.articles.sm { margin: -.5rem 0; margin-bottom: 0;}article { border-radius: 4px; overflow: hidden;}article.li { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); height: 20rem; overflow: hidden; margin: 1rem 0;}article.li > a { display: block; color: #333;}article.li .inner { padding: 1rem;}article.li .thumb { height: 8rem;}article.li .title { color: #333; font-size: 1.2rem; line-height: 1.5rem; margin-bottom: .5rem;}article.li .summary { font-size: .8rem; height: 6rem; overflow: hidden; margin-top: 1rem;}article.lism { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin: .5rem 0;}article.lism::after { content: ''; display: block; clear: both;}article.lism > a { display: block; color: #333;}article.lism .inner { display: table-cell; vertical-align: middle; height: 5rem; padding-left: .5rem;}article.lism .thumb { width: 5rem; height: 5rem; float: left;}article.lism .title { font-weight: 700; line-height: 1.25rem; margin-bottom: .25rem;}article.sn { background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); margin-bottom: 1rem;}article.sn .thumb { height: 20rem;}@media (max-width: 768px) { article.sn .thumb { height: 10rem; }}article.sn > .article-header,article.sn > .article-body,article.sn .article-footer { padding: 2rem;}article.sn > .article-body { padding: 0 2rem;}@media (max-width: 768px) { article.sn > .article-header, article.sn > .article-body, article.sn .article-footer { padding: 1rem; } article.sn > .article-body { padding: 0 1rem; }}article.sn > .article-header .title { font-size: 1.8rem; line-height: 2rem; margin-bottom: .5rem;}@media (max-width: 768px) { article.sn > .article-header .title { font-size: 1.4rem; line-height: 1.5rem; }}article.sn > .article-header .facts { margin-bottom: 1rem;}article.sn > .article-body { margin-bottom: 1.5rem; word-break: break-all;}article.sn > .article-body h2 { border-bottom: .25rem solid #333; font-size: 1.2rem; line-height: 1.5rem; margin: 1.5rem 0; padding: .5rem 0;}article.sn > .article-body h3 { border-left: .5rem solid #333; line-height: 1.5rem; margin: 1.5rem 0; padding: .125rem .5rem;}article.sn > .article-body ul,article.sn > .article-body ol { margin: 1.5rem 0; padding-left: 1.5rem;}article.sn > .article-body li { padding-bottom: .5rem; line-height: 1.5rem;}article.sn > .article-body li:last-child { padding-bottom: 0;}article.sn > .article-body p { margin: 1rem 0; line-height: 1.5rem;}article.sn > .article-body strong,article.sn > .article-body em { font-style: normal; font-weight: 700;}article.sn > .article-body strong { box-shadow: 0 -.5rem 0 0 #ffc107 inset;}article.sn > .article-body em { color: #8bc34a;}article.sn > .article-body code,article.sn > .article-body pre { font-family: Menlo, Consolas, monospace; font-size: .7rem;}article.sn > .article-body pre { background-color: #333; color: #fff; line-height: 1rem; margin: 1.5rem -2rem; overflow: auto;}@media (max-width: 768px) { article.sn > .article-body pre { margin: 1.5rem -1rem; }}article.sn > .article-body pre > code { display: block; padding: 1rem 2rem;}@media (max-width: 768px) { article.sn > .article-body pre > code { padding: 1rem; }}article.sn > .article-body p code { background-color: #eceff1; color: #333; border-radius: 4px; margin: 0 .25rem; padding: .375rem; white-space: nowrap;}article.sn > .article-body blockquote { position: relative; border-left: .25rem solid #333; font-size: .8rem; padding: .125rem 1rem; margin: 1.5rem 0;}@media (max-width: 768px) { article.sn > .article-body blockquote { font-size: 1rem; }}article.sn > .article-body blockquote p { margin: .5rem 0; line-height: 1rem;}article.sn > .article-body figure { margin: 1.5rem 0;}article.sn > .article-body figure img,article.sn > .article-body figure amp-img { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); max-width: 100%;}article.sn > .article-body figcaption { color: #cfd8dc; font-size: .8rem; font-weight: 700; margin-top: .5rem;}.facts li { display: inline; font-size: .8rem; margin-right: 1rem;}.facts i { color: #cfd8dc; margin-right: .5em;}.facts.sm li { font-size: .7rem;}.sections.sidebar { margin: -1rem 0;}.sections.footer { margin: -1rem 0;}section.sidebar { margin: 2rem 0;}section.sidebar > header { font-size: .8rem; font-weight: 700; letter-spacing: 4px; text-align: center; margin: 1.5rem 0;}section.footer { margin: 1rem 0;}section.footer > header { font-size: .8rem; margin: .5rem 0;}section.footer > header::before { content: "- ";}section.footer > header a { font-weight: 700; color: #333; text-decoration: underline;}.terms { margin: -.25rem;}.terms li { display: inline-block;}.terms a { display: block; float: left; background-color: #333; border-radius: 4px; color: #fff; font-size: .7rem; margin: .25rem; padding: 0 .75rem; line-height: 1.75rem;}.paging { text-align: center; padding: 1rem 0;}.paging a { display: inline-block; background-color: #fff; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); border-radius: 4px; color: #333; padding: 0 1rem; line-height: 3rem;}.page-title { text-align: center; margin: 1rem 0;}.page-title::after { content: ''; display: block; border-bottom: .25rem solid #333; width: 3rem; margin: 1.5rem auto;}.page-title > .title { font-size: 1.2rem; line-height: 1.5rem;}/* Parts:breadcrumb */.crumb ol { text-overflow: ellipsis; color: #cfd8dc; white-space: nowrap; overflow: hidden;}.crumb li { display: inline; font-size: .8rem;}.crumb li::after { content: '›'; margin: 0 .25rem 0 .5rem;}.crumb li:last-child::after { content: '';}.crumb a { color: #cfd8dc;}.crumb i { margin-right: .5em;}.share { padding: 0;}.share a { display: inline-block; box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px rgba(63,63,68,.1), 0 1px 2px rgba(0,0,0,.05); min-width: 1rem; height: 2rem; border-radius: 4px; color: #333; font-size: .8rem; font-weight: 700; line-height: 2rem; text-align: center; padding: 0 .5rem;}.adj article.lism { margin-bottom: 1rem;}.adj header { font-weight: 700; font-size: .8rem;}.toc { padding: 0 2rem;}@media (max-width: 768px) { .toc { padding: 0 1rem; }}.toc { margin: 1rem 0;}.toc nav>ul { background-color: #eceff1; border-radius: 4px; display: inline-block; font-size: .8rem; padding: .5rem 1rem; word-break: break-all; list-style: none;}.toc ul { padding: 0;}.toc ul ul { padding-left: 1rem;}.toc ul ul ul { padding-left: 1rem;}.toc li { color: #90a4ae;}.toc ul ul>li { font-weight: 700; margin: .5rem 0; list-style-type: decimal;}.toc ul ul ul>li { list-style-type: disc; font-weight: 500;}.thumb { background-image: url(http://tjchester.github.io/images/default.jpg); background-size: cover;}.thumb-161ea488772a611c68ae338f28c6ff01 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-e701422d5d79d3a6784393e8f5f859f7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-9c06832134ac3b1bf5ac505f44f972e7 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-e2fc3f612fd039b967f1bec3ce76b2e6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-0b0cda628be80f0d61e5448c8fc42fd0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-32f88f5a104c180ca0e2c5598b72ee39 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-ea1d53287313d452e54fbfcd6f08a7cf { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-a104fb8a18bd0de47f233c01bf2e7479 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-938a1f711bc39c21459842955cb4a3fc { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-89b38bad6ca604794ee7fbad564408a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-3c4116e0c0758d85af1236a2a437f985 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-ea20ca6e433a2829b5be53dc2eafe393 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-aed55365eccf97e5c290a3e12317108e { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-abd38d5b85b8b17ee3913acdb5cea5c5 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-f625bb597fe06739be42d9478a39e309 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-6efc84aba56ee6c729401c3b786fddac { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-1ca01e36e8ea1c36087086fc322b82ad { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1891628ad0db83c0a00b880b6c17974c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-9756858709cfd2e412619c2a284493b3 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-1cf3d78b95eb200c427a3e487128426c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-bb175006c256441fed31e035fcd454a0 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-508618ae10dd76aa38789fccbb50fb76 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-80814d5c7659bffa0b562563d29bc98c { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-fda34b02421a4f884291523c4ad49d32 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-963b9700f2a58d526bfd16e0004911d8 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-a86fb5985e759d8a858551602a42be71 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-633b5e63fc7775442ffc225297502a1a { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-f6d0788325ae45084d3ebe6e7baf6c52 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-33cc6a32e49ca50523d31820a54cfcbb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-6fbec6ca8cc6335a412d8b2210ec2c23 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-11.jpg);}.thumb-e06b60ef112096b1249f29bcaa30cf46 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}.thumb-052660c3e6eabd122d8f3931ab383dd6 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-10.jpg);}.thumb-6bbfa922acab3dec818390ad7aee5e91 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-09.jpg);}.thumb-2aa42f120abcb5a6d78ae24187f4ea74 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-08.jpg);}.thumb-62b31a793be89a89cd160b9dc5be26bb { background-image: url(http://tjchester.github.io/images/theme/thumbnail-07.jpg);}.thumb-8ac4e8461a27760ccbddd69d69e40911 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-06.jpg);}.thumb-5aff53c7421c80d2bd68aa4977270977 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-05.jpg);}.thumb-27abff142ce9069dcbc65786087f931d { background-image: url(http://tjchester.github.io/images/theme/thumbnail-04.jpg);}.thumb-bb7a4b292816e52cc39ec3a59baf5053 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-03.jpg);}.thumb-1770d4fe2262c48ffa32f35c66384410 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-02.jpg);}.thumb-d1d552cdb71d70c0ee72fdb4deb0ab90 { background-image: url(http://tjchester.github.io/images/theme/thumbnail-01.jpg);}
+       body { font-family: Lato,YuGothic,'Hiragino Kaku Gothic Pro',Meiryo,sans-serif; } 
+       .h-logo { font-family: Lobster, cursive; } 
+    </style>
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <div class="l-container">
+        <div class="logo">
+          <a href="http://tjchester.github.io/">Thomas Chester&#39;s Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="l-container">
+        
+<div class="mrow">
+  <div class="mcol c8">
+
+    <article class="sn">
+
+  <div class="thumb thumb-e06b60ef112096b1249f29bcaa30cf46"></div>
+
+  <header class="article-header">
+    <h1 class="title">SSIS Multi-Environment Configration</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2013-06-13T00:00:00JST">June 13, 2013</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://tjchester.github.io/post/">POST</a></li>
+      
+    </ul>
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&title=SSIS%20Multi-Environment%20Configration" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&text=SSIS%20Multi-Environment%20Configration&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&t=SSIS%20Multi-Environment%20Configration" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&title=SSIS%20Multi-Environment%20Configration" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?SSIS%20Multi-Environment%20Configration http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+  </header>
+
+  
+
+  <div class="article-body"><p>This post describes a method of managing multiple SQL Server Integration Services (SSIS) package configurations across environments using a single SQL Server table.</p>
+
+<p></p>
+
+<p>The following articles were consulted in the creation of this document:
+- <a href="http://msdn.microsoft.com/en-us/library/ms141682.aspx">MSDN: Package Configurations</a>
+- <a href="http://msdn.microsoft.com/en-us/library/cc895212.aspx">Understanding Integration Services Package Configurations</a>
+- <a href="http://www.sqlservercentralcom/articles/Integration+Services+(SSIS)/66426/">SSIS multi-environment configuration in a single SQL Server table</a>
+- <a href="http://www.mssqltips.com/sqlservertip/1405/sql-server-integration-services-ssis-package-configuration/">SQL Server Integration Services SSIS Package Configuration</a>
+- <a href="http://sqlblog.com/blogs/michael_coles/archive/2010/01/18/ssis-mo-secure-configurations.aspx">SSIS: Mo&rsquo; Secure Configurations</a>
+- <a href="http://curionorg.blogspot.com/2007/05/encrypted-sql-server-ssis.html">Encrypted SQL Server SSIS Configurations</a>
+- <a href="http://www.mssqltips.com/sqlservertip/2459/using-a-sql-server-alias-for-ssis-package-configuration-database-connection-string/">Using a SQL Server Alias for SSIS Package Configuration Database Connection String</a>
+- <a href="http://habaneroconsulting.com/blog/Posts/Create_a_SQL_Alias_with_a_PowerShell_Script.aspx#.UZIkl83D_Oh">Create a SQL Alias with a PowerShell Script</a></p>
+
+<h2 id="background">Background</h2>
+
+<p>The database build process needs a consistent and managed way to provide different configuration settings to SSIS packages depending on the current environment. SQL Server packages support configurations via XML files, environment variables, registry entries, parent package variables, and SQL Server tables. The database build process is designed for the controlled deployment of databases therefore the SQL Server table configuration type is the match that is most consistent with that philosophy. Out of the box, the SQL Server configuration type is limited to a single environment and does not impose any default security or encryption capabilities. By building some additional infrastructure around the base implementation we can enhance it to handle multiple environments, a more secure default security model, and optionally encryption.</p>
+
+<h2 id="solution">Solution</h2>
+
+<h3 id="sql-server-table">SQL Server Table</h3>
+
+<h4 id="default">Default</h4>
+
+<p>The Package Configuration Wizard will use the CREATE TABLE statement below to create the default configuration table.</p>
+
+<h5 id="default-configuration-table">Default Configuration Table</h5>
+
+<pre><code class="language-sql">CREATE TABLE [dbo].[SSIS Configurations]
+(
+    ConfigurationFilter NVARCHAR(255) NOT NULL,
+    ConfiguredValue     NVARCHAR(255) NULL,
+    PackagePath         NVARCHAR(255) NOT NULL,
+    ConfiguredValueType NVARCHAR(20)  NOT NULL
+)
+</code></pre>
+
+<p>The table columns have the following meanings:</p>
+
+<ul>
+<li>The <strong>ConfigurationFilter</strong> column is used to identify a group of property/value pairs.</li>
+<li>The <strong>ConfiguredValue</strong> is the value that is assigned to the property specified by PackagePath.</li>
+<li>The <strong>PackagePath</strong> is the SSIS path used to identify the property that the ConfigurationValue is being stored for.</li>
+<li>The <strong>ConfiguredValueType</strong> is the SSIS data type of the ConfigurationValue. The entry stored in this column is case-sensitive and supports one of the following values: <em>Boolean</em>, <em>Byte</em>, <em>Char</em>, <em>DateTime</em>, <em>DBNull</em>, <em>Decimal</em>, <em>Double</em>, <em>Empty</em>, <em>Int16</em>, <em>Int32</em>, <em>Int64</em>, <em>Object</em>, <em>Sbyte</em>, <em>Single</em>, <em>String</em>, <em>UInt32</em>, and <em>UInt64</em>.</li>
+</ul>
+
+<h4 id="enhanced-table">Enhanced Table</h4>
+
+<p>The base table design has been enhanced to support multiple environments and encrypted values.</p>
+
+<h5 id="enhanced-configuration-table">Enhanced Configuration Table</h5>
+
+<pre><code class="language-sql">CREATE TABLE [ssis].[ConfigurationsBase]
+(
+    [ConfigurationFilter] [nvarchar](255) 
+        COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [ConfiguredValue]     [varbinary](512) NULL,
+    [PackagePath]         [nvarchar](255) 
+        COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [ConfiguredValueType] [nvarchar](20) 
+        COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+    [EnvironmentEnum]     [tinyint] NOT NULL DEFAULT (0),
+    [EnvironmentDesc]     AS (CASE [EnvironmentEnum] 
+                                WHEN (0) THEN 'Default' 
+                                WHEN (1) THEN 'Development' 
+                                WHEN (2) THEN 'Test' 
+                                WHEN (3) THEN 'Production'  
+                              END),
+    [ConfigurationId]     [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [HostNameDesc]        AS (CASE [EnvironmentEnum] 
+                                WHEN (0) THEN 'Default' 
+                                WHEN (1) THEN 'DEV_DB_HOSTNAME' 
+                                WHEN (2) THEN 'QA_DB_HOSTNAME' 
+                                WHEN (3) THEN 'PROD_DB_HOSTNAME'  
+                              END),
+)
+</code></pre>
+
+<p>The table columns have the following meanings:</p>
+
+<ul>
+<li>The <strong>ConfigurationFilter</strong> column has the same meaning as the default table but its definition was changed to be case-sensitive.</li>
+<li>The <strong>ConfiguredValue</strong> column has the same meaning as the default table but its definition was changed to <em>varbinary</em> to store the encrypted data.</li>
+<li>The <strong>PackagePath</strong> column as the same meaning as the default table but its definition was changed to be case-sensitive.</li>
+<li>The <strong>ConfiguredValueType</strong> column has the same meaning as the default table but its definition was changed to be case sensitive. In addition, a check constraint was added (not shown) to restrict the allowed values to the supported SSIS types as described in the default table definition.</li>
+<li>The <strong>EnvironmentEnum</strong> column is new and is used to identify the environment the property/value pair applies to. The default environment, usually the developer’s local machine, will have a value that is default to 0. Defaulting the column is this manner, completely coincides with the behavior expected by Business Intelligence Development Studio (BIDS). The value of 1 is used to identify the <em>Development</em> server, 2 for the <em>Test</em> server, and 3 for the <em>Production</em> server.</li>
+<li>The <strong>EnvironmentDesc</strong> column is a new computed column to display friendly and consistent names for the value in the <em>EnvironmentEnum</em> column.</li>
+<li>The <strong>ConfigurationId</strong> column is a new column to be used as a primary key column which makes working with the individual entries easier.</li>
+<li>The <strong>HostNameDesc</strong> column is a new computed column to display friendly and consistent names for the expected host server that coincides with the value from <em>EnvironmentEnum</em>. Note that the creation of this computed column depends on hooks within the database build process to fill out the case statement values prior to the table being initially created.</li>
+</ul>
+
+<p>It should also be noted that the table has been moved under a new <strong>[ssis]</strong> schema. A separate schema simplifies the security management and also can prevent namespace conflicts with existing objects. In addition, a unique non-clustered index was created over the <strong>[ConfigurationFilter]</strong>, <strong>[EnvironmentEnum]</strong>, and <strong>[PackagePath]</strong> columns. Since the values in the configuration table will be manipulated outside of the BIDS environment the index has prevent multiple values from being entered for the same property within the same environment.</p>
+
+<h3 id="supporting-objects-mandatory">Supporting Objects (Mandatory)</h3>
+
+<p>The objects in this section are required for proper execution of SSIS and the BIDS environments.</p>
+
+<h4 id="views">Views</h4>
+
+<p>In order for SSIS and BIDS to work with the enhanced table we need a view to act as the intermediary between those products and our base table. This view will be in charge of encrypting and decrypting the property values. Creation of this view depends on hooks in the database build process in order to store the passphrase that will be used by the <em>EncryptByPassPhase</em> and <em>DecryptByPassPhrase</em> T-SQL functions. In order to prevent the passphrase to be disclosed, outside of the developer groups, the view is created with the encryption option. The CASE statement within the JOIN clause will select the appropriate environment’s values based on the host server. This statement also relies on hooks within the database build process to replace the tokens with actual server names.</p>
+
+<h5 id="ssis-and-bids-interface-view">SSIS and BIDS Interface View</h5>
+
+<pre><code class="language-sql">CREATE VIEW [ssis].[Configurations] WITH ENCRYPTION AS
+    SELECT ConfigurationFilter,
+           ConfiguredValue = CAST (                                        DecryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE'
+                                    , ConfiguredValue) AS NVARCHAR(255)),
+           PackagePath,
+           ConfiguredValueType,
+           EnvironmentEnum,
+           EnvironmentDesc,
+           ConfigurationId,
+           HostNameDesc
+      FROM [ssis].[ConfigurationsBase] base
+           INNER JOIN (SELECT CurrentEnvironment = 
+                CASE WHEN HOST_NAME() = 'DEV_DB_HOSTNAME'  THEN 1
+                         WHEN HOST_NAME() = 'QA_DB_HOSTNAME'   THEN 2
+                         WHEN HOST_NAME() = 'PROD_DB_HOSTNAME' THEN 3
+                    END) e
+             ON base.EnvironmentEnum = 0 
+                OR base.EnvironmentEnum = e.CurrentEnvironment
+</code></pre>
+
+<h4 id="triggers">Triggers</h4>
+
+<p>In order to allow the view to encrypt the property values on insert and update we need to use INSTEAD OF triggers. Similar to the view discussed previously, these triggers rely on hooks within the database build process in order to set the passphrase used for encryption and decryption. The triggers are created with the encryption option as well in order to prevent disclosure of the passphrase in the object definition.</p>
+
+<h5 id="insert-trigger">Insert Trigger</h5>
+
+<pre><code class="language-sql">CREATE TRIGGER [ssis].[Configurations_Trigger_Instead_Insert] 
+ON [ssis].[Configurations] WITH ENCRYPTION INSTEAD OF INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [ssis].[ConfigurationsBase]
+    (
+        ConfigurationFilter,
+        ConfiguredValue,
+        PackagePath,
+        ConfiguredValueType,
+        EnvironmentEnum
+    )
+    SELECT ConfigurationFilter,
+           EncryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE', ConfiguredValue),
+           PackagePath,
+           ConfiguredValueType,
+           ISNULL(EnvironmentEnum, 0)
+      FROM inserted 
+END
+</code></pre>
+
+<h5 id="update-trigger">Update Trigger</h5>
+
+<pre><code class="language-sql">CREATE TRIGGER [ssis].[Configurations_Trigger_Instead_Update] 
+ON [ssis].[Configurations] WITH ENCRYPTION INSTEAD OF UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE target
+       SET target.ConfiguredValue = EncryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE', source.ConfiguredValue)
+      FROM inserted AS source 
+         JOIN [ssis].[ConfigurationsBase] target
+           ON target.ConfigurationFilter = source.ConfigurationFilter
+             AND target.PackagePath = source.PackagePath
+               AND target.ConfiguredValueType = source.ConfiguredValueType
+                 AND target.EnvironmentEnum = ISNULL(source.EnvironmentEnum, 0)
+END
+</code></pre>
+
+<h4 id="roles">Roles</h4>
+
+<p>Permissions to the [ssis] schema object s are controlled through database role membership. The following roles are defined:</p>
+
+<ul>
+<li>ssis_owner</li>
+<li>ssis_datareader</li>
+<li>ssis_datawriter</li>
+</ul>
+
+<h4 id="permissions">Permissions</h4>
+
+<table>
+<thead>
+<tr>
+<th>Role Name</th>
+<th>Full</th>
+<th>Select</th>
+<th>View Definition</th>
+<th>Insert</th>
+<th>Update</th>
+<th>Delete</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ssis_owner</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>ssis_datareader</td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>ssis_datawriter</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="supporting-objects-optional">Supporting Objects (Optional)</h3>
+
+<p>The objects in this section are not strictly required for proper execution of SSIS and the BIDS environments. Their purpose is to facilitate interaction with the people who are in charge of maintaining the settings for the additional environments beyond the local developer’s station. Similarly to the mandatory objects discussed previously, the creation of these objects depends on hooks within the build process and also the use of object encryption options.</p>
+
+<h4 id="views-1">Views</h4>
+
+<p>This view provides a convenient way of viewing all of the decrypted options across all the environments in a tabular format. This view is also has triggers (not shown) similar to the ones on the Configurations view. This is to support configuration maintenance scripts or tools that need to have an unfiltered view of the base table for maintenance tasks.</p>
+
+<h5 id="all-configurations-tabular-format">All Configurations - Tabular Format</h5>
+
+<pre><code class="language-sql">CREATE VIEW [ssis].[ConfigurationsAll] WITH ENCRYPTION AS
+SELECT ConfigurationFilter,
+       ConfiguredValue = CAST (
+                  DecryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE'
+                                      , ConfiguredValue) AS NVARCHAR(255)),
+       PackagePath,
+       ConfiguredValueType,
+       EnvironmentEnum,
+       EnvironmentDesc,
+       ConfigurationId,
+       HostNameDesc
+  FROM [ssis].[ConfigurationsBase]
+</code></pre>
+
+<p>This view provides a convenient way of viewing all of the decrypted options across all the environments in a crosstab format.</p>
+
+<h5 id="all-configurations-crosstab-format">All Configurations - Crosstab Format</h5>
+
+<pre><code class="language-sql">CREATE VIEW [ssis].[ConfigurationsCrosstab] WITH ENCRYPTION AS
+SELECT ConfigurationFilter,
+       PackagePath,
+       SUBSTRING(t.ConfiguredValueTypeList, 4, 999) AS ConfiguredValueType,
+       [0] AS [DefaultValue],
+       [1] AS [DevelopmentValue],
+       [2] AS [TestValue],
+       [3] AS [ProductionValue]
+  FROM (
+         SELECT ConfigurationFilter,
+                PackagePath,
+                EnvironmentEnum,
+                ConfiguredValue = CAST (
+                     DecryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE'
+                         , ConfiguredValue) AS NVARCHAR(255))
+           FROM [ssis].[ConfigurationsBase]
+       ) base
+  PIVOT (MAX(ConfiguredValue) FOR EnvironmentEnum IN ([0], [1], [2], [3])) pvt
+
+-- Use CROSS APPLY ... FOR XML PATH trick to concatenate different ConfiguredValueType entries
+-- There shouldn't be any differences, but if there are it should be made obvious
+-- The initial space-semicolon-space delimiter is removed by SUBSTRING above
+
+  CROSS APPLY (
+    SELECT DISTINCT ' ; ' + ConfiguredValueType
+      FROM [ssis].[Configurations]
+     WHERE ConfigurationFilter = pvt.ConfigurationFilter
+       AND PackagePath = pvt.PackagePath
+       FOR XML PATH('') ) t ( ConfiguredValueTypeList )
+</code></pre>
+
+<p>This view looks for possible errors in the stored configurations and presents them in a tabular format.</p>
+
+<h5 id="configuration-warnings-tabular-format">Configuration Warnings - Tabular Format</h5>
+
+<pre><code class="language-sql">CREATE VIEW [ssis].[ConfigurationsWarnings] WITH ENCRYPTION AS
+SELECT ConfigurationFilter,
+       PackagePath,
+       ConfiguredValueType,
+       [DefaultValue],
+       [DevelopmentValue],
+       [TestValue],
+       [ProductionValue]
+  FROM [ssis].[ConfigurationsCrosstab]
+ WHERE ConfiguredValueType LIKE '% ; %'
+    OR (DefaultValue IS NULL AND (ProductionValue IS NULL
+                                    OR DevelopmentValue IS NULL 
+                                      OR TestValue IS NULL))
+</code></pre>
+
+<h4 id="procedures">Procedures</h4>
+
+<p>This procedure provides a convenient way of viewing the decrypted settings for a specific server. When this procedure is executed it will provide the values specific to the environment that matches the server and the default values for those values that were not overridden for the specified server’s. When both a default value and an environment specific value exist the latter will be chosen.</p>
+
+<h5 id="configuration-for-specified-server-only">Configuration for Specified Server Only</h5>
+
+<pre><code class="language-sql">CREATE PROCEDURE [ssis].[ConfigurationsForHostName] 
+(
+    @HostName NVARCHAR(128)
+)
+    WITH ENCRYPTION
+AS
+BEGIN
+    -- This query returns the result set of settings for a specified server.
+    -- In actual reality the SSIS execution environment will return all the
+    -- default settings as well as the environment specific settings and will
+    -- then internally override the default values whenever an specific 
+    -- settings is found.
+
+    -- First identify all the settings that have been explicitly defined
+    -- for the specified server.
+    SELECT ConfigurationFilter,
+           ConfiguredValue = CAST (
+            DecryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE', 
+                      ConfiguredValue) AS NVARCHAR(255)),
+           PackagePath,
+           ConfiguredValueType,
+           EnvironmentEnum,
+           EnvironmentDesc,
+           ConfigurationId,
+           HostNameDesc
+      INTO #EnvironmentSettings
+      FROM [ssis].[ConfigurationsBase] base
+     WHERE base.EnvironmentEnum = 
+                CASE 
+                  WHEN @HostName = 'DEV_DB_HOSTNAME'  THEN 1
+                  WHEN @HostName = 'QA_DB_HOSTNAME'   THEN 2
+                  WHEN @HostName = 'PROD_DB_HOSTNAME' THEN 3
+                END
+
+    -- Second identify all the default settings that have not been 
+    -- overridden by a specific setting for this server (i.e. exclude
+    -- results from the previous query)                   
+    SELECT ConfigurationFilter,
+           ConfiguredValue = CAST (
+                DecryptByPassPhrase('SSIS_CONFIGURATION_PASSPHRASE', 
+                      ConfiguredValue) AS NVARCHAR(255)),
+           PackagePath,
+           ConfiguredValueType,
+           EnvironmentEnum,
+           EnvironmentDesc,
+           ConfigurationId,
+           HostNameDesc
+      INTO #DefaultSettings
+      FROM [ssis].[ConfigurationsBase]
+     WHERE ConfigurationId NOT IN 
+               (SELECT base.ConfigurationId
+                  FROM [ssis].[ConfigurationsBase] base 
+                       INNER JOIN #EnvironmentSettings s
+                         ON base.[ConfigurationFilter] = s.[ConfigurationFilter]
+                           AND base.[PackagePath] = s.[PackagePath])
+       AND [EnvironmentEnum] = 0
+
+    -- The real set of settings for the specified server is the union of
+    -- the explicit settings from the first query and the implicit 
+    -- settings from the second query.    
+    SELECT * FROM #EnvironmentSettings
+      UNION ALL
+    SELECT * FROM #DefaultSettings     
+END
+</code></pre>
+
+<h3 id="database-server-alias">Database Server Alias</h3>
+
+<p>The connection string used by SSIS and BIDS to connect to the database in order to access the stored values is stored within the package itself. The enhanced solution uses database server alias so that we do not have to rely on the same database server and instance names existing across the environments. In order to avoid name conflicts between different databases using this solution, the alias will be named <strong>SSIS_CONFIG_&lt;databasename&gt;</strong>. The database build process will have additional tasks that will enable the creation of these aliases in a consistent manner. In addition, because the TCP connection can be configured on different addresses and use either dynamic or static ports; to simplify matters the alias is created using the Named Pipe connection instead. As an aside, the local Shared Memory connection does not allow aliases.</p>
+
+<h3 id="security-implications">Security Implications</h3>
+
+<p>The use of encrypted settings and a separate schema would tend to imply a very tight security model but this is not necessarily the case. The separate schema prevents inadvertent viewing of the configuration settings such as might be the case were the objects in the <em>dbo</em> schema. The encryption of the actual data within the table helps to keep the data safe in external files such as backups as well as restores of those backups onto other servers. In the end, the SSIS and BIDS tools need access to the unencrypted data so the members of the <em>ssis_reader</em> role are able to see all of the configuration data. Role membership will be generally confined to the database developers. These developers will also have access to the database project repositories which will contain the additional passphrase and server names that are encoded in the objects. If this is a concern, the act of creating the database objects related to configuration management could be moved to a separate repository with tighter controls; and the views that return data, further strengthened with additional role or user name checks. In general, tighter security models are more complex to manage and more prone to leaks than simpler models. This paper promotes the simpler model whereby the database development team has knowledge of the encryption passphrase and the values all of the unencrypted configurations.</p>
+
+<h3 id="basic-workflow">Basic Workflow</h3>
+
+<p>The section below outlines the basic tasks, on how SSIS package management might be inserted into the database build process, and who is responsible for them.</p>
+
+<h4 id="lead-developer">Lead Developer</h4>
+
+<ol>
+<li>In the initial database project setup, the Lead Developer would make a decision about whether this SSIS configuration solution would be applied to the project.</li>
+<li>Assuming this solution was chosen, while specifying the shared project settings, a passphrase would be chosen and saved to the repository.</li>
+<li>The SSIS configuration objects (mandatory and optional) would be created in the initial database and checked into the repository.</li>
+<li>The database project repository is released to the general developers</li>
+</ol>
+
+<h4 id="developer">Developer</h4>
+
+<ol>
+<li>Development of SSIS packages occurs no different than today where environment specific settings are not used</li>
+<li>When the developer is completed and tested the SSIS package, but prior to pushing it back to the repository, package configuration is activated.</li>
+<li>The developer takes an inventory of the SSIS package and identifies any variables, properties, or connection managers whose value might change based on the environment</li>
+<li>A unique configuration filter value is created using the SSIS packages name, in order to properly identify which package those settings go to</li>
+<li>The settings are stored in the database using the SQL Server Alias</li>
+<li>The base table data is added to source control so that changes can be tracked</li>
+<li>The developer commits their SSIS packages and pushes to the central repository</li>
+</ol>
+
+<h4 id="lead-developer-or-build-manager">Lead Developer or Build Manager</h4>
+
+<ol>
+<li>Using T-SQL statements or a client UI, build settings for additional environments would be added to the base table.</li>
+</ol></div>
+
+  <footer class="article-footer">
+
+    <aside class="share">
+  <a href="http://b.hatena.ne.jp/add?mode=confirm&url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&title=SSIS%20Multi-Environment%20Configration" title="はてなブックマーク" class="ht" target="_blank" rel="nofollow">B!</a>
+  <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&text=SSIS%20Multi-Environment%20Configration&tw_p=tweetbutton" title="Twitterでシェア" class="tw" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&t=SSIS%20Multi-Environment%20Configration" title="Facebookでシェア" class="fb" target="_blank" rel="nofollow"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://plus.google.com/share?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f" title="Google Plusでシェア" class="gp" target="_blank" rel="nofollow"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+  <a href="http://getpocket.com/edit?url=http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f&title=SSIS%20Multi-Environment%20Configration" title="Pocketに保存" class="pk" target="_blank" rel="nofollow"><i class="fa fa-get-pocket" aria-hidden="true"></i></a>
+  <a href="http://line.me/R/msg/text/?SSIS%20Multi-Environment%20Configration http%3a%2f%2ftjchester.github.io%2fpost%2f2013-06-13-ssis-multi-environment-configuration%2f" title="LINEでシェア" class="ln" target="_blank" rel="nofollow">LINE</a>
+</aside>
+
+
+    <section class="footer">
+      <div>
+        <nav class="crumb">
+          <ol>
+            <li><a href="http://tjchester.github.io/"><i class="fa fa-home" aria-hidden="true"></i>TOP</a></li>
+            
+            <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://tjchester.github.io/post/" itemprop="url"><span itemprop="title">POST</span></a></li>
+            
+            <li class="active">SSIS Multi-Environment Configration</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/categories/">CATEGORIES</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/categories/howto/">HowTo</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="footer">
+      <header>
+        <a href="http://tjchester.github.io/tags/">TAGS</a>
+      </header>
+      <div>
+        <ul class="terms">
+          
+          <li><a href="http://tjchester.github.io/tags/sql-server/">SQL Server</a></li>
+          
+          <li><a href="http://tjchester.github.io/tags/ssis/">SSIS</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    <div class="adj">
+      <div class="mrow">
+        
+        <div class="mcol c6">
+          <header>Previous Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/">
+    <div class="thumb thumb-052660c3e6eabd122d8f3931ab383dd6"></div>
+
+    <div class="inner">
+      <div class="title">SQL Server Database Mirroring Troubleshooting Notes</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2013-06-11T00:00:00JST">June 11, 2013</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+        
+        <div class="mcol c6">
+          <header>Next Article</header>
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/">
+    <div class="thumb thumb-6fbec6ca8cc6335a412d8b2210ec2c23"></div>
+
+    <div class="inner">
+      <div class="title">SQL Server Alias Registry Settings</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2013-06-13T00:00:00JST">June 13, 2013</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="mcol c4">
+    <aside class="l-sidebar">
+
+  <div class="sections sidebar">
+    <section class="sidebar">
+      <header>LATESTS</header>
+      <div>
+        <div class="articles sm">
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/">
+    <div class="thumb thumb-161ea488772a611c68ae338f28c6ff01"></div>
+
+    <div class="inner">
+      <div class="title">Lost Disk Space to Fuslogvw</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-12-07T00:00:00JST">December 7, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/">
+    <div class="thumb thumb-e701422d5d79d3a6784393e8f5f859f7"></div>
+
+    <div class="inner">
+      <div class="title">Using the bpod Gem</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-09-03T00:00:00JST">September 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/">
+    <div class="thumb thumb-9c06832134ac3b1bf5ac505f44f972e7"></div>
+
+    <div class="inner">
+      <div class="title">Palindromic Prime Calculation</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-08-30T00:00:00JST">August 30, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/">
+    <div class="thumb thumb-e2fc3f612fd039b967f1bec3ce76b2e6"></div>
+
+    <div class="inner">
+      <div class="title">Disable Google Chrome Updates [Updated]</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-07-20T00:00:00JST">July 20, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/">
+    <div class="thumb thumb-0b0cda628be80f0d61e5448c8fc42fd0"></div>
+
+    <div class="inner">
+      <div class="title">Removing Old Windows Folder After Upgrade</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-04-05T00:00:00JST">April 5, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/">
+    <div class="thumb thumb-32f88f5a104c180ca0e2c5598b72ee39"></div>
+
+    <div class="inner">
+      <div class="title">Generating Test Data for Rails Projects</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-17T00:00:00JST">March 17, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-16-when-hardware-fails/">
+    <div class="thumb thumb-ea1d53287313d452e54fbfcd6f08a7cf"></div>
+
+    <div class="inner">
+      <div class="title">When Hardware Fails?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-16T00:00:00JST">March 16, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2016-03-03-what-is-a-database/">
+    <div class="thumb thumb-a104fb8a18bd0de47f233c01bf2e7479"></div>
+
+    <div class="inner">
+      <div class="title">What Is A Database?</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2016-03-03T00:00:00JST">March 3, 2016</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/">
+    <div class="thumb thumb-938a1f711bc39c21459842955cb4a3fc"></div>
+
+    <div class="inner">
+      <div class="title">Fixing Windows Update Error 0x80072F8F</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-11-15T00:00:00JST">November 15, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+          <article class="lism">
+  <a href="http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/">
+    <div class="thumb thumb-89b38bad6ca604794ee7fbad564408a0"></div>
+
+    <div class="inner">
+      <div class="title">Pixel Art with Processing</div>
+
+      <ul class="facts sm">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2015-10-25T00:00:00JST">October 25, 2015</time></li>
+        <li><i class="fa fa-bookmark" aria-hidden="true"></i>POST</li>
+        
+      </ul>
+
+    </div>
+  </a>
+</article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="sidebar">
+      <header>CATEGORIES</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/categories/technote">technote</a></li><li><a href="http://tjchester.github.io/categories/howto">howto</a></li><li><a href="http://tjchester.github.io/categories/post">post</a></li><li><a href="http://tjchester.github.io/categories/plug">plug</a></li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="sidebar">
+      <header>TAGS</header>
+      <div>
+        <ul class="terms">
+          <li><a href="http://tjchester.github.io/tags/sql-server">sql-server</a></li><li><a href="http://tjchester.github.io/tags/linux">linux</a></li><li><a href="http://tjchester.github.io/tags/windows-server">windows-server</a></li><li><a href="http://tjchester.github.io/tags/bids">bids</a></li><li><a href="http://tjchester.github.io/tags/macos">macos</a></li><li><a href="http://tjchester.github.io/tags/registry">registry</a></li><li><a href="http://tjchester.github.io/tags/ruby">ruby</a></li><li><a href="http://tjchester.github.io/tags/.net">.net</a></li><li><a href="http://tjchester.github.io/tags/archlinux">archlinux</a></li><li><a href="http://tjchester.github.io/tags/backup/restore">backup/restore</a></li>
+        </ul>
+      </div>
+    </section>
+    
+  </div>
+
+</aside>
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <p><span class="h-logo">&copy; Thomas Chester&#39;s Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_robust">Robust</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

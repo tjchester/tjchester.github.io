@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Failure on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/failure/</link>
+    <description>Recent content in Failure on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 16 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/failure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>When Hardware Fails?</title>
+      <link>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</guid>
+      <description>&lt;p&gt;A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

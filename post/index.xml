@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/post/</link>
+    <description>Recent content in Posts on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lost Disk Space to Fuslogvw</title>
+      <link>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</guid>
+      <description>&lt;p&gt;This post will discuss a recent problem I encountered when installing Visual Studio 2015 &lt;em&gt;(although the actual software being installed does not matter)&lt;/em&gt;. During the installation process, the 250GB drive in my computer ran out of space.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using the bpod Gem</title>
+      <link>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</guid>
+      <description>&lt;p&gt;This post will discuss installing the &lt;strong&gt;bpod&lt;/strong&gt; gem on a macOS desktop and then scheduling it to change your desktop picture each day to the Bing home page image.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Palindromic Prime Calculation</title>
+      <link>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</link>
+      <pubDate>Tue, 30 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-08-30-palindromic-primes-with-ruby/</guid>
+      <description>&lt;p&gt;This post will dicuss palindromic prime numbers using ruby code. It will also discuss several refinements made to the original attempt to speed up the performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Disable Google Chrome Updates [Updated]</title>
+      <link>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</link>
+      <pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-07-20-disable-google-chrome-updates-updated/</guid>
+      <description>&lt;p&gt;In this article we look at using the Administative Template in ADMX format for Windows 7 and later. The original article, &lt;strong&gt;Disable Google Chrome Updates&lt;/strong&gt;, used the Administrative Template in ADM format for versions of Windows prior to Windows 7.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Removing Old Windows Folder After Upgrade</title>
+      <link>http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/</link>
+      <pubDate>Tue, 05 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-04-05-removing-old-windows-folder-after-upgrade/</guid>
+      <description>&lt;p&gt;When you do an inplace upgrade of Windows Server 2008 R2 to Windows Server 2012 R2, the old Windows system files are relocated to a folder named C:\Windows.old. This is to support a rollback to the prior version if necessary.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Generating Test Data for Rails Projects</title>
+      <link>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</link>
+      <pubDate>Thu, 17 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-17-generating-test-data-for-rails-projects/</guid>
+      <description>&lt;p&gt;How often have you created a database for a new Rails application and then sat staring at the empty tables? Often times when building a new application you need sample data to help flesh out the user interface or to show off the application to your customer. Rails provides a convenient method of loading this data via the &lt;em&gt;seeds.rb&lt;/em&gt; file, but you still have to create the content for this file. This article will discuss a mostly automated way of generating content for your database.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>When Hardware Fails?</title>
+      <link>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-16-when-hardware-fails/</guid>
+      <description>&lt;p&gt;A failure of any kind requires you to remain calm while you triage the event, in order to minimize the damage as much as possible. Afterwards, you can look back on the failure with a clear head and identify the conditions that led to it, and implement improvements that minimize the change of the same failure in the future. In short, it is an opportunity to grow.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>What Is A Database?</title>
+      <link>http://tjchester.github.io/post/2016-03-03-what-is-a-database/</link>
+      <pubDate>Thu, 03 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-03-03-what-is-a-database/</guid>
+      <description>&lt;p&gt;If I were to say the word &lt;em&gt;database&lt;/em&gt; to you, what might be the first thing that would come to mind. It would probably depend on your current situation and background. Corporate developers might immediately think of Oracle Database or Microsoft SQL Server. Open-source developers would probably think of MySQL/MariaDB, PostgreSQL, or MongoDB. Desktop users might think of Microsoft Access, Paradox, or even dBase. In general, what you are actually thinking of is the DBMS (Database Management System) or the software that allows you to interact with the database.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fixing Windows Update Error 0x80072F8F</title>
+      <link>http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/</link>
+      <pubDate>Sun, 15 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-11-15-fixing-windows-update-error-80072f8f/</guid>
+      <description>&lt;p&gt;The posts discusses a method of addressing Windows Update error 0x80072F8F in the context of SCCM and non-domain joined machines.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pixel Art with Processing</title>
+      <link>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-10-25-pixel-art-with-processing/</guid>
+      <description>&lt;p&gt;This brief post talks about my first attempt at creating art using the Processing visual arts programming environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL Backups with AutoMySQLBackup</title>
+      <link>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</link>
+      <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</guid>
+      <description>&lt;p&gt;This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Regain Access to SQL Server When Locked Out</title>
+      <link>http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/</link>
+      <pubDate>Wed, 08 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-08-regain-access-sql-server-when-locked-out/</guid>
+      <description>&lt;p&gt;This post describes how to regain access to a SQL server when you are denied access and the sa password has been lost.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing ownCloud on ArchLinux</title>
+      <link>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</link>
+      <pubDate>Sun, 05 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</guid>
+      <description>&lt;p&gt;Do you like the idea of DropBox but want to host the files on a server that you control. This how-to will walkthrough installing ownCloud on an ArchLinux installation and then configuring a Mac client to sync with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Setup an ArchLinux System</title>
+      <link>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</link>
+      <pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-06-09-setup-an-archlinux-system/</guid>
+      <description>&lt;p&gt;This walk-through will focus on a fresh installation of ArchLinux on a HP Envy TouchSmart SE all-in-one computer. The all-in-one has an existing installation of Windows 8.1 that will be replaced.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing an IPFire Based Firewall (Plug)</title>
+      <link>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-04-24-ipfire-serial-console-plug/</guid>
+      <description>&lt;p&gt;This is both humorous and a shamless plug at the same time for my previous article, &lt;strong&gt;Installing an IPFire Based Firewall&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2012 Restore Error</title>
+      <link>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</link>
+      <pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-03-30-sql-server-2012-restore-error/</guid>
+      <description>&lt;p&gt;This post describes an error that may occur when you are transferring database backup files from a SQL 2008 server to a SQL 2012 server and you are using SQL Server Management Studio (SSMS) to perform the restores.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dell PowerEdge OpenManage Firmware Notice</title>
+      <link>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</link>
+      <pubDate>Thu, 18 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-18-dell-openmanage-firmware-notice/</guid>
+      <description>&lt;p&gt;This brief note talks about how to turn off the Dell OpenManage disk firmware and driver checks.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dell PowerEdge Degraded Backplane Error</title>
+      <link>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</link>
+      <pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-12-08-dell-degraded-backplane-error-after-disk-replace/</guid>
+      <description>&lt;p&gt;This brief note talks about an issue I encountered with the Dell OpenManage agents after replacing a failed disk.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Disable Google Chrome Updates</title>
+      <link>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-disable-google-chrome-updates/</guid>
+      <description>&lt;p&gt;Google publishes information on how to disable the automatic updating of Chrome on Windows machines via group policy. That information is not easily to locate on Google&amp;rsquo;s site, so this article will distill that information into an easily referenced procedure.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monitoring RabbitMQ Hosted on Microsoft Windows</title>
+      <link>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-21-monitoring-rabbitmq-hosted-on-microsoft-windows/</guid>
+      <description>&lt;p&gt;This post will discuss how to monitor a Windows hosted RabbitMQ installation from a Linux based Zenoss monitor using the RabbitMQ plugin.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PowerShell Tips - Remote Maintenance Helpers</title>
+      <link>http://tjchester.github.io/post/2014-10-10-powershell-tips-for-remote-maintenance/</link>
+      <pubDate>Fri, 10 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-10-10-powershell-tips-for-remote-maintenance/</guid>
+      <description>&lt;p&gt;This article contains some PowerShell tips that I have found to be useful for performing maintenance on computers in remote offices.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fedora Fails to Boot After Install</title>
+      <link>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</link>
+      <pubDate>Wed, 03 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-03-fedora-fails-to-boot-after-install/</guid>
+      <description>&lt;p&gt;In this post I discuss a fatal bug that I ran into while installing Fedora 20.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create a Debian Bootable Install Disk</title>
+      <link>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</guid>
+      <description>&lt;p&gt;In this post I discuss how to create a bootable USB disk on Mac OS X for the Debian &amp;ldquo;Testing&amp;rdquo; network installer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing an IPFire Based Firewall</title>
+      <link>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</link>
+      <pubDate>Sat, 09 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-08-09-installing-an-ipfire-based-firewall/</guid>
+      <description>&lt;p&gt;In this post I will discuss setting up an IPFire based firewall appliance via a console serial cable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Add Drivers to a Windows Deployment Image</title>
+      <link>http://tjchester.github.io/post/2014-06-18-how-to-add-drivers-to-a-windows-deployment-image-troubleshooting/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-06-18-how-to-add-drivers-to-a-windows-deployment-image-troubleshooting/</guid>
+      <description>&lt;p&gt;This post describes the procedure for opening a Windows image and incorporating vendor specific drivers in it for the purposes of deploying that image on new equipment.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Error Running SQL 2012 Best Practice Analyzer</title>
+      <link>http://tjchester.github.io/post/2014-06-15-error-running-sql-2012-bpa/</link>
+      <pubDate>Sun, 15 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-06-15-error-running-sql-2012-bpa/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a permissions problem when attempting to run the SQL Server 2012 Best Practice Analyzer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Class Not Registered Error Using Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</link>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-04-17-ssis-class-not-registered-error-using-excel-connection-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a “Class Not Registered Error” when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Designer Stops Working in BIDS</title>
+      <link>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-designer-stops-working-in-bids/</guid>
+      <description>&lt;p&gt;This post describes how to fix the Business Intelligence Development Studio 2008 error that occurs when trying to view the design surface of a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Transaction Response Timeout from Service Manager</title>
+      <link>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</link>
+      <pubDate>Mon, 13 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-01-13-transaction-response-timeout-from-service-manager/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a timeout error that occurs during a service startup.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Alias Registry Settings</title>
+      <link>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-sql-server-alias-registry-settings/</guid>
+      <description>&lt;p&gt;In this post we will discuss where SQL Server Aliases, defined through the SQL Server Configuration Manager, are stored in the Windows registry.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSIS Multi-Environment Configration</title>
+      <link>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-13-ssis-multi-environment-configuration/</guid>
+      <description>&lt;p&gt;This post describes a method of managing multiple SQL Server Integration Services (SSIS) package configurations across environments using a single SQL Server table.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Database Mirroring Troubleshooting Notes</title>
+      <link>http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/</link>
+      <pubDate>Tue, 11 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-11-sql-server-database-mirroring-troubleshooting-notes/</guid>
+      <description>&lt;p&gt;In this post we will highlight a collection of troubleshooting notes related to SQL Server database mirroring.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SQL Server Database Mirroring Failover Notes</title>
+      <link>http://tjchester.github.io/post/2013-06-10-sql-server-database-mirroring-failover-notes/</link>
+      <pubDate>Mon, 10 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-10-sql-server-database-mirroring-failover-notes/</guid>
+      <description>&lt;p&gt;In this post we will highlight some techniques on executing a failover when using SQL Server database mirroring.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Upgrade Windows Server 2008 from Standard Edition to Datacenter Edition</title>
+      <link>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</link>
+      <pubDate>Fri, 07 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-06-07-how-to-upgrade-windows-server-2008-from-standard-edition-to-datacenter-edition/</guid>
+      <description>&lt;p&gt;This post describes a process for upgrading a Microsoft Windows Server 2008 R2 Standard edition to the Datacenter edition using generic Key Management Server (KMS) keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Communicate with Debug Host Process in BIDS</title>
+      <link>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</link>
+      <pubDate>Thu, 23 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-23-failed-to-communicate-with-debug-host-process-using-bids/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to fix the &lt;em&gt;“cannot communicate with the debug host process”&lt;/em&gt; error when trying to debug SQL Server Integration Services projects using the Business Intelligence Development Studio (BIDS).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ConvertStringSidToSid Error from the Volume Shadow Copy Service</title>
+      <link>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2013-05-20-convertstringsidtosid-error-from-the-volume-shadow-copy-service/</guid>
+      <description>&lt;p&gt;In this post we discuss how to fix the ConvertStringSidToSid error from the Volume Shadow Copy Service.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Entity Framework Error When Calling SaveChanges Method</title>
+      <link>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a potential transaction error when calling the SaveChanges method on an Entity Framework context variable.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Source Control Your SQL Server Databases</title>
+      <link>http://tjchester.github.io/post/2012-03-30-sql-server-source-control/</link>
+      <pubDate>Fri, 30 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-03-30-sql-server-source-control/</guid>
+      <description>&lt;p&gt;This document discusses the feasibility of using source control with database development for SQL Server (2005 and newer) databases.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Unable to Connect to Remote SQL Server Integration Services</title>
+      <link>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</link>
+      <pubDate>Fri, 17 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-12-17-ssis-remote-access-denied-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &lt;em&gt;&amp;ldquo;Access Is Denied&amp;rdquo;&lt;/em&gt; error when trying to connect to a remote instance SQL Server Integration Services.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Change SQL Agent Job Ownership</title>
+      <link>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-11-10-sql-agent-change-job-ownership/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address a typical error when trying to reassign SQL Agent job ownership.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Failed to Acquire Excel Connection Manager</title>
+      <link>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</link>
+      <pubDate>Wed, 13 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2010-10-13-ssis-excel-connection-manager-error/</guid>
+      <description>&lt;p&gt;In this post we will discuss how to address an &amp;ldquo;OLE DB error … failed to acquire connection&amp;rdquo; when using a Microsoft Excel Connection Manager in a SSIS package.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

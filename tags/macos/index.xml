@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Macos on Thomas Chester&#39;s Blog</title>
+    <link>http://tjchester.github.io/tags/macos/</link>
+    <description>Recent content in Macos on Thomas Chester&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Sep 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tjchester.github.io/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using the bpod Gem</title>
+      <link>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2016-09-03-using-the-bpod-gem/</guid>
+      <description>&lt;p&gt;This post will discuss installing the &lt;strong&gt;bpod&lt;/strong&gt; gem on a macOS desktop and then scheduling it to change your desktop picture each day to the Bing home page image.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL Backups with AutoMySQLBackup</title>
+      <link>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</link>
+      <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-08-20-mysql-backups-with-automysqlbackup/</guid>
+      <description>&lt;p&gt;This walk-through will describe how to configure AutoMySQLBackup to perform scheduled backups of a MySQL database and then use rsync to make a redundant copy to another computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing ownCloud on ArchLinux</title>
+      <link>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</link>
+      <pubDate>Sun, 05 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2015-07-05-installing-owncloud-on-archlinux/</guid>
+      <description>&lt;p&gt;Do you like the idea of DropBox but want to host the files on a server that you control. This how-to will walkthrough installing ownCloud on an ArchLinux installation and then configuring a Mac client to sync with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create a Debian Bootable Install Disk</title>
+      <link>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2014-09-02-create-a-debian-bootable-install-disk/</guid>
+      <description>&lt;p&gt;In this post I discuss how to create a bootable USB disk on Mac OS X for the Debian &amp;ldquo;Testing&amp;rdquo; network installer.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
