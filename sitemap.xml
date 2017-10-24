@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://tjchester.github.io/post/2017-10-17-runas-domain-tip/</loc>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
+  </url>
   
   <url>
     <loc>http://tjchester.github.io/post/2016-12-07-lost-disk-space-to-fuslogvw/</loc>
@@ -375,7 +381,7 @@
   
   <url>
     <loc>http://tjchester.github.io/post/</loc>
-    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -418,6 +424,12 @@
   <url>
     <loc>http://tjchester.github.io/tags/ruby/</loc>
     <lastmod>2016-09-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/runas/</loc>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -465,19 +477,19 @@
   
   <url>
     <loc>http://tjchester.github.io/categories/technote/</loc>
-    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tjchester.github.io/</loc>
-    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tjchester.github.io/tags/windows/</loc>
-    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
