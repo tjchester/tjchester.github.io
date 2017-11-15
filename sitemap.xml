@@ -188,6 +188,11 @@
   </url>
   
   <url>
+    <loc>http://tjchester.github.io/post/2012-12-07-sourcesafe-to-mercurial-migration/</loc>
+    <lastmod>2012-12-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</loc>
     <lastmod>2012-06-28T00:00:00+00:00</lastmod>
   </url>
@@ -356,6 +361,18 @@
   </url>
   
   <url>
+    <loc>http://tjchester.github.io/tags/mercurial/</loc>
+    <lastmod>2012-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/migration/</loc>
+    <lastmod>2012-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tjchester.github.io/tags/mysql/</loc>
     <lastmod>2015-08-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -448,6 +465,12 @@
   <url>
     <loc>http://tjchester.github.io/tags/source-control/</loc>
     <lastmod>2012-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tjchester.github.io/tags/sourcesafe/</loc>
+    <lastmod>2012-12-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

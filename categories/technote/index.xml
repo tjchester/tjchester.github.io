@@ -254,6 +254,17 @@
     </item>
     
     <item>
+      <title>Migrating from SourceSafe to Mercurial</title>
+      <link>http://tjchester.github.io/post/2012-12-07-sourcesafe-to-mercurial-migration/</link>
+      <pubDate>Fri, 07 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://tjchester.github.io/post/2012-12-07-sourcesafe-to-mercurial-migration/</guid>
+      <description>&lt;p&gt;In this post, I will describe two methods to migrate source controlled projects from Microsoft SourceSafe to Mercurial. The first method involves only migration of the latest code version; and the second method the migration of both objects and history.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Entity Framework Error When Calling SaveChanges Method</title>
       <link>http://tjchester.github.io/post/2012-06-28-entity-framework-error-calling-savechanges-method/</link>
       <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
